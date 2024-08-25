@@ -7,14 +7,14 @@ import { Roboto_Mono } from "next/font/google";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 export default function ImageHeader() {
   return (
-    <div className="relative ml-[80px] flex flex-1 flex-col items-center   ">
+    <div className="relative ml-[60px] max-w-[1810px] flex flex-1 flex-col items-center   ">
       <div className=" w-full z-[-2] h-full">
         <Image
           className="rounded-[30px] object-cover w-full h-[750px]  m-2"
           src="https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
           alt="Picture of the author"
-          width={1800}
-          height={400}
+          width={1920}
+          height={1080}
         />
       </div>
 
