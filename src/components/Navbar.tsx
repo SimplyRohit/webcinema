@@ -12,8 +12,8 @@ import {
 
 export default function Navbar() {
   return (
-    <div className="fixed left-0 top-[210px] m-2 h-full">
-      <nav className="flex flex-col items-center rounded-[10px] justify-evenly w-[54px] h-[420px] backdrop-blur-sm bg-opacity-60 bg-[#000000] mt-[50px]">
+    <div className="fixed left-0 top-[250px] pl-2 z-10 h-full">
+      <nav className="flex flex-col items-center rounded-[10px] justify-evenly w-[54px] h-[420px] backdrop-blur-sm bg-opacity-50 bg-[#000000] ">
         <House className="w-5 h-5 text-[#576B87]" />
         <Search className="w-5 h-5 text-[#576B87]" />
         <CirclePlay className="w-5 h-5 text-[#576B87]" />

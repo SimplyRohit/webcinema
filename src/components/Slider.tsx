@@ -16,11 +16,11 @@ export default function Slider() {
   });
 
   return (
-    <div ref={ref} className="keen-slider flex h-[270px] max-w-[1900px]   ">
+    <div ref={ref} className="keen-slider h-[270px] ">
       {db.map((item) => (
-        <div className="keen-slider__slide  rounded">
+        <div className="keen-slider__slide   ">
           <Image
-            className="object-cover w-full  h-[250px] rounded"
+            className="object-cover  h-[250px] rounded"
             src={item.url}
             alt=""
             width={1920}
