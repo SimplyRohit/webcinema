@@ -1,7 +1,224 @@
 import React from "react";
-
+import { Roboto_Mono } from "next/font/google";
+import { Roboto_Serif } from "next/font/google";
+import { cn } from "@/libs/utils";
+import Link from "next/link";
+import Image from "next/image";
+const sans = Roboto_Serif({ subsets: ["latin"] });
+const roboto = Roboto_Mono({ subsets: ["latin"] });
 function page() {
-  return <div>page</div>;
+  return (
+    <div className="w-full h-full items-center p-10 pr-12 pl-[85px] flex flex-col">
+      <div className="">
+        <input
+          className={cn(
+            roboto.className,
+            "rounded-lg w-[400px] h-[48px] bg-black text-[13px] px-3 placeholder:text-[12px] placeholder:text-[#5c6065] outline-none text-[#ffc31e]  "
+          )}
+          placeholder="please enter at least 3 characters to search ....."
+          type="text"
+        />
+      </div>
+      <div className=" py-10 flex items-center space-x-4 w-full h-full">
+        <h1 className={cn(sans, " pl-10 text-[25px]")}>Top Searches</h1>
+        <h1 className={cn("font-bold text-[#ffc31e] text-[25px]")}>today</h1>
+      </div>
+      <div className=" flex flex-wrap items-center jutify-between w-full  pl-[40px] h-full">
+        <Link href={""} className="flex py-10 pr-12 flex-row items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>{" "}
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
+          <Image
+            className="object-cover w-[140px] h-[230px] rounded-lg"
+            src={
+              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
+            }
+            width={1920}
+            height={1080}
+            alt=""
+          ></Image>
+          <div className="flex flex-col max-w-[210px] pl-4">
+            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
+            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
+            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default page;
