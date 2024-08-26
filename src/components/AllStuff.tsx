@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "../Home/Slider";
+import Slider from "./Slider";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Roboto_Mono } from "next/font/google";
 import { cn } from "@/libs/utils";

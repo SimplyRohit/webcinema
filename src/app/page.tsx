@@ -1,7 +1,7 @@
-import ImageHeader from "@/components/Home/ImageHeader";
-import AllStuff from "@/components/Home/AllStuff";
+import ImageHeader from "@/components/ImageHeader";
+import AllStuff from "@/components/AllStuff";
 
-import Slider from "@/components/Home/Slider";
+import Slider from "@/components/Slider";
 export default function Homepage() {
   return (
     <div className="  w-full h-full ">

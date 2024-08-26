@@ -61,7 +61,7 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="fixed left-0 top-1/3 pl-2 z-50 h-full">
+    <div className="fixed left-0 top-[30%] pl-2 z-50 h-full">
       <nav className="flex flex-col items-center rounded-[10px] justify-evenly w-[54px] h-[420px] backdrop-blur-sm bg-opacity-50 bg-[#000000]">
         {navItems.map((item, index) => (
           <div key={index} className="relative group">
