@@ -4,6 +4,8 @@ import { Roboto_Serif } from "next/font/google";
 import { cn } from "@/libs/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { db } from "@/DB/db";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 const sans = Roboto_Serif({ subsets: ["latin"] });
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 function page() {
@@ -19,203 +21,42 @@ function page() {
           type="text"
         />
       </div>
-      <div className=" py-10 flex items-center space-x-4 w-full h-full">
+      <div className=" pt-5 flex items-center space-x-4 w-full h-full">
         <h1 className={cn(sans, " pl-10 text-[25px]")}>Top Searches</h1>
         <h1 className={cn("font-bold text-[#ffc31e] text-[25px]")}>today</h1>
       </div>
       <div className=" flex flex-wrap items-center jutify-between w-full  pl-[40px] h-full">
-        <Link href={""} className="flex py-10 pr-12 flex-row items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>{" "}
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
-        <Link href={""} className="flex flex-row py-10 pr-12 items-center">
-          <Image
-            className="object-cover w-[140px] h-[230px] rounded-lg"
-            src={
-              "https://image.tmdb.org/t/p/original//vVKlL4HyrQYAcJuaaUW49FrRqY5.jpg"
-            }
-            width={1920}
-            height={1080}
-            alt=""
-          ></Image>
-          <div className="flex flex-col max-w-[210px] pl-4">
-            <h1 className={cn("font-bold text-[20px]")}>Drive</h1>
-            <p className={cn(roboto.className, "")}>Movie ,10 ,3000 ,En</p>
-            <p className={cn(roboto.className, "")}> crime ,horror ,drama</p>
-          </div>
-        </Link>
+        {db.map((item) => (
+          <Link
+            key={item.name}
+            href={""}
+            className="flex py-10 pr-12 flex-row items-center"
+          >
+            <Image
+              className="object-cover w-[140px] h-[230px] rounded-lg"
+              src={item.url}
+              width={1920}
+              height={1080}
+              alt=""
+            ></Image>
+            <div className="flex flex-col max-w-[210px] pl-4">
+              <h1 className={cn("font-bold text-[20px]")}>{item.name}</h1>
+              <p className={cn(roboto.className, "")}>{item.details}</p>
+              <p className={cn(roboto.className, "")}>{item.category}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className=" flex  items-center space-x-2 justify-center w-full h-full">
+        <ChevronLeft className="  bg-[#576B87] rounded-[50%] w-6 h-6" />
+        <h1
+          className={cn(
+            " text-[#000000] px-3 rounded-[10px] bg-[#ffc31e] text-[20px]"
+          )}
+        >
+          1
+        </h1>
+        <ChevronRight className="bg-[#576B87] rounded-[50%] w-6 h-6" />
       </div>
     </div>
   );
