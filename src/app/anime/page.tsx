@@ -9,7 +9,7 @@ function page() {
   return (
     <div className="w-full pl-[100px] p-5 flex flex-col  h-full">
       <div className="flex pb-5 ">
-        <h1 className={cn("font-bold text-[25px] pb-3")}> Movies</h1>
+        <h1 className={cn("font-bold text-[25px] pb-3")}> Anime</h1>
       </div>
       <div className="flex flex-row pb-5  justify-between ">
         <div className="flex space-x-5">
