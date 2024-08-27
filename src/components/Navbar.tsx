@@ -29,7 +29,7 @@ export default function Navbar() {
     {
       icon: CirclePlay,
       label: "Movies",
-      path: "/movies",
+      path: "/movie",
       tooltipPosition: "right",
     },
     { icon: Monitor, label: "TV Shows", path: "/tv", tooltipPosition: "right" },

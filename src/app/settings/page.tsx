@@ -5,7 +5,8 @@ import Arrow from "@/components/Arrow";
 import { Roboto_Mono } from "next/font/google";
 import { FilterX } from "lucide-react";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
-function page() {
+
+export default function page() {
   return (
     <div className="w-full pl-[100px] p-5 flex flex-col  h-full">
       <div className="flex flex-col pb-5 ">
@@ -42,5 +43,3 @@ function page() {
     </div>
   );
 }
-
-export default page;
