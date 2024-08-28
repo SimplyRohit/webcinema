@@ -14,7 +14,7 @@ function Page(params: any) {
   const [movies, setMovies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const [count, setCount] = useState(1);
   const data = (() => {
     switch (params.params.id) {
       case "movie":
@@ -32,9 +32,10 @@ function Page(params: any) {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/${data}api_key=21adfad015207a4c85a59b73ff60ddec&page=1`
+          `https://api.themoviedb.org/3/${data}api_key=21adfad015207a4c85a59b73ff60ddec&page=${count}`
         );
         setMovies(response.data.results);
       } catch (err: any) {
@@ -45,7 +46,7 @@ function Page(params: any) {
     };
 
     fetchData();
-  }, [data]);
+  }, [data, count]);
 
   if (
     params.params.id === "movie" ||
@@ -103,7 +104,7 @@ function Page(params: any) {
                 </div>
               ))}
         </div>
-        <Arrow />
+        <Arrow count={count} setCount={setCount} />
       </div>
     );
   } else {

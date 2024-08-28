@@ -102,7 +102,7 @@ export default function ImageHeader() {
             "transform -rotate-[-90deg] text-[18px] translate-x-[-140px]"
           )}
         >
-          Movie
+          {loading ? <>Movie</> : <>{currentItem.name ? "Show" : "Movie"}</>}
         </p>
         <div className="flex ml-7 flex-row space-x-2 items-center">
           <Link
