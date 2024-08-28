@@ -32,7 +32,6 @@ export default function Card(params: any) {
           `https://api.themoviedb.org/3/${data}api_key=21adfad015207a4c85a59b73ff60ddec&page=1`
         );
         setMovies(response.data.results);
-        console.log(response.data.results);
       } catch (err) {
         setError(err);
       } finally {

@@ -14,7 +14,6 @@ export default function Slider(props: any) {
   const [error, setError] = useState(null as any);
   const endpoint = props.endpoint;
   const [ref] = useKeenSlider({
-    initial: 0,
     slides: {
       perView: 9,
       spacing: 15,
@@ -25,7 +24,6 @@ export default function Slider(props: any) {
       try {
         const response = await axios.get(endpoint);
         setMovies(response.data.results);
-        console.log(response.data.results);
       } catch (err: any) {
         setError(err);
       } finally {
@@ -34,6 +32,7 @@ export default function Slider(props: any) {
     };
     fetchData();
   }, []);
+  console.log(movies);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error fetching data: {error.message}</p>;
   return (

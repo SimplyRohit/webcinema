@@ -4,7 +4,6 @@ import { Roboto_Mono } from "next/font/google";
 import { Roboto_Serif } from "next/font/google";
 import { cn } from "@/libs/utils";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Arrow from "@/components/Arrow";
 import axios from "axios";
 
@@ -12,21 +11,33 @@ const sans = Roboto_Serif({ subsets: ["latin"] });
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function Page() {
-  const [movies, setMovies] = useState([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null as any);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
-  const fetchMovies = async (query: string) => {
+  const fetchItems = async (query: string) => {
     setLoading(true);
     try {
-      const endpoint = query
-        ? `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=21adfad015207a4c85a59b73ff60ddec&page=1`
-        : `https://api.themoviedb.org/3/movie/popular?api_key=21adfad015207a4c85a59b73ff60ddec&page=1`;
+      const movieEndpoint = query
+        ? `https://api.themoviedb.org/3/search/movie?api_key=21adfad015207a4c85a59b73ff60ddec&query=${query}&sort_by=popularity.desc`
+        : `https://api.themoviedb.org/3/movie/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc`;
 
-      const response = await axios.get(endpoint);
-      setMovies(response.data.results);
+      const tvEndpoint = query
+        ? `https://api.themoviedb.org/3/search/tv?api_key=21adfad015207a4c85a59b73ff60ddec&query=${query}&sort_by=popularity.desc`
+        : `https://api.themoviedb.org/3/tv/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc`;
+
+      const [moviesResponse, tvResponse] = await Promise.all([
+        axios.get(movieEndpoint),
+        axios.get(tvEndpoint),
+      ]);
+      const combinedResults: any = [
+        ...moviesResponse.data.results,
+        ...tvResponse.data.results,
+      ].sort(() => Math.random() - 0.5);
+
+      setItems(combinedResults);
     } catch (err) {
       setError(err);
     } finally {
@@ -35,15 +46,15 @@ export default function Page() {
   };
 
   useEffect(() => {
-    fetchMovies("");
+    fetchItems("");
   }, []);
 
   useEffect(() => {
     if (searchQuery.length >= 3) {
-      fetchMovies(searchQuery);
+      fetchItems(searchQuery);
       setIsSearching(true);
     } else {
-      fetchMovies("");
+      fetchItems("");
       setIsSearching(false);
     }
   }, [searchQuery]);
@@ -71,7 +82,7 @@ export default function Page() {
         ) : error ? (
           <p>Error fetching data: {error.message}</p>
         ) : (
-          movies.slice(0, 18).map((item: any) => (
+          items.slice(0, 18).map((item: any) => (
             <div
               key={item.id}
               className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
@@ -79,14 +90,16 @@ export default function Page() {
               <div className="flex min-h-[250px] min-w-[150px]">
                 <Image
                   className="object-cover rounded"
-                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w500${
+                    item.poster_path ? item.poster_path : item.backdrop_path
+                  }`}
                   width={1920}
                   height={1080}
-                  alt={item.title}
+                  alt={item.title || item.name}
                 />
               </div>
-              <p className={cn(roboto.className, "truncate")}>
-                {item.title || item.name}
+              <p className={cn(roboto.className, "truncate mt-1")}>
+                {item.title || item.name}{" "}
               </p>
             </div>
           ))

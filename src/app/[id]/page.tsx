@@ -8,7 +8,6 @@ import { FilterX } from "lucide-react";
 import { notFound } from "next/navigation";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 function page(params: any, props: any) {
-  console.log(params.params.id);
   if (
     params.params.id === "movie" ||
     params.params.id === "tv" ||
