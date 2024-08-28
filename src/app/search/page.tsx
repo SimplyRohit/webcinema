@@ -77,33 +77,37 @@ export default function Page() {
         <h1 className={cn("font-bold text-[#ffc31e] text-[25px]")}>today</h1>
       </div>
       <div className="flex flex-wrap items-center mt-10 w-full h-full">
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error fetching data: {error.message}</p>
-        ) : (
-          items.slice(0, 18).map((item: any) => (
-            <div
-              key={item.id}
-              className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
-            >
-              <div className="flex min-h-[250px] min-w-[150px]">
-                <Image
-                  className="object-cover rounded"
-                  src={`https://image.tmdb.org/t/p/w500${
-                    item.poster_path ? item.poster_path : item.backdrop_path
-                  }`}
-                  width={1920}
-                  height={1080}
-                  alt={item.title || item.name}
-                />
+        {loading
+          ? Array.from({ length: 18 }).map((_, index) => (
+              <div
+                key={index}
+                className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+              >
+                <div className="flex min-h-[250px] min-w-[150px] rounded shimmer"></div>
+                <p className={cn(roboto.className, "truncate  ")}>Loading...</p>
               </div>
-              <p className={cn(roboto.className, "truncate mt-1")}>
-                {item.title || item.name}{" "}
-              </p>
-            </div>
-          ))
-        )}
+            ))
+          : items.slice(0, 18).map((item: any) => (
+              <div
+                key={item.id}
+                className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+              >
+                <div className="flex min-h-[250px] min-w-[150px]">
+                  <Image
+                    className="object-cover rounded"
+                    src={`https://image.tmdb.org/t/p/w500${
+                      item.poster_path ? item.poster_path : item.backdrop_path
+                    }`}
+                    width={1920}
+                    height={1080}
+                    alt={item.title || item.name}
+                  />
+                </div>
+                <p className={cn(roboto.className, "truncate mt-1")}>
+                  {item.title || item.name}{" "}
+                </p>
+              </div>
+            ))}
       </div>
       <Arrow />
     </div>

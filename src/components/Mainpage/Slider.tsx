@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
-import { db } from "@/DB/db";
 import { Roboto_Mono } from "next/font/google";
 import { cn } from "@/libs/utils";
 import axios from "axios";
@@ -15,7 +14,7 @@ export default function Slider(props: any) {
   const endpoint = props.endpoint;
   const [ref] = useKeenSlider({
     slides: {
-      perView: 9,
+      perView: 8,
       spacing: 15,
     },
   });
@@ -32,12 +31,27 @@ export default function Slider(props: any) {
     };
     fetchData();
   }, []);
-  console.log(movies);
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="keen-slider  overflow-x-auto h-[270px] ">
+        {Array.from({ length: 18 }).map((_, index) => (
+          <div key={index} className="keen-slider__slide !min-w-[200px]">
+            <Image
+              className="object-cover  h-[250px] shimmer rounded"
+              src={""}
+              alt="Loading..."
+              width={1920}
+              height={1080}
+            ></Image>
+            <p className={cn(roboto.className, "truncate")}>Loading...</p>
+          </div>
+        ))}
+      </div>
+    );
   if (error) return <p>Error fetching data: {error.message}</p>;
   return (
     <div ref={ref} className="keen-slider  overflow-x-auto h-[270px] ">
-      {movies.slice(0, 20).map((item: any) => (
+      {movies.map((item: any) => (
         <div key={item.id} className="keen-slider__slide !min-w-[200px]">
           <Image
             className="object-cover  h-[250px] rounded"

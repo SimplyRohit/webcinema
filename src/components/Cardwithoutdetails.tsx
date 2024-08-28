@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
@@ -25,6 +26,7 @@ export default function Card(params: any) {
         return "";
     }
   })();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,29 +42,41 @@ export default function Card(params: any) {
     };
 
     fetchData();
-  }, []); // Empty dependency array to run only once on mount
+  }, [data]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error fetching data: {error.message}</p>;
 
   return (
-    <div className="flex flex-wrap items-center mt-10  w-full h-full">
-      {movies.slice(0, 18).map((item: any) => (
-        <div className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px] ">
-          <div key={item.id} className="flex min-h-[250px] min-w-[150px]  ">
-            <Image
-              className="object-cover rounded "
-              src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-              width={1920}
-              height={1080}
-              alt={item.title}
-            />
-          </div>
-          <p className={cn(roboto.className, " truncate")}>
-            {item.title} {item.name}
-          </p>
-        </div>
-      ))}
+    <div className="flex flex-wrap items-center mt-10 w-full h-full">
+      {loading
+        ? Array.from({ length: 18 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+            >
+              <div className="flex min-h-[250px] min-w-[150px] rounded shimmer"></div>
+              <p className={cn(roboto.className, "truncate  ")}>Loading...</p>
+            </div>
+          ))
+        : movies.slice(0, 18).map((item: any) => (
+            <div
+              key={item.id}
+              className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+            >
+              <div className="flex min-h-[250px] min-w-[150px]">
+                <Image
+                  className="object-cover rounded"
+                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  width={1920}
+                  height={1080}
+                  alt={item.title || item.name}
+                />
+              </div>
+              <p className={cn(roboto.className, "truncate")}>
+                {item.title || item.name}
+              </p>
+            </div>
+          ))}
     </div>
   );
 }

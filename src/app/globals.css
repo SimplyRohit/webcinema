@@ -15,3 +15,26 @@ Link {
 p {
   @apply text-[#4C5E77];
 }
+.shimmer {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(
+    to right,
+    #1b1919 4%,
+    rgb(97, 94, 94) 18%,
+    #1b1919 80%
+  );
+  background-size: 1000px 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 100%;
+  }
+}
