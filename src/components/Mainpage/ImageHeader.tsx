@@ -109,10 +109,9 @@ export default function ImageHeader() {
               roboto.className,
               "p-1 bg-[#FFD700] rounded-[5px] flex"
             )}
-            href={""}
-            // `/details?id=${currentItem.id}&type=${
-            //   currentItem.name ? "tv" : "movie"
-            // }`
+            href={`/watch?id=${currentItem.id}&type=${
+              currentItem.name ? "tv" : "movie"
+            }`}
           >
             Watch
             <Play className="w-5 fill-[#000000]" />

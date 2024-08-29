@@ -8,6 +8,7 @@ import Arrow from "@/components/Arrow";
 import { FilterX } from "lucide-react";
 import { notFound } from "next/navigation";
 import { useRouter } from "next/navigation";
+
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 function Page(params: any) {
@@ -63,7 +64,7 @@ function Page(params: any) {
           <h1
             onClick={() => setType("now_playing")}
             className={cn(
-              type === "now_playing" ? "text-[#FFB800]" : "",
+              type === "  now_playing" ? "text-[#FFB800]" : "",
               roboto.className,
               ""
             )}

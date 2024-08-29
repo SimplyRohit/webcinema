@@ -52,13 +52,14 @@ function ImageHeader(props: any) {
               roboto.className,
               "p-1 bg-[#FFD700] rounded-[5px] flex"
             )}
-            href={`/watch&type=${item.id}`}
+            href={`/watch?id=${item.id}&type=${item.name ? "tv" : "movie"}`}
           >
             Watch
             <Play className="w-5 fill-[#000000]" />
           </Link>
-          <Link className="p-1 bg-[#FFD700] rounded-[5px]" href="">
-            Details
+          <Link className="p-1 bg-[#FFD700] rounded-[5px] flex" href="">
+            Trailer
+            <Play className="w-5 fill-[#000000]" />
           </Link>
           <Bookmark className="w-5 h-5 text-[#4C5E77]" />
           <Share className="w-5 h-5 text-[#4C5E77]" />

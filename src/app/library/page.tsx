@@ -38,7 +38,7 @@ function page() {
       </div>
       <div className="flex pb-5 space-x-5">
         <h1 className={cn(roboto.className, "")}>Watchlist</h1>
-        <h1 className={cn(roboto.className, "")}>Continue Watching</h1>
+        <h1 className={cn(roboto.className, "")}>Continue-Watching</h1>
       </div>
       <div className="flex flex-row pb-5  justify-between ">
         <div className="flex space-x-5">
@@ -46,7 +46,7 @@ function page() {
           <h1 className={cn(roboto.className, "")}>Tv-Show</h1>
         </div>
       </div>
-      <div className="flex flex-wrap items-center mt-10 w-full h-full">
+      {/* <div className="flex flex-wrap items-center mt-10 w-full h-full">
         {loading
           ? Array.from({ length: 18 }).map((_, index) => (
               <div
@@ -82,10 +82,10 @@ function page() {
                 </div>
                 <p className={cn(roboto.className, "truncate")}>
                   {item.title || item.name}
-                </p>
+                </p> 
               </div>
             ))}
-      </div>
+      </div>*/}
     </div>
   );
 }
