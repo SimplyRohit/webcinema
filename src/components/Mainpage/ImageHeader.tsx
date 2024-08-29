@@ -6,13 +6,14 @@ import Link from "next/link";
 import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function ImageHeader() {
   const [items, setItems] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,17 +63,15 @@ export default function ImageHeader() {
     return () => clearInterval(interval);
   }, [items.length]);
 
-  const currentItem = items[currentIndex];
+  const currentItem = items[currentIndex] || {}; // Fallback to an empty object if undefined
 
   return (
     <div className="relative flex flex-1 flex-col items-center">
       <div className="w-full z-[-2] h-full p-2">
         {loading ? (
-          <>
-            <div className="rounded-[30px] shimmer h-[750px]"></div>
-          </>
+          <div className="rounded-[30px] shimmer h-[750px]"></div>
         ) : (
-          <>
+          currentItem.backdrop_path && (
             <Image
               className="rounded-[30px] object-cover h-[750px]"
               src={`https://image.tmdb.org/t/p/original${currentItem.backdrop_path}`}
@@ -80,7 +79,7 @@ export default function ImageHeader() {
               width={1920}
               height={1080}
             />
-          </>
+          )
         )}
       </div>
 
@@ -110,12 +109,19 @@ export default function ImageHeader() {
               roboto.className,
               "p-1 bg-[#FFD700] rounded-[5px] flex"
             )}
-            href=""
+            href={`/details?id=${currentItem.id}&type=${
+              currentItem.name ? "tv" : "movie"
+            }`}
           >
             Watch
             <Play className="w-5 fill-[#000000]" />
           </Link>
-          <Link className="p-1 bg-[#FFD700] rounded-[5px]" href="">
+          <Link
+            className="p-1 bg-[#FFD700] rounded-[5px]"
+            href={`/details?id=${currentItem.id}&type=${
+              currentItem.name ? "tv" : "movie"
+            }`}
+          >
             Details
           </Link>
           <Bookmark className="w-5 h-5 text-[#4C5E77]" />

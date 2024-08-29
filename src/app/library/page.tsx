@@ -6,11 +6,13 @@ import Image from "next/image";
 import Arrow from "@/components/Arrow";
 import { Roboto_Mono } from "next/font/google";
 import { FilterX } from "lucide-react";
+import { useRouter } from "next/navigation";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 function page() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null as any);
+  const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,7 +62,16 @@ function page() {
                 key={item.id}
                 className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
               >
-                <div className="flex min-h-[250px] min-w-[150px]">
+                <div
+                  onClick={() =>
+                    router.push(
+                      `/details?id=${item.id}&type=${
+                        item.title ? "movie" : "tv"
+                      }`
+                    )
+                  }
+                  className="flex min-h-[250px] min-w-[150px]"
+                >
                   <Image
                     className="object-cover rounded"
                     src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -75,8 +86,6 @@ function page() {
               </div>
             ))}
       </div>
-
-      <Arrow />
     </div>
   );
 }

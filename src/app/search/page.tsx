@@ -6,6 +6,7 @@ import { cn } from "@/libs/utils";
 import Image from "next/image";
 import Arrow from "@/components/Arrow";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const sans = Roboto_Serif({ subsets: ["latin"] });
 const roboto = Roboto_Mono({ subsets: ["latin"] });
@@ -16,7 +17,7 @@ export default function Page() {
   const [error, setError] = useState(null as any);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-
+  const router = useRouter();
   const fetchItems = async (query: string) => {
     setLoading(true);
     try {
@@ -92,7 +93,16 @@ export default function Page() {
                 key={item.id}
                 className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
               >
-                <div className="flex min-h-[250px] min-w-[150px]">
+                <div
+                  onClick={() =>
+                    router.push(
+                      `/details?id=${item.id}&type=${
+                        item.title ? "movie" : "tv"
+                      }`
+                    )
+                  }
+                  className="flex min-h-[250px] min-w-[150px]"
+                >
                   <Image
                     className="object-cover rounded"
                     src={`https://image.tmdb.org/t/p/w500${

@@ -6,7 +6,7 @@ body {
   @apply bg-[#1B1919];
 }
 h1 {
-  @apply text-[#A4B3C9];
+  @apply text-[#A4B3C9] font-serif;
 }
 Link {
   @apply text-[#576B87];

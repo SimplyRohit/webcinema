@@ -7,20 +7,23 @@ import Arrow from "@/components/Arrow";
 import { Roboto_Mono } from "next/font/google";
 import { Roboto_Serif } from "next/font/google";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 const sans = Roboto_Serif({ subsets: ["latin"] });
 function page() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null as any);
-
+  const [count, setCount] = useState(1);
+  const router = useRouter();
   useEffect(() => {
     const fetchItems = async () => {
       setLoading(true);
       try {
-        const movieEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc`;
+        const movieEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc&page=${count}`;
 
-        const tvEndpoint = `https://api.themoviedb.org/3/tv/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc`;
+        const tvEndpoint = `https://api.themoviedb.org/3/tv/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc&page=${count}`;
 
         const [moviesResponse, tvResponse] = await Promise.all([
           axios.get(movieEndpoint),
@@ -39,20 +42,10 @@ function page() {
       }
     };
     fetchItems();
-  }, []);
+  }, [count]);
 
   return (
     <div className="w-full h-full items-center p-10 pr-12 pl-[100px] flex flex-col">
-      <div className="">
-        <input
-          className={cn(
-            roboto.className,
-            "rounded-lg w-[400px] h-[48px] bg-black text-[13px] px-3 placeholder:text-[12px] placeholder:text-[#5c6065] outline-none text-[#ffc31e]  "
-          )}
-          placeholder="please enter at least 3 characters to search ....."
-          type="text"
-        />
-      </div>
       <div className=" pt-5 flex items-center space-x-4 w-full h-full">
         <h1 className={cn(sans, "  text-[25px]")}>All Collections</h1>
         <h1 className={cn("font-bold text-[#ffc31e] text-[25px]")}></h1>
@@ -73,7 +66,16 @@ function page() {
                 key={item.id}
                 className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
               >
-                <div className="flex min-h-[250px] min-w-[150px]">
+                <div
+                  onClick={() =>
+                    router.push(
+                      `/details?id=${item.id}&type=${
+                        item.title ? "movie" : "tv"
+                      }`
+                    )
+                  }
+                  className="flex min-h-[250px] min-w-[150px]"
+                >
                   <Image
                     className="object-cover rounded"
                     src={`https://image.tmdb.org/t/p/w500${
@@ -90,7 +92,7 @@ function page() {
               </div>
             ))}
       </div>
-      <Arrow />
+      <Arrow count={count} setCount={setCount} />
     </div>
   );
 }

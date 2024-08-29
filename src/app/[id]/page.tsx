@@ -7,7 +7,7 @@ import { Roboto_Mono } from "next/font/google";
 import Arrow from "@/components/Arrow";
 import { FilterX } from "lucide-react";
 import { notFound } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 function Page(params: any) {
@@ -15,6 +15,7 @@ function Page(params: any) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [count, setCount] = useState(1);
+  const router = useRouter();
   const data = (() => {
     switch (params.params.id) {
       case "movie":
@@ -89,7 +90,16 @@ function Page(params: any) {
                   key={item.id}
                   className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
                 >
-                  <div className="flex min-h-[250px] min-w-[150px]">
+                  <div
+                    onClick={() =>
+                      router.push(
+                        `/details?id=${item.id}&type=${
+                          item.title ? "movie" : "tv"
+                        }`
+                      )
+                    }
+                    className="flex  min-h-[250px] min-w-[150px]"
+                  >
                     <Image
                       className="object-cover rounded"
                       src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
