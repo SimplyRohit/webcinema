@@ -13,19 +13,25 @@ const roboto = Roboto_Mono({ subsets: ["latin"] });
 function Page(params: any) {
   const [movies, setMovies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | "">("");
   const [count, setCount] = useState(1);
+  const [type, setType] = useState("now_playing");
   const router = useRouter();
+
   const data = (() => {
     switch (params.params.id) {
       case "movie":
-        return "movie/popular?";
+        return `movie/${type}?`;
       case "tv":
-        return "tv/popular?";
+        return `tv/${type === "now_playing" ? "airing_today" : type}?`;
       case "anime":
-        return "discover/movie?with_genres=16&";
+        return type === "now_playing"
+          ? "discover/movie?with_genres=16&"
+          : "discover/tv?&with_genres=16&";
       case "kdrama":
-        return "discover/movie?with_genres=18&";
+        return type === "now_playing"
+          ? "discover/movie?with_origin_country=KR&"
+          : "discover/tv?with_origin_country=KR&";
       default:
         return "";
     }
@@ -38,6 +44,7 @@ function Page(params: any) {
         const response = await axios.get(
           `https://api.themoviedb.org/3/${data}api_key=21adfad015207a4c85a59b73ff60ddec&page=${count}`
         );
+
         setMovies(response.data.results);
       } catch (err: any) {
         setError(err.message || "Error fetching data");
@@ -49,12 +56,71 @@ function Page(params: any) {
     fetchData();
   }, [data, count]);
 
-  if (
-    params.params.id === "movie" ||
-    params.params.id === "tv" ||
-    params.params.id === "kdrama" ||
-    params.params.id === "anime"
-  ) {
+  const renderSortOptions = () => {
+    if (params.params.id === "anime" || params.params.id === "kdrama") {
+      return (
+        <>
+          <h1
+            onClick={() => setType("now_playing")}
+            className={cn(
+              type === "now_playing" ? "text-[#FFB800]" : "",
+              roboto.className,
+              ""
+            )}
+          >
+            Movie
+          </h1>
+          <h1
+            onClick={() => setType("popular")}
+            className={cn(
+              type === "popular" ? "text-[#FFB800]" : "",
+              roboto.className,
+              ""
+            )}
+          >
+            Show
+          </h1>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <h1
+            onClick={() => setType("now_playing")}
+            className={cn(
+              type === "now_playing" ? "text-[#FFB800]" : "",
+              roboto.className,
+              ""
+            )}
+          >
+            Latest
+          </h1>
+          <h1
+            onClick={() => setType("popular")}
+            className={cn(
+              type === "popular" ? "text-[#FFB800]" : "",
+              roboto.className,
+              ""
+            )}
+          >
+            Trending
+          </h1>
+          <h1
+            onClick={() => setType("top_rated")}
+            className={cn(
+              type === "top_rated" ? "text-[#FFB800]" : "",
+              roboto.className,
+              ""
+            )}
+          >
+            Top-Rated
+          </h1>
+        </>
+      );
+    }
+  };
+
+  if (["movie", "tv", "anime", "kdrama"].includes(params.params.id)) {
     return (
       <div className="w-full pl-[100px] p-5 flex flex-col h-full">
         <div className="flex pb-5">
@@ -63,11 +129,7 @@ function Page(params: any) {
           </h1>
         </div>
         <div className="flex flex-row pb-5 justify-between">
-          <div className="flex space-x-5">
-            <h1 className={cn(roboto.className, "")}>Latest</h1>
-            <h1 className={cn(roboto.className, "")}>Trending</h1>
-            <h1 className={cn(roboto.className, "")}>Top-Rated</h1>
-          </div>
+          <div className="flex space-x-5">{renderSortOptions()}</div>
           <div className="flex items-center">
             <h1 className={cn(roboto.className, "")}>Filter</h1>
             <FilterX className="text-[#A4B3C9] w-4 h-4" />

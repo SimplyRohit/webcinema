@@ -27,7 +27,7 @@ function Page() {
         setLoading(false);
       }
     };
-
+    console.log(item);
     fetchData();
   }, []);
 

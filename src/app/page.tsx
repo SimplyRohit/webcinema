@@ -13,52 +13,45 @@ import ImageHeader from "@/components/Mainpage/ImageHeader";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function Homepage() {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
   const router = useRouter();
   const maindata = [
     {
       id: 0,
       name: "Recommendation",
-      url: "https://api.themoviedb.org/3/movie/now_playing?api_key=21adfad015207a4c85a59b73ff60ddec&language=en-US&page=1",
+      url: "https://api.themoviedb.org/3/movie/157336/recommendations?api_key=21adfad015207a4c85a59b73ff60ddec&language=en-US&page=1",
     },
     {
       id: 1,
       name: "Latest Movies",
-      url: "https://api.themoviedb.org/3/discover/movie?api_key=21adfad015207a4c85a59b73ff60ddec&primary_release_date.gte=2024-08-01&primary_release_date.lte=2024-08-31&page=1",
+      url: `https://api.themoviedb.org/3/movie/now_playing?api_key=21adfad015207a4c85a59b73ff60ddec&page=1`,
     },
     {
       id: 2,
       name: "Latest TV-Shows",
-      url: "https://api.themoviedb.org/3/discover/tv?api_key=21adfad015207a4c85a59b73ff60ddec&first_air_date.gte=2024-08-01&first_air_date.lte=2024-08-31&page=1",
+      url: `https://api.themoviedb.org/3/tv/on_the_air?api_key=21adfad015207a4c85a59b73ff60ddec&page=1`,
     },
     {
       id: 3,
-      name: "Latest K-Drama",
-      url: "https://api.themoviedb.org/3/trending/all/day?api_key=21adfad015207a4c85a59b73ff60ddec",
+      name: "K-Drama Movies",
+      url: "https://api.themoviedb.org/3/discover/movie?api_key=21adfad015207a4c85a59b73ff60ddec&with_origin_country=KR&sort_by=popularity.descpage=1",
     },
     {
       id: 4,
-      name: "Popular K-Drama",
-      url: "https://api.themoviedb.org/3/trending/all/day?api_key=21adfad015207a4c85a59b73ff60ddec",
+      name: "K-Drama Shows",
+      url: "https://api.themoviedb.org/3/discover/tv?api_key=21adfad015207a4c85a59b73ff60ddec&with_origin_country=KR&sort_by=popularity.descpage=1",
     },
     {
       id: 5,
-      name: "Latest Anime",
-      url: "https://api.themoviedb.org/3/trending/all/day?api_key=21adfad015207a4c85a59b73ff60ddec",
+      name: "Anime Movies",
+      url: "https://api.themoviedb.org/3/discover/movie?api_key=21adfad015207a4c85a59b73ff60ddec&with_genres=16&sort_by=popularity.desc&page=1",
     },
     {
       id: 6,
-      name: "Popular Anime",
-      url: "https://api.themoviedb.org/3/trending/all/day?api_key=21adfad015207a4c85a59b73ff60ddec",
-    },
-    {
-      id: 7,
-      name: "Popular Movies",
-      url: "https://api.themoviedb.org/3/movie/popular?api_key=21adfad015207a4c85a59b73ff60ddec&language=en-US&page=1",
-    },
-    {
-      id: 8,
-      name: "Popular TV-Shows",
-      url: "https://api.themoviedb.org/3/tv/popular?api_key=21adfad015207a4c85a59b73ff60ddec&language=en-US&page=1",
+      name: "Anime Shows",
+      url: "https://api.themoviedb.org/3/discover/tv?api_key=21adfad015207a4c85a59b73ff60ddec&with_genres=16&sort_by=popularity.desc&page=1",
     },
   ];
 
@@ -95,92 +88,88 @@ export default function Homepage() {
   return (
     <div className="w-full h-full pl-[70px]">
       <ImageHeader />
-      {loading ? (
-        maindata.map((item, idx) => (
-          <div key={idx} className="pl-1 w-full h-full">
-            <div className="pb-[40px] pt-[40px]">
-              <div className="flex flex-row items-center justify-between">
-                <h1 className={cn("text-[25px] pb-3")}>{item.name}</h1>
-                <div className="flex flex-row items-center pr-2 justify-center">
-                  <ChevronLeft className="text-[#A4B3C9] w-5 h-5" />
-                  <p
-                    className={cn(
-                      roboto.className,
-                      "text-[#A4B3C9] text-[12px]"
-                    )}
-                  >
-                    swipe
-                  </p>
-                  <ChevronRight className="text-[#A4B3C9] w-5 h-5" />
-                </div>
-              </div>
-              <div className="keen-slider overflow-x-auto h-[270px]">
-                {Array.from({ length: 18 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="keen-slider__slide shimmer !min-w-[200px]"
-                  >
-                    <p className={cn(roboto.className, "truncate")}></p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))
-      ) : error ? (
-        <p>Error fetching data: {error.message}</p>
-      ) : (
-        moviesData.map((item, idx) => (
-          <div key={idx} className="pl-1 w-full h-full">
-            <div className="pb-[40px] pt-[40px]">
-              <div className="flex flex-row items-center justify-between">
-                <h1 className={cn("text-[25px] pb-3")}>{item.name}</h1>
-                <div className="flex flex-row items-center pr-2 justify-center">
-                  <ChevronLeft className="text-[#A4B3C9] w-5 h-5" />
-                  <p
-                    className={cn(
-                      roboto.className,
-                      "text-[#A4B3C9] text-[12px]"
-                    )}
-                  >
-                    swipe
-                  </p>
-                  <ChevronRight className="text-[#A4B3C9] w-5 h-5" />
-                </div>
-              </div>
-              <div
-                ref={sliderRef}
-                className="keen-slider overflow-x-auto h-[270px]"
-              >
-                {item.data.map((movie: any) => (
-                  <div
-                    onClick={() =>
-                      router.push(
-                        `/details?id=${movie.id}&type=${
-                          movie.name ? "tv" : "movie"
-                        }`
-                      )
-                    }
-                    key={movie.id}
-                    className="keen-slider__slide !min-w-[200px]"
-                  >
-                    <Image
-                      className="object-cover h-[250px] rounded"
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.name || movie.title}
-                      width={1920}
-                      height={1080}
-                    />
-                    <p className={cn(roboto.className, "truncate")}>
-                      {movie.name || movie.title}
+      {loading
+        ? maindata.map((item, idx) => (
+            <div key={idx} className="pl-1 w-full h-full">
+              <div className="pb-[40px] pt-[40px]">
+                <div className="flex flex-row items-center justify-between">
+                  <h1 className={cn(" text-[25px] pb-3")}>{item.name}</h1>
+                  <div className="flex flex-row items-center pr-2 justify-center">
+                    <ChevronLeft className="text-[#A4B3C9] w-5 h-5" />
+                    <p
+                      className={cn(
+                        roboto.className,
+                        "text-[#A4B3C9] text-[12px]"
+                      )}
+                    >
+                      swipe
                     </p>
+                    <ChevronRight className="text-[#A4B3C9] w-5 h-5" />
                   </div>
-                ))}
+                </div>
+                <div className="keen-slider overflow-x-auto h-[270px]">
+                  {Array.from({ length: 18 }).map((_, index) => (
+                    <div
+                      key={index}
+                      className="keen-slider__slide shimmer !min-w-[200px]"
+                    >
+                      <p className={cn(roboto.className, "truncate")}></p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))
-      )}
+          ))
+        : moviesData.map((item, idx) => (
+            <div key={idx} className="pl-1 w-full h-full">
+              <div className="pb-[40px] pt-[40px]">
+                <div className="flex flex-row items-center justify-between">
+                  <h1 className={cn(" text-[25px] pb-3")}>{item.name}</h1>
+                  <div className="flex flex-row items-center pr-2 justify-center">
+                    <ChevronLeft className="text-[#A4B3C9] w-5 h-5" />
+                    <p
+                      className={cn(
+                        roboto.className,
+                        "text-[#A4B3C9] text-[12px]"
+                      )}
+                    >
+                      swipe
+                    </p>
+                    <ChevronRight className="text-[#A4B3C9] w-5 h-5" />
+                  </div>
+                </div>
+                <div
+                  ref={sliderRef}
+                  className="keen-slider overflow-x-auto h-[270px]"
+                >
+                  {item.data.map((movie: any) => (
+                    <div
+                      onClick={() =>
+                        router.push(
+                          `/details?id=${movie.id}&type=${
+                            movie.name ? "tv" : "movie"
+                          }`
+                        )
+                      }
+                      key={movie.id}
+                      className="keen-slider__slide !min-w-[200px]"
+                    >
+                      <Image
+                        className="object-cover h-[250px] rounded"
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        alt={movie.name || movie.title}
+                        width={1920}
+                        height={1080}
+                      />
+                      <p className={cn(roboto.className, "truncate")}>
+                        {movie.name || movie.title}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
     </div>
   );
 }

@@ -63,7 +63,7 @@ export default function ImageHeader() {
     return () => clearInterval(interval);
   }, [items.length]);
 
-  const currentItem = items[currentIndex] || {}; // Fallback to an empty object if undefined
+  const currentItem = items[currentIndex] || {};
 
   return (
     <div className="relative flex flex-1 flex-col items-center">
@@ -109,9 +109,10 @@ export default function ImageHeader() {
               roboto.className,
               "p-1 bg-[#FFD700] rounded-[5px] flex"
             )}
-            href={`/details?id=${currentItem.id}&type=${
-              currentItem.name ? "tv" : "movie"
-            }`}
+            href={""}
+            // `/details?id=${currentItem.id}&type=${
+            //   currentItem.name ? "tv" : "movie"
+            // }`
           >
             Watch
             <Play className="w-5 fill-[#000000]" />
