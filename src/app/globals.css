@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam:wght@400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,7 +7,8 @@ body {
   @apply bg-[#1B1919];
 }
 h1 {
-  @apply text-[#A4B3C9] font-serif;
+  color: #A4B3C9;
+  font-family: 'New Amsterdam', sans-serif;
 }
 Link {
   @apply text-[#576B87];

@@ -9,12 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^14.2.7",
-    "@tanstack/react-query": "^5.52.2",
-    "@trpc/client": "11.0.0-rc.485",
-    "@trpc/next": "11.0.0-rc.485",
-    "@trpc/react-query": "11.0.0-rc.485",
-    "@trpc/server": "11.0.0-rc.485",
     "axios": "^1.7.5",
     "clsx": "^2.1.1",
     "keen-slider": "^6.8.6",
@@ -22,11 +16,9 @@
     "next": "14.2.6",
     "react": "^18",
     "react-dom": "^18",
-    "react-font": "^1.2.1",
-    "react-select": "^5.8.0",
+
     "tailwind-merge": "^2.5.2",
-    "webcinema": "link:",
-    "zod": "^3.23.8"
+    "webcinema": "link:"
   },
   "devDependencies": {
     "@types/node": "^20",
