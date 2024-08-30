@@ -1,13 +1,46 @@
-import React from "react";
+"use client";
 
-function page() {
+import React, { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+
+function EmbedContent() {
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+  const id = searchParams.get("id");
+  const season = searchParams.get("season");
+  const episode = searchParams.get("episode");
+
+  const embedURL = `https://vidsrc.cc/v2/embed/${type}/${id}${
+    type === "tv" ? `/${season}/${episode}` : ""
+  }`;
+
+  console.log(type, id, season, episode);
+
   return (
-    <div className="w-full flex h-full items-center ">
-      <div className="w-full flex h-full items-center justify-center">
-        <h1 className="text-3xl">coming soon ...</h1>
-      </div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <iframe
+        src={embedURL}
+        title="Embedded TV Show Episode"
+        width="100%"
+        height="100%"
+        style={{ border: "none" }}
+        allowFullScreen
+      />
     </div>
   );
 }
 
-export default page;
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EmbedContent />
+    </Suspense>
+  );
+}
