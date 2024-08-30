@@ -61,23 +61,23 @@ export default function Page() {
   }, [searchQuery]);
 
   return (
-    <div className="w-full h-full items-center p-10 pr-12 pl-[85px] flex flex-col">
+    <div className="w-full h-full overflow-hidden items-center pt-10 sm:pl-[85px] flex flex-col">
       <div className="">
         <input
           className={cn(
             roboto.className,
-            "rounded-lg w-[400px] h-[48px] bg-black text-[13px] px-3 placeholder:text-[12px] placeholder:text-[#5c6065] outline-none text-[#ffc31e]"
+            "rounded-lg w-[350px] h-[48px] bg-black text-[13px] px-3 placeholder:text-[12px] placeholder:text-[#5c6065] outline-none text-[#ffc31e]"
           )}
           placeholder="please enter at least 3 characters to search ....."
           type="text"
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <div className="pt-5 flex items-center space-x-4 w-full h-full">
-        <h1 className={cn(sans, "pl-10 text-[25px]")}>Top Searches</h1>
-        <h1 className={cn("font-bold text-[#ffc31e] text-[25px]")}>today</h1>
+      <div className="pt-5 flex items-center space-x-2 w-full h-full">
+        <h1 className={cn(sans, "sm:pl-10 p-2 text-[20px] sm:text-[25px]")}>Top Searches</h1>
+        <h1 className={cn("font-bold text-[#ffc31e] text-[20px] sm:text-[25px]")}>today</h1>
       </div>
-      <div className="flex flex-wrap items-center mt-10 w-full h-full">
+      <div className="flex flex-wrap items-start justify-start  mt-5 w-full h-full">
         {loading
           ? Array.from({ length: 18 }).map((_, index) => (
               <div
@@ -91,7 +91,7 @@ export default function Page() {
           : items.slice(0, 18).map((item: any) => (
               <div
                 key={item.id}
-                className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+                className="flex flex-col sm:mr-10 px-2 mb-5  sm:mb-12 sm:max-w-[150px] max-w-[120px]  sm:max-h-[278px]"
               >
                 <div
                   onClick={() =>
@@ -101,7 +101,7 @@ export default function Page() {
                       }`
                     )
                   }
-                  className="flex min-h-[250px] min-w-[150px]"
+                  className="flex sm:min-h-[250px] sm:min-w-[150px]"
                 >
                   <Image
                     className="object-cover rounded"

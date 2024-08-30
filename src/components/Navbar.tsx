@@ -61,10 +61,10 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="fixed left-0 top-[30%] pl-2 z-50 h-full">
-      <nav className="flex flex-col items-center rounded-[10px] justify-evenly w-[54px] h-[420px] backdrop-blur-sm bg-opacity-50 bg-[#000000]">
+    <div className="fixed sm:left-0 top-[93%] sm:top-[30%] sm:pl-2 z-50 h-full">
+      <nav className="flex flex-row sm:flex-col items-center sm:rounded-[10px] justify-evenly sm:justify-evenly sm:w-[54px] w-screen h-[50px] sm:h-[420px] backdrop-blur-sm bg-opacity-50 bg-[#000000]">
         {navItems.map((item, index) => (
-          <div key={index} className="relative group">
+          <div key={index} className="relative sm:group">
             <p
               className={cn(
                 roboto.className,

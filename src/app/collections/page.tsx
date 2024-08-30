@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 const sans = Roboto_Serif({ subsets: ["latin"] });
-function page() {
+function Page() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null as any);
@@ -45,7 +45,7 @@ function page() {
   }, [count]);
 
   return (
-    <div className="w-full h-full items-center p-10 pr-12 pl-[100px] flex flex-col">
+    <div className="w-full h-full items-center p-2 mr:p-10 sm:pr-12 sm:pl-[100px] flex flex-col">
       <div className=" pt-5 flex items-center space-x-4 w-full h-full">
         <h1 className={cn(sans, "  text-[25px]")}>All Collections</h1>
         <h1 className={cn("font-bold text-[#ffc31e] text-[25px]")}></h1>
@@ -61,10 +61,10 @@ function page() {
                 <p className={cn(roboto.className, "truncate  ")}>Loading...</p>
               </div>
             ))
-          : items.map((item: any) => (
+          : items.slice(0, 39).map((item: any) => (
               <div
                 key={item.id}
-                className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+                className="flex flex-col sm:mr-10 mr-5 mb-5 sm:mb-12 sm:max-w-[150px] max-w-[90px]  max-h-[180px] sm:max-h-[278px]"
               >
                 <div
                   onClick={() =>
@@ -74,7 +74,7 @@ function page() {
                       }`
                     )
                   }
-                  className="flex min-h-[250px] min-w-[150px]"
+                  className="flex sm:min-h-[250px] min-h-[100px] min-w-[50px] sm:min-w-[150px]"
                 >
                   <Image
                     className="object-cover rounded"
@@ -97,4 +97,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

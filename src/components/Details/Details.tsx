@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Overview from "./Overview";
+import Episodes from "./Episodes";
 function Details(props: any) {
   const { item, loading } = props;
   const [activeSection, setActiveSection] = useState("Overview");
@@ -15,8 +16,8 @@ function Details(props: any) {
   const isMovie = !!item.title;
 
   return (
-    <div className="flex flex-col items-center rounded-[15px] w-full h-full mt-4 bg-black">
-      <div className="flex w-full pt-3 justify-evenly px-4 flex-row">
+    <div className="flex flex-col items-center rounded-[15px] w-screen sm:w-full sm:h-full sm:mt-4 bg-black">
+      <div className="flex w-full pt-3 justify-evenly sm:px-4 flex-row">
         {!isMovie && (
           <h1
             className={`text-[16px] cursor-pointer ${
@@ -60,13 +61,11 @@ function Details(props: any) {
           Related
         </h1>
       </div>
-      <hr className="w-[93%] border-1 border-[#A4B3C9]" />
-      <div className="flex flex-col pr-0.5 h-full w-full">
+      <hr className="w-[93%]   border-1 border-[#A4B3C9]" />
+      <div className="flex flex-col sm:pr-0.5 h-full w-full">
         {activeSection === "Overview" && <Overview item={item} />}
         {!isMovie && activeSection === "Episodes" && (
-          <div className="p-5 ">
-            <h1 className="p-1">Coming Soon</h1>
-          </div>
+          <Episodes item={item}  />
         )}
         {activeSection === "Casts" && (
           <div className="p-5">

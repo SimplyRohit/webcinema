@@ -64,7 +64,7 @@ function Page(params: any) {
           <h1
             onClick={() => setType("now_playing")}
             className={cn(
-              type === "  now_playing" ? "text-[#FFB800]" : "",
+              type === "popular" ? "" : "text-[#FFB800]",
               roboto.className,
               ""
             )}
@@ -106,6 +106,7 @@ function Page(params: any) {
           >
             Trending
           </h1>
+          {params.params.id === "anime" || params.params.id === "kdrama"}
           <h1
             onClick={() => setType("top_rated")}
             className={cn(
@@ -123,26 +124,26 @@ function Page(params: any) {
 
   if (["movie", "tv", "anime", "kdrama"].includes(params.params.id)) {
     return (
-      <div className="w-full pl-[100px] p-5 flex flex-col h-full">
+      <div className="w-full sm:pl-[100px] p-2 sm:p-5 flex flex-col h-full">
         <div className="flex pb-5">
           <h1 className={cn("font-bold text-[25px] pb-3")}>
-            {params.params.id}
+            { params.params.id.charAt(0).toUpperCase() + params.params.id.slice(1) }
           </h1>
         </div>
         <div className="flex flex-row pb-5 justify-between">
-          <div className="flex space-x-5">{renderSortOptions()}</div>
+          <div className="flex space-x-2">{renderSortOptions()}</div>
           <div className="flex items-center">
             <h1 className={cn(roboto.className, "")}>Filter</h1>
             <FilterX className="text-[#A4B3C9] w-4 h-4" />
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center mt-10 w-full h-full">
+        <div className="flex flex-wrap items-center sm:mt-10 w-full h-full">
           {loading
             ? Array.from({ length: 18 }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+                  className="flex flex-col sm:mr-10 sm:mb-12 max-w-[150px] max-h-[278px]"
                 >
                   <div className="flex min-h-[250px] min-w-[150px] rounded shimmer"></div>
                   <p className={cn(roboto.className, "truncate")}>Loading...</p>
@@ -151,7 +152,7 @@ function Page(params: any) {
             : movies.slice(0, 18).map((item: any) => (
                 <div
                   key={item.id}
-                  className="flex flex-col mr-10 mb-12 max-w-[150px] max-h-[278px]"
+                  className="flex flex-col sm:mr-10 mr-3  sm:mb-12 mb-6 sm:max-w-[150px] max-w-[100px]  sm:max-h-[278px]"
                 >
                   <div
                     onClick={() =>
@@ -161,7 +162,7 @@ function Page(params: any) {
                         }`
                       )
                     }
-                    className="flex  min-h-[250px] min-w-[150px]"
+                    className="flex  sm:min-h-[250px] min-h-[100px] min-w-[50px] sm:min-w-[150px]"
                   >
                     <Image
                       className="object-cover rounded"

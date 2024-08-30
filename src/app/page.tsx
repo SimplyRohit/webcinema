@@ -60,8 +60,25 @@ export default function Homepage() {
   const [error, setError] = useState<any>(null);
 
   const [sliderRef, slider] = useKeenSlider({
+    breakpoints: {
+      "(min-width: 400px)": {
+        slides: { perView: 4, spacing: 10 },
+      },
+      "(min-width: 600px)": {
+        slides: { perView: 6, spacing: 15 },
+      },
+      "(min-width: 800px)": {
+        slides: { perView: 8, spacing: 15 },
+      },
+      "(min-width: 1000px)": {
+        slides: { perView: 10, spacing: 15 },
+      },
+      "(min-width: 1200px)": {
+        slides: { perView: 10, spacing: 15 },
+      },
+    },
     slides: {
-      perView: 8,
+      perView: 10,
       spacing: 15,
     },
   });
@@ -83,15 +100,15 @@ export default function Homepage() {
       }
     };
     fetchData();
-  }, []);
+  }, [maindata]);
 
   return (
-    <div className="w-full h-full pl-[70px]">
+    <div className="w-full h-full overflow-hidden sm:pl-[70px]">
       <ImageHeader />
       {loading
         ? maindata.map((item, idx) => (
             <div key={idx} className="pl-1 w-full h-full">
-              <div className="pb-[40px] pt-[40px]">
+              <div className="sm:pb-[40px] sm:pt-[40px]">
                 <div className="flex flex-row items-center justify-between">
                   <h1 className={cn(" text-[25px] pb-3")}>{item.name}</h1>
                   <div className="flex flex-row items-center pr-2 justify-center">
@@ -107,7 +124,7 @@ export default function Homepage() {
                     <ChevronRight className="text-[#A4B3C9] w-5 h-5" />
                   </div>
                 </div>
-                <div className="keen-slider overflow-x-auto h-[270px]">
+                <div className="keen-slider overflow-x-auto sm:h-[270px] h-[100px]">
                   {Array.from({ length: 18 }).map((_, index) => (
                     <div
                       key={index}
@@ -122,9 +139,11 @@ export default function Homepage() {
           ))
         : moviesData.map((item, idx) => (
             <div key={idx} className="pl-1 w-full h-full">
-              <div className="pb-[40px] pt-[40px]">
+              <div className="sm:pb-[40px] pt-[20px] sm:pt-[40px]">
                 <div className="flex flex-row items-center justify-between">
-                  <h1 className={cn(" text-[25px] pb-3")}>{item.name}</h1>
+                  <h1 className={cn(" text-[20px] sm:text-[25px] pb-3")}>
+                    {item.name}
+                  </h1>
                   <div className="flex flex-row items-center pr-2 justify-center">
                     <ChevronLeft className="text-[#A4B3C9] w-5 h-5" />
                     <p
@@ -140,7 +159,7 @@ export default function Homepage() {
                 </div>
                 <div
                   ref={sliderRef}
-                  className="keen-slider overflow-x-auto h-[270px]"
+                  className="keen-slider overflow-x-auto  sm:h-[270px] h-[180px] "
                 >
                   {item.data.map((movie: any) => (
                     <div
@@ -152,10 +171,10 @@ export default function Homepage() {
                         )
                       }
                       key={movie.id}
-                      className="keen-slider__slide !min-w-[200px]"
+                      className="keen-slider__slide sm:!min-w-[180px] !min-w-[90px]   "
                     >
                       <Image
-                        className="object-cover h-[250px] rounded"
+                        className="object-cover sm:h-[250px] h-[150px] rounded"
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.name || movie.title}
                         width={1920}

@@ -23,6 +23,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-font": "^1.2.1",
+    "react-select": "^5.8.0",
     "tailwind-merge": "^2.5.2",
     "webcinema": "link:",
     "zod": "^3.23.8"
