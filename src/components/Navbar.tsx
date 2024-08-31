@@ -19,6 +19,8 @@ export default function Navbar() {
   const path = usePathname();
   const router = useRouter();
 
+  const shouldHideNavbar = path.startsWith("/watch");
+
   const navItems = [
     { icon: House, label: "Home", path: "/", tooltipPosition: "top" },
     {
@@ -64,7 +66,12 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="fixed md:left-0 bottom-0 md:top-[30%] md:pl-2 z-50">
+    <div
+      className={cn(
+        "fixed md:left-0 bottom-0 md:top-[30%] md:pl-2 z-50",
+        shouldHideNavbar ? "hidden md:block" : "block"
+      )}
+    >
       <nav className="flex md:flex-col flex-row items-center md:rounded-[10px] justify-evenly md:w-[54px] w-screen h-[65px] md:h-[420px] md:backdrop-blur-sm md:bg-opacity-50 bg-[#000000]">
         {navItems.map((item, index) => (
           <div
@@ -81,7 +88,7 @@ export default function Navbar() {
                 item.tooltipPosition === "top"
                   ? "left-1/2 transform -translate-x-1/2 -translate-y-1/3 bottom-full"
                   : "left-full top-1/2 transform -translate-y-1/2 ml-2",
-                "opacity-0 md:group-hover:opacity-100" // Apply hover effect only on md and above
+                "opacity-0 md:group-hover:opacity-100"
               )}
             >
               {item.label}
