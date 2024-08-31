@@ -14,16 +14,16 @@ const sans = Roboto_Serif({ subsets: ["latin"] });
 function Page() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null as any);
+
   const [count, setCount] = useState(1);
   const router = useRouter();
   useEffect(() => {
     const fetchItems = async () => {
       setLoading(true);
       try {
-        const movieEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc&page=${count}`;
+        const movieEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&page=${count}`;
 
-        const tvEndpoint = `https://api.themoviedb.org/3/tv/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc&page=${count}`;
+        const tvEndpoint = `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&page=${count}`;
 
         const [moviesResponse, tvResponse] = await Promise.all([
           axios.get(movieEndpoint),
@@ -35,8 +35,6 @@ function Page() {
         ].sort(() => Math.random() - 0.5);
 
         setItems(combinedResults);
-      } catch (err) {
-        setError(err);
       } finally {
         setLoading(false);
       }

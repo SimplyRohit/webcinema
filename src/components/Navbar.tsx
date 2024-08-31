@@ -53,13 +53,13 @@ export default function Navbar() {
       label: "Library",
       path: "/library",
       tooltipPosition: "right",
-      hiddenOnSmall: true,
     },
     {
       icon: Settings,
       label: "Settings",
       path: "/settings",
       tooltipPosition: "right",
+      hiddenOnSmall: true,
     },
   ];
 
@@ -70,7 +70,7 @@ export default function Navbar() {
           <div
             key={index}
             className={cn(
-              "relative sm:group",
+              "relative group",
               item.hiddenOnSmall ? "hidden sm:block" : "block"
             )}
           >
@@ -79,8 +79,8 @@ export default function Navbar() {
                 roboto.className,
                 "absolute inline-block whitespace-nowrap opacity-0 p-2 bg-opacity-60 backdrop-blur-[0px] rounded-[6px] bg-[#4d4747] text-[#b8c2cf] text-[.9rem] tracking-[-.075em]",
                 item.tooltipPosition === "top"
-                  ? "left-[-50%] top-0 translate -x-[-50%] translate-y-[-120%] sm:group-hover:opacity-100 sm:group-hover:-mt-2"
-                  : "left-full top-[50%] translate-y-[-50%] ml-2 group-hover:opacity-100 group-hover:ml-2"
+                  ? "left-1/2 transform -translate-x-1/2 -translate-y-1/3 bottom-full group-hover:opacity-100"
+                  : "left-full top-1/2 transform -translate-y-1/2 ml-2 group-hover:opacity-100"
               )}
             >
               {item.label}
@@ -89,7 +89,7 @@ export default function Navbar() {
               onClick={() => router.push(item.path)}
               className={cn(
                 path === item.path ? "text-[#ffde24]" : "text-[#576B87]",
-                "w-5 h-5"
+                "w-5 h-5 cursor-pointer"
               )}
             />
           </div>

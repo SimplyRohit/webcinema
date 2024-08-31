@@ -1,15 +1,13 @@
 import React from "react";
-import { cn } from "@/libs/utils";
-import Card from "@/components/Cardwithoutdetails";
-import Arrow from "@/components/Arrow";
+
 import { Roboto_Mono } from "next/font/google";
-import { FilterX } from "lucide-react";
+
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function page() {
   return (
-    <div className="w-full  flex items-center justify-center  h-full">
-      <h1 className="text-3xl">Coming Soon ........</h1>
+    <div className="w-full  flex items-center  justify-center  h-full">
+      <h1 className="text-3xl pt-10 ">Coming Soon ........</h1>
     </div>
     // <div className="w-full pl-[100px] p-5 flex flex-col  h-full">
     //   <div className="flex flex-col pb-5 ">

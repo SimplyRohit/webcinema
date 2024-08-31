@@ -19,7 +19,7 @@ export default function ImageHeader() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://api.themoviedb.org/3/trending/all/day?api_key=21adfad015207a4c85a59b73ff60ddec&language=en-US&page=1"
+          `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
         );
 
         setItems(response.data.results.slice(0, 6));

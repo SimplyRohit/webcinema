@@ -20,7 +20,9 @@ function Related(props: any) {
         const response = await axios.get(
           `https://api.themoviedb.org/3/${item.name ? "tv" : "movie"}/${
             item.id
-          }/recommendations?api_key=21adfad015207a4c85a59b73ff60ddec&language=en-US&page=${count}`
+          }/recommendations?api_key=${
+            process.env.NEXT_PUBLIC_API_KEY
+          }&language=en-US&page=${count}`
         );
         setRelated(response.data.results);
       } finally {
@@ -60,9 +62,9 @@ function Related(props: any) {
             >
               <div
                 onClick={() =>
-                  router.push(
-                    `/details?id=${item.id}&type=${item.title ? "movie" : "tv"}`
-                  )
+                  (window.location.href = `/details?id=${item.id}&type=${
+                    item.title ? "movie" : "tv"
+                  }`)
                 }
                 className="flex min-h-[100px] min-w-[50px] cursor-pointer"
               >

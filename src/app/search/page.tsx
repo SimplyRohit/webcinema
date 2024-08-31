@@ -14,7 +14,6 @@ const roboto = Roboto_Mono({ subsets: ["latin"] });
 export default function Page() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null as any);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const router = useRouter();
@@ -22,12 +21,12 @@ export default function Page() {
     setLoading(true);
     try {
       const movieEndpoint = query
-        ? `https://api.themoviedb.org/3/search/movie?api_key=21adfad015207a4c85a59b73ff60ddec&query=${query}&sort_by=popularity.desc`
-        : `https://api.themoviedb.org/3/movie/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc`;
+        ? `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}&sort_by=popularity.desc`
+        : `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc`;
 
       const tvEndpoint = query
-        ? `https://api.themoviedb.org/3/search/tv?api_key=21adfad015207a4c85a59b73ff60ddec&query=${query}&sort_by=popularity.desc`
-        : `https://api.themoviedb.org/3/tv/popular?api_key=21adfad015207a4c85a59b73ff60ddec&sort_by=popularity.desc`;
+        ? `https://api.themoviedb.org/3/search/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}&sort_by=popularity.desc`
+        : `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc`;
 
       const [moviesResponse, tvResponse] = await Promise.all([
         axios.get(movieEndpoint),
@@ -39,8 +38,6 @@ export default function Page() {
       ].sort(() => Math.random() - 0.5);
 
       setItems(combinedResults);
-    } catch (err) {
-      setError(err);
     } finally {
       setLoading(false);
     }
@@ -74,8 +71,14 @@ export default function Page() {
         />
       </div>
       <div className="pt-5 flex items-center space-x-2 pl-5 sm:pl-0 w-full h-full">
-        <h1 className={cn(sans, "sm:pl-10 p-2 text-[20px] sm:text-[25px]")}>Top Searches</h1>
-        <h1 className={cn("font-bold text-[#ffc31e] text-[20px] sm:text-[25px]")}>today</h1>
+        <h1 className={cn(sans, "sm:pl-10 p-2 text-[20px] sm:text-[25px]")}>
+          Top Searches
+        </h1>
+        <h1
+          className={cn("font-bold text-[#ffc31e] text-[20px] sm:text-[25px]")}
+        >
+          today
+        </h1>
       </div>
       <div className="flex flex-wrap items-start justify-start pl-5 sm:pl-0  mt-5 w-full h-full">
         {loading

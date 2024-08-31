@@ -18,7 +18,7 @@ function PageContent() {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/${type}/${id}?api_key=21adfad015207a4c85a59b73ff60ddec`
+          `https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
         );
         setItem(response.data);
       } catch (err) {
@@ -30,17 +30,13 @@ function PageContent() {
     fetchData();
   }, [type, id]);
 
-  if (!item) {
-    return <div>No data found</div>;
-  }
-
   return (
     <div className="flex w-full sm:h-svh items-center flex-col sm:flex-row justify-center">
       <div className="sm:w-[75vw] sm:ml-20 h-full">
-        <ImageHeader item={item} loading={loading} />
+        <ImageHeader item={loading ? "" : item} loading={loading} />
       </div>
       <div className="sm:w-[23vw] h-[96%] sm:mb-8 rounded-[15px] transition-all items-center justify-center overflow-hidden duration-300 mr-3 ease-in-out sm:hover:w-[37vw]">
-        <Details item={item} loading={loading} />
+        <Details item={loading ? "" : item} loading={loading} />
       </div>
     </div>
   );

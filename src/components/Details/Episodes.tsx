@@ -25,7 +25,7 @@ function Episodes(props: any) {
     if (selectedSeason && item && item.id) {
       axios
         .get(
-          `https://api.themoviedb.org/3/tv/${item.id}/season/${selectedSeason}?api_key=21adfad015207a4c85a59b73ff60ddec`
+          `https://api.themoviedb.org/3/tv/${item.id}/season/${selectedSeason}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
         )
         .then((response) => {
           setEpisodes(response.data.episodes || []);

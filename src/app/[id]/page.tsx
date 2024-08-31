@@ -14,7 +14,7 @@ const roboto = Roboto_Mono({ subsets: ["latin"] });
 function Page(params: any) {
   const [movies, setMovies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | "">("");
+
   const [count, setCount] = useState(1);
   const [type, setType] = useState("now_playing");
   const router = useRouter();
@@ -43,12 +43,10 @@ function Page(params: any) {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/${data}api_key=21adfad015207a4c85a59b73ff60ddec&page=${count}`
+          `https://api.themoviedb.org/3/${data}api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${count}`
         );
 
         setMovies(response.data.results);
-      } catch (err: any) {
-        setError(err.message || "Error fetching data");
       } finally {
         setLoading(false);
       }
@@ -127,7 +125,8 @@ function Page(params: any) {
       <div className="w-full sm:pl-[100px] p-2   sm:p-5 flex flex-col h-full">
         <div className="flex pb-5">
           <h1 className={cn("font-bold text-[25px] pt-2 ")}>
-            { params.params.id.charAt(0).toUpperCase() + params.params.id.slice(1) }
+            {params.params.id.charAt(0).toUpperCase() +
+              params.params.id.slice(1)}
           </h1>
         </div>
         <div className="flex flex-row pb-5 justify-between">

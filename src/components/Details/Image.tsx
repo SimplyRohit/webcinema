@@ -11,23 +11,37 @@ function ImageHeader(props: any) {
   const loading = props.loading;
   return (
     <div className=" w-full h-full flex-col  ">
-      <div className="sm:w-full h-[500px] pt-2 px-2 sm:pt-5 sm:pr-5 pb-8 sm:h-full">
-        <Image
-          className="sm:rounded-[30px] rounded-lg  object-cover w-full h-full"
-          src={`https://image.tmdb.org/t/p/original${
-            item.backdrop_path === null ? item.poster_path : item.backdrop_path
-          }`}
-          alt={item.title || item.name}
-          width={1920}
-          height={1080}
-        />
-      </div>
+      {loading ? (
+        <div className="sm:w-full h-[500px] pt-2 px-2 sm:pt-5 sm:pr-5 pb-8 sm:h-full">
+          <Image
+            className="shimmer sm:rounded-[30px]  rounded-lg  object-cover w-full h-full"
+            src={""}
+            alt={""}
+            width={1920}
+            height={1080}
+          />
+        </div>
+      ) : (
+        <div className="sm:w-full h-[500px] pt-2 px-2 sm:pt-5 sm:pr-5 pb-8 sm:h-full">
+          <Image
+            className="sm:rounded-[30px] rounded-lg  object-cover w-full h-full"
+            src={`https://image.tmdb.org/t/p/original${
+              item.backdrop_path === null
+                ? item.poster_path
+                : item.backdrop_path
+            }`}
+            alt={item.title || item.name}
+            width={1920}
+            height={1080}
+          />
+        </div>
+      )}
 
       <div className="absolute sm:bottom-2 bottom-[44.5%] left-[30%] sm:left-[13%] flex flex-col items-center bg-[#000000]  border-[5px] sm:border-[15px] border-[#1B1919] min-w-[120px] sm:min-w-[350px]  p-1 rounded-[20px] sm:rounded-[40px]">
         {/* <div className="w-[50px] h-[50px] absolute bottom-[13px] left-[-63px] rounded-br-[50px] shadow-[70px_70px_0px_70px_#1B1919] z-[-1]"></div>
         <div className="w-[50px] h-[50px] bottom-[13px] absolute left-[315px] text-white bg-white  rounded-bl-[50px] shadow-[-70px_70px_0px_70px_#1B1919] z-[-1]"></div> */}
         <h1 className="font-bold ml-3 pl-1 relative translate-y-2 truncate text-[20px] sm:text-[25px] max-w-[200px]">
-          {item.title || item.name}
+          {loading ? "Name" : item.title || item.name}
         </h1>
 
         <p
@@ -62,16 +76,18 @@ function ImageHeader(props: any) {
 
       <div className="absolute sm:bottom-[2%] bottom-[44.5%] bg-[#000000] border-[5px] sm:border-[10px]  border-[#1B1919]  sm:left-[4%] sm:max-h-[270px] max-w-[120px] max-h-[250px] sm:max-w-[170px] rounded-[20px]">
         <Image
-          className="object-cover rounded-[20px]   w-full h-full"
+          className={cn("object-cover rounded-[20px]   w-full h-full")}
           src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
           width={1920}
           height={1080}
           alt={item.title || item.name}
         />
       </div>
-      <div className="absolute sm:bottom-[22%] bottom-[61%] left-[23%] sm:left-[11%] bg-[#000000] border-[2px] sm:border-[10px] border-[#1B1919] rounded-[50%]">
-        <h1 className="font-bold text-[15px] p-2">5.5</h1>
-      </div>
+      {!loading && (
+        <div className="absolute sm:bottom-[22%] bottom-[61%] left-[23%] sm:left-[11%] bg-[#000000] border-[2px] sm:border-[10px] border-[#1B1919] rounded-[50%]">
+          <h1 className="font-bold text-[15px] p-2">{item.vote_average}</h1>
+        </div>
+      )}
     </div>
   );
 }

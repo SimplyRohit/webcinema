@@ -14,7 +14,9 @@ function Cast(props: any) {
         const response = await axios.get(
           `https://api.themoviedb.org/3/${item.name ? "tv" : "movie"}/${
             item.id
-          }/credits?api_key=21adfad015207a4c85a59b73ff60ddec&language=en-US&page=1`
+          }/credits?api_key=${
+            process.env.NEXT_PUBLIC_API_KEY
+          }&language=en-US&page=1`
         );
         setCast(response.data.cast);
       } finally {

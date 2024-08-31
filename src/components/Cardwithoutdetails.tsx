@@ -31,7 +31,7 @@ export default function Card(params: any) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/${data}api_key=21adfad015207a4c85a59b73ff60ddec&page=1`
+          `https://api.themoviedb.org/3/${data}api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=1`
         );
         setMovies(response.data.results);
       } catch (err) {
