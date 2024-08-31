@@ -32,7 +32,7 @@ export const maindata = [
   {
     id: 6,
     name: "Popular Anime",
-    url: `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}",
+    url: `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
   },
   {
     id: 7,

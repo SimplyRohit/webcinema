@@ -94,7 +94,7 @@ export default function Homepage() {
       }
     };
     fetchData();
-  }, [maindata]);
+  }, [maindata, process.env.NEXT_PUBLIC_API_KEY]);
 
   return (
     <div className="w-full h-full sm:pb-2  overflow-hidden sm:pl-[70px]">

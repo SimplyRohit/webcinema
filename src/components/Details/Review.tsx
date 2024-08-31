@@ -35,7 +35,10 @@ function Review(props: any) {
   return (
     <div className="w-full h-[880px]  flex overflow-y-auto overflow-x-hidden flex-col">
       {Review.map((review: any) => (
-        <div className="flex w-full h-[250px] rounded-lg  m-2 bg-[#1B1919] flex-col">
+        <div
+          key={review.id}
+          className="flex w-full h-[250px] rounded-lg  m-2 bg-[#1B1919] flex-col"
+        >
           <h1 className="text-[#FFD700] pb-2 pt-2 pl-2">{review.author}</h1>
           <p className={cn(roboto.className, "pl-2  items-center flex")}>
             <Star size={15} color="#FFD700" /> -{review.author_details.rating}
