@@ -11,27 +11,19 @@ function ImageHeader(props: any) {
   const loading = props.loading;
   return (
     <div className=" w-full h-full flex-col  ">
-      {item.backdrop_path || item.poster_path ? (
-        <div className="sm:w-full h-[500px] pt-2 px-2 sm:pt-5 sm:pr-5 pb-8 sm:h-full">
-          <Image
-            className="rounded-[30px]  object-cover w-full h-full"
-            src={`https://image.tmdb.org/t/p/original${
-              item.backdrop_path === null
-                ? item.poster_path
-                : item.backdrop_path
-            }`}
-            alt={item.title || item.name}
-            width={1920}
-            height={1080}
-          />
-        </div>
-      ) : (
-        <div className="w-full h-[750px] p-2 flex items-center justify-center">
-          <p>No image available</p>
-        </div>
-      )}
+      <div className="sm:w-full h-[500px] pt-2 px-2 sm:pt-5 sm:pr-5 pb-8 sm:h-full">
+        <Image
+          className="sm:rounded-[30px] rounded-lg  object-cover w-full h-full"
+          src={`https://image.tmdb.org/t/p/original${
+            item.backdrop_path === null ? item.poster_path : item.backdrop_path
+          }`}
+          alt={item.title || item.name}
+          width={1920}
+          height={1080}
+        />
+      </div>
 
-      <div className="absolute sm:bottom-2 bottom-[29%] left-[32%] sm:left-[13%] flex flex-col items-center bg-[#000000]  border-[5px] sm:border-[15px] border-[#1B1919] min-w-[120px] sm:min-w-[350px]  p-1 rounded-[20px] sm:rounded-[40px]">
+      <div className="absolute sm:bottom-2 bottom-[44.5%] left-[30%] sm:left-[13%] flex flex-col items-center bg-[#000000]  border-[5px] sm:border-[15px] border-[#1B1919] min-w-[120px] sm:min-w-[350px]  p-1 rounded-[20px] sm:rounded-[40px]">
         {/* <div className="w-[50px] h-[50px] absolute bottom-[13px] left-[-63px] rounded-br-[50px] shadow-[70px_70px_0px_70px_#1B1919] z-[-1]"></div>
         <div className="w-[50px] h-[50px] bottom-[13px] absolute left-[315px] text-white bg-white  rounded-bl-[50px] shadow-[-70px_70px_0px_70px_#1B1919] z-[-1]"></div> */}
         <h1 className="font-bold ml-3 pl-1 relative translate-y-2 truncate text-[20px] sm:text-[25px] max-w-[200px]">
@@ -41,12 +33,12 @@ function ImageHeader(props: any) {
         <p
           className={cn(
             roboto.className,
-            "transform -rotate-[-90deg] text-[18px] translate-x-[-100px]  sm:translate-x-[-140px]"
+            "transform -rotate-[-90deg] sm:text-[18px] text-[14px] translate-x-[-100px]  sm:translate-x-[-140px]"
           )}
         >
           {item.name ? "Show" : "Movie"}
         </p>
-        <div className="flex ml-7 flex-row space-x-2 items-center">
+        <div className="flex ml-5  flex-row space-x-2 items-center">
           <Link
             className={cn(
               roboto.className,
@@ -68,7 +60,7 @@ function ImageHeader(props: any) {
         </div>
       </div>
 
-      <div className="absolute sm:bottom-[2%] bottom-[29%] bg-[#000000] border-[5px] sm:border-[10px]  border-[#1B1919]  sm:left-[4%] sm:max-h-[270px] max-w-[120px] max-h-[250px] sm:max-w-[170px] rounded-[20px]">
+      <div className="absolute sm:bottom-[2%] bottom-[44.5%] bg-[#000000] border-[5px] sm:border-[10px]  border-[#1B1919]  sm:left-[4%] sm:max-h-[270px] max-w-[120px] max-h-[250px] sm:max-w-[170px] rounded-[20px]">
         <Image
           className="object-cover rounded-[20px]   w-full h-full"
           src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -77,7 +69,7 @@ function ImageHeader(props: any) {
           alt={item.title || item.name}
         />
       </div>
-      <div className="absolute sm:bottom-[22%] bottom-[50%] left-[23%] sm:left-[11%] bg-[#000000] border-[2px] sm:border-[10px] border-[#1B1919] rounded-[50%]">
+      <div className="absolute sm:bottom-[22%] bottom-[61%] left-[23%] sm:left-[11%] bg-[#000000] border-[2px] sm:border-[10px] border-[#1B1919] rounded-[50%]">
         <h1 className="font-bold text-[15px] p-2">5.5</h1>
       </div>
     </div>

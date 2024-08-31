@@ -3,7 +3,7 @@ import React from "react";
 function Overview(props: any) {
   const { item } = props;
   return (
-    <div className="p-5">
+    <div className="p-2 pt-1  ">
       <h1 className="p-1 pt-5">Title: {item.title || item.name}</h1>
       <p className=" font-mono">{item.overview || "No overview available"}</p>
       <h1 className="p-1 pt-5">Release Date</h1>

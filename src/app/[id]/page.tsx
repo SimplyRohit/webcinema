@@ -124,9 +124,9 @@ function Page(params: any) {
 
   if (["movie", "tv", "anime", "kdrama"].includes(params.params.id)) {
     return (
-      <div className="w-full sm:pl-[100px] p-2 sm:p-5 flex flex-col h-full">
+      <div className="w-full sm:pl-[100px] p-2   sm:p-5 flex flex-col h-full">
         <div className="flex pb-5">
-          <h1 className={cn("font-bold text-[25px] pb-3")}>
+          <h1 className={cn("font-bold text-[25px] pt-2 ")}>
             { params.params.id.charAt(0).toUpperCase() + params.params.id.slice(1) }
           </h1>
         </div>
@@ -152,7 +152,7 @@ function Page(params: any) {
             : movies.slice(0, 18).map((item: any) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:mr-10 mr-3  sm:mb-12 mb-6 sm:max-w-[150px] max-w-[100px]  sm:max-h-[278px]"
+                  className="flex flex-col sm:mr-10 mx-3 sm:mb-12 mb-6 sm:max-w-[150px] max-w-[100px]  sm:max-h-[278px]"
                 >
                   <div
                     onClick={() =>

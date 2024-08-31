@@ -14,7 +14,7 @@ function EmbedContent() {
     type === "tv" ? `/${season}/${episode}` : ""
   }`;
 
-  console.log(type, id, season, episode);
+ 
 
   return (
     <div

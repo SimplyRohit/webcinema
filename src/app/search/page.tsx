@@ -73,11 +73,11 @@ export default function Page() {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <div className="pt-5 flex items-center space-x-2 w-full h-full">
+      <div className="pt-5 flex items-center space-x-2 pl-5 sm:pl-0 w-full h-full">
         <h1 className={cn(sans, "sm:pl-10 p-2 text-[20px] sm:text-[25px]")}>Top Searches</h1>
         <h1 className={cn("font-bold text-[#ffc31e] text-[20px] sm:text-[25px]")}>today</h1>
       </div>
-      <div className="flex flex-wrap items-start justify-start  mt-5 w-full h-full">
+      <div className="flex flex-wrap items-start justify-start pl-5 sm:pl-0  mt-5 w-full h-full">
         {loading
           ? Array.from({ length: 18 }).map((_, index) => (
               <div
@@ -91,7 +91,7 @@ export default function Page() {
           : items.slice(0, 18).map((item: any) => (
               <div
                 key={item.id}
-                className="flex flex-col sm:mr-10 px-2 mb-5  sm:mb-12 sm:max-w-[150px] max-w-[120px]  sm:max-h-[278px]"
+                className="flex flex-col sm:mr-10 mx-2 sm:mb-12 mb-6 sm:max-w-[150px] max-w-[100px]  sm:max-h-[278px]"
               >
                 <div
                   onClick={() =>

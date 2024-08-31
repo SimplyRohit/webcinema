@@ -103,7 +103,7 @@ export default function Homepage() {
   }, [maindata]);
 
   return (
-    <div className="w-full h-full overflow-hidden sm:pl-[70px]">
+    <div className="w-full h-full sm:pb-2  overflow-hidden sm:pl-[70px]">
       <ImageHeader />
       {loading
         ? maindata.map((item, idx) => (
@@ -138,7 +138,7 @@ export default function Homepage() {
             </div>
           ))
         : moviesData.map((item, idx) => (
-            <div key={idx} className="pl-1 w-full h-full">
+            <div key={idx} className="pl-1  w-full h-full">
               <div className="sm:pb-[40px] pt-[20px] sm:pt-[40px]">
                 <div className="flex flex-row items-center justify-between">
                   <h1 className={cn(" text-[20px] sm:text-[25px] pb-3")}>
@@ -159,7 +159,7 @@ export default function Homepage() {
                 </div>
                 <div
                   ref={sliderRef}
-                  className="keen-slider overflow-x-auto  sm:h-[270px] h-[180px] "
+                  className="keen-slider overflow-x-auto   sm:h-[270px] h-[180px] "
                 >
                   {item.data.map((movie: any) => (
                     <div

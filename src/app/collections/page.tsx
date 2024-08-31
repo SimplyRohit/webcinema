@@ -64,7 +64,7 @@ function Page() {
           : items.slice(0, 39).map((item: any) => (
               <div
                 key={item.id}
-                className="flex flex-col sm:mr-10 mr-5 mb-5 sm:mb-12 sm:max-w-[150px] max-w-[90px]  max-h-[180px] sm:max-h-[278px]"
+                className="flex flex-col sm:mr-10 mx-3 sm:mb-12 mb-6 sm:max-w-[150px] max-w-[100px]  sm:max-h-[278px]"
               >
                 <div
                   onClick={() =>

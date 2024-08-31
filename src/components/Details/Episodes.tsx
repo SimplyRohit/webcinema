@@ -29,8 +29,7 @@ function Episodes(props: any) {
         )
         .then((response) => {
           setEpisodes(response.data.episodes || []);
-        })
-        .catch((error) => console.error("Error fetching episodes:", error));
+        });
     }
   }, [selectedSeason, item]);
 
@@ -39,7 +38,7 @@ function Episodes(props: any) {
   };
 
   return (
-    <div className="p-4">
+    <div className="">
       <div className="flex items-center pb-5 pt-2 w-full justify-center">
         {seasons.length > 0 && (
           <select
@@ -57,7 +56,7 @@ function Episodes(props: any) {
         )}
       </div>
 
-      <div className="w-full h-[730px] overflow-y-auto flex flex-col p-2">
+      <div className="w-full h-[800px] overflow-y-auto flex flex-col p-2">
         {episodes.map((episode: any) => (
           <div
             key={episode.id}

@@ -14,6 +14,7 @@ import { cn } from "@/libs/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { Roboto_Mono } from "next/font/google";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
+
 export default function Navbar() {
   const path = usePathname();
   const router = useRouter();
@@ -45,12 +46,14 @@ export default function Navbar() {
       label: "Collections",
       path: "/collections",
       tooltipPosition: "right",
+      hiddenOnSmall: true,
     },
     {
       icon: LibraryBig,
       label: "Library",
       path: "/library",
       tooltipPosition: "right",
+      hiddenOnSmall: true,
     },
     {
       icon: Settings,
@@ -61,16 +64,22 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="fixed sm:left-0 top-[93%] sm:top-[30%] sm:pl-2 z-50 h-full">
-      <nav className="flex flex-row sm:flex-col items-center sm:rounded-[10px] justify-evenly sm:justify-evenly sm:w-[54px] w-screen h-[50px] sm:h-[420px] backdrop-blur-sm bg-opacity-50 bg-[#000000]">
+    <div className="fixed sm:left-0 bottom-0 sm:top-[30%] sm:pl-2 z-50">
+      <nav className="flex sm:flex-col flex-row items-center sm:rounded-[10px] justify-evenly sm:w-[54px] w-screen h-[65px] sm:h-[420px] sm:backdrop-blur-sm sm:bg-opacity-50 bg-[#000000]">
         {navItems.map((item, index) => (
-          <div key={index} className="relative sm:group">
+          <div
+            key={index}
+            className={cn(
+              "relative sm:group",
+              item.hiddenOnSmall ? "hidden sm:block" : "block"
+            )}
+          >
             <p
               className={cn(
                 roboto.className,
-                "  absolute inline-block whitespace-nowrap opacity-0  p-2 bg-opacity-60 backdrop-blur-[0px] rounded-[6px] bg-[#4d4747] text-[#b8c2cf] text-[.9rem] tracking-[-.075em]",
+                "absolute inline-block whitespace-nowrap opacity-0 p-2 bg-opacity-60 backdrop-blur-[0px] rounded-[6px] bg-[#4d4747] text-[#b8c2cf] text-[.9rem] tracking-[-.075em]",
                 item.tooltipPosition === "top"
-                  ? "left-[-50%] top-0 translate -x-[-50%] translate-y-[-120%] group-hover:opacity-100 group-hover:-mt-2"
+                  ? "left-[-50%] top-0 translate -x-[-50%] translate-y-[-120%] sm:group-hover:opacity-100 sm:group-hover:-mt-2"
                   : "left-full top-[50%] translate-y-[-50%] ml-2 group-hover:opacity-100 group-hover:ml-2"
               )}
             >

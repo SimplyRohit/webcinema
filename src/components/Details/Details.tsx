@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import Overview from "./Overview";
 import Episodes from "./Episodes";
+import Cast from "./Cast";
+import Review from "./Review";
+import Related from "./Related";
 function Details(props: any) {
   const { item, loading } = props;
   const [activeSection, setActiveSection] = useState("Overview");
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!item) {
-    return <div>No data found</div>;
-  }
-
   const isMovie = !!item.title;
 
   return (
-    <div className="flex flex-col items-center rounded-[15px] w-screen sm:w-full sm:h-full sm:mt-4 bg-black">
-      <div className="flex w-full pt-3 justify-evenly sm:px-4 flex-row">
+    <div className="flex flex-col items-center  rounded-t-[15px] w-screen sm:w-full h-full sm:mt-4 bg-black">
+      <div className="flex w-full pt-2  justify-evenly sm:px-4 flex-row">
         {!isMovie && (
           <h1
             className={`text-[16px] cursor-pointer ${
@@ -62,26 +57,12 @@ function Details(props: any) {
         </h1>
       </div>
       <hr className="w-[93%]   border-1 border-[#A4B3C9]" />
-      <div className="flex flex-col sm:pr-0.5 h-full w-full">
+      <div className="flex flex-col sm:pr-0.5  w-full">
         {activeSection === "Overview" && <Overview item={item} />}
-        {!isMovie && activeSection === "Episodes" && (
-          <Episodes item={item}  />
-        )}
-        {activeSection === "Casts" && (
-          <div className="p-5">
-            <h1 className="p-1">Coming Soon</h1>
-          </div>
-        )}
-        {activeSection === "Reviews" && (
-          <div className="p-5">
-            <h1 className="p-1">Coming Soon</h1>
-          </div>
-        )}
-        {activeSection === "Related" && (
-          <div className="p-5">
-            <h1 className="p-1">Coming Soon</h1>
-          </div>
-        )}
+        {!isMovie && activeSection === "Episodes" && <Episodes item={item} />}
+        {activeSection === "Casts" && <Cast item={item} />}
+        {activeSection === "Reviews" && <Review item={item} />}
+        {activeSection === "Related" && <Related item={item} />}
       </div>
     </div>
   );

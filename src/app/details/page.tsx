@@ -22,7 +22,6 @@ function PageContent() {
         );
         setItem(response.data);
       } catch (err) {
-        console.error("Failed to fetch data", err);
       } finally {
         setLoading(false);
       }
@@ -40,7 +39,7 @@ function PageContent() {
       <div className="sm:w-[75vw] sm:ml-20 h-full">
         <ImageHeader item={item} loading={loading} />
       </div>
-      <div className="sm:w-[23vw] h-full pb-12 transition-all items-center justify-center overflow-hidden duration-300 mr-3 ease-in-out sm:hover:w-[37vw]">
+      <div className="sm:w-[23vw] h-[96%] sm:mb-8 rounded-[15px] transition-all items-center justify-center overflow-hidden duration-300 mr-3 ease-in-out sm:hover:w-[37vw]">
         <Details item={item} loading={loading} />
       </div>
     </div>
