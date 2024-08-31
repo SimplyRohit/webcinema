@@ -31,7 +31,7 @@ function Cast(props: any) {
         {cast.map((item: any) => (
           <div
             key={item.id}
-            className="flex mx-1 sm:mx-2 w-[120px] h-[100px] items-center "
+            className="flex mx-1 md:mx-2 w-[120px] h-[100px] items-center "
           >
             <div className="w-[60px]  h-[100px]">
               <Image

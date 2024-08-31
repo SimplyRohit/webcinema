@@ -122,7 +122,7 @@ function Page(params: any) {
 
   if (["movie", "tv", "anime", "kdrama"].includes(params.params.id)) {
     return (
-      <div className="w-full sm:pl-[100px] p-2   sm:p-5 flex flex-col h-full">
+      <div className="w-full md:pl-[100px] p-2   md:p-5 flex flex-col h-full">
         <div className="flex pb-5">
           <h1 className={cn("font-bold text-[25px] pt-2 ")}>
             {params.params.id.charAt(0).toUpperCase() +
@@ -137,12 +137,12 @@ function Page(params: any) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center sm:mt-10 w-full h-full">
+        <div className="flex flex-wrap items-center md:mt-10 w-full h-full">
           {loading
             ? Array.from({ length: 18 }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex flex-col sm:mr-10 sm:mb-12 max-w-[150px] max-h-[278px]"
+                  className="flex flex-col md:mr-10 md:mb-12 max-w-[150px] max-h-[278px]"
                 >
                   <div className="flex min-h-[250px] min-w-[150px] rounded shimmer"></div>
                   <p className={cn(roboto.className, "truncate")}>Loading...</p>
@@ -151,7 +151,7 @@ function Page(params: any) {
             : movies.slice(0, 18).map((item: any) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:mr-10 mx-3 sm:mb-12 mb-6 sm:max-w-[150px] max-w-[100px]  sm:max-h-[278px]"
+                  className="flex flex-col md:mr-10 mx-3 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px]  md:max-h-[278px]"
                 >
                   <div
                     onClick={() =>
@@ -161,7 +161,7 @@ function Page(params: any) {
                         }`
                       )
                     }
-                    className="flex  sm:min-h-[250px] min-h-[100px] min-w-[50px] sm:min-w-[150px]"
+                    className="flex  md:min-h-[250px] min-h-[100px] min-w-[50px] md:min-w-[150px]"
                   >
                     <Image
                       className="object-cover rounded"

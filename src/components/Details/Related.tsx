@@ -83,7 +83,7 @@ function Related(props: any) {
           ))}
         </div>
       )}
-      <div className="sm:pl-[160px]">
+      <div className="md:pl-[160px]">
         <Arrow count={count} setCount={setCount} />
       </div>
     </div>

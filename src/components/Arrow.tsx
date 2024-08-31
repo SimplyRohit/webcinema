@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/libs/utils";
 function Arrow(props: any) {
   return (
-    <div className=" flex mb-2 items-center space-x-2 justify-center sm:pr-[150px] w-full h-full">
+    <div className=" flex mb-2 items-center space-x-2 justify-center md:pr-[150px] w-full h-full">
       <ChevronLeft
         onClick={() => {
           props.count > 1 && props.setCount(props.count - 1);

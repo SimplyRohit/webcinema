@@ -43,7 +43,7 @@ function Page() {
   }, [count]);
 
   return (
-    <div className="w-full h-full items-center p-2 mr:p-10 sm:pr-12 sm:pl-[100px] flex flex-col">
+    <div className="w-full h-full items-center p-2 mr:p-10 md:pr-12 md:pl-[100px] flex flex-col">
       <div className=" pt-5 flex items-center space-x-4 w-full h-full">
         <h1 className={cn(sans, "  text-[25px]")}>All Collections</h1>
         <h1 className={cn("font-bold text-[#ffc31e] text-[25px]")}></h1>
@@ -62,7 +62,7 @@ function Page() {
           : items.slice(0, 39).map((item: any) => (
               <div
                 key={item.id}
-                className="flex flex-col sm:mr-10 mx-3 sm:mb-12 mb-6 sm:max-w-[150px] max-w-[100px]  sm:max-h-[278px]"
+                className="flex flex-col md:mr-10 mx-3 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px]  md:max-h-[278px]"
               >
                 <div
                   onClick={() =>
@@ -72,7 +72,7 @@ function Page() {
                       }`
                     )
                   }
-                  className="flex sm:min-h-[250px] min-h-[100px] min-w-[50px] sm:min-w-[150px]"
+                  className="flex md:min-h-[250px] min-h-[100px] min-w-[50px] md:min-w-[150px]"
                 >
                   <Image
                     className="object-cover rounded"

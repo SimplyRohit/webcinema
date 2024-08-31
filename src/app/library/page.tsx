@@ -6,7 +6,7 @@ import { cn } from "@/libs/utils";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 function Page() {
   return (
-    <div className="w-full sm:pl-[100px] ml-1 sm:p-5 flex flex-col  h-full">
+    <div className="w-full md:pl-[100px] ml-1 md:p-5 flex flex-col  h-full">
       <div className="flex pb-5 ">
         <h1 className={cn("font-bold text-[25px] ")}> Movies</h1>
       </div>

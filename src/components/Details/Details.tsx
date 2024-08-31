@@ -11,8 +11,8 @@ function Details(props: any) {
   const isMovie = !!item.title;
 
   return (
-    <div className="flex flex-col items-center  rounded-t-[15px] w-screen sm:w-full h-full sm:mt-4 bg-black">
-      <div className="flex w-full pt-2  justify-evenly sm:px-4 flex-row">
+    <div className="flex flex-col items-center  rounded-t-[15px] w-screen md:w-full h-full md:mt-4 bg-black">
+      <div className="flex w-full pt-2  justify-evenly md:px-4 flex-row">
         {!isMovie && (
           <h1
             className={`text-[16px] cursor-pointer ${
@@ -57,7 +57,7 @@ function Details(props: any) {
         </h1>
       </div>
       <hr className="w-[93%]   border-1 border-[#A4B3C9]" />
-      <div className="flex flex-col sm:pr-0.5  w-full">
+      <div className="flex flex-col md:pr-0.5  w-full">
         {activeSection === "Overview" && <Overview item={item} />}
         {!isMovie && activeSection === "Episodes" && <Episodes item={item} />}
         {activeSection === "Casts" && <Cast item={item} />}

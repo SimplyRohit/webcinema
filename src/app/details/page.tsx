@@ -31,11 +31,11 @@ function PageContent() {
   }, [type, id]);
 
   return (
-    <div className="flex w-full sm:h-svh items-center flex-col sm:flex-row justify-center">
-      <div className="sm:w-[75vw] sm:ml-20 h-full">
+    <div className="flex w-full md:h-svh items-center flex-col md:flex-row justify-center">
+      <div className="md:w-[75vw] md:ml-20 h-full">
         <ImageHeader item={loading ? "" : item} loading={loading} />
       </div>
-      <div className="sm:w-[23vw] h-[96%] sm:mb-8 rounded-[15px] transition-all items-center justify-center overflow-hidden duration-300 mr-3 ease-in-out sm:hover:w-[37vw]">
+      <div className="md:w-[23vw] h-[96%] md:mb-8 rounded-[15px] transition-all items-center justify-center overflow-hidden duration-300 mr-3 ease-in-out md:hover:w-[37vw]">
         <Details item={loading ? "" : item} loading={loading} />
       </div>
     </div>
