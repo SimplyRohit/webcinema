@@ -23,7 +23,7 @@ function PageContent() {
         setItem(response.data);
       } catch (err) {
       } finally {
-        setLoading(false);
+        setTimeout(() => setLoading(false), 3000);
       }
     };
 
