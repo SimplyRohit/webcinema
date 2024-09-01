@@ -10,7 +10,7 @@ function PageContent() {
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
   const id = searchParams.get("id");
-  const [item, setItem] = useState<any>(null);
+  const [item, setItem] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,9 +32,9 @@ function PageContent() {
 
   return (
     <div className="flex w-full md:h-[100vh] items-center flex-col md:flex-row md:justify-center">
-      <ImageHeader item={loading ? "" : item} loading={loading} />
+      <ImageHeader item={item} loading={loading} />
 
-      <Details item={loading ? "" : item} loading={loading} />
+      <Details item={item} loading={loading} />
     </div>
   );
 }

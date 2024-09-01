@@ -59,19 +59,17 @@ function Details(props: any) {
       <hr className="w-[93%]    border-1 border-[#A4B3C9]" />
       <div className="flex flex-col md:pr-0.5  w-full">
         {activeSection === "Overview" && (
-          <Overview loading={loading} item={loading ? {} : item} />
+          <Overview loading={loading} item={item} />
         )}
         {!isMovie && activeSection === "Episodes" && (
-          <Episodes loading={loading} item={loading ? {} : item} />
+          <Episodes loading={loading} item={item} />
         )}
-        {activeSection === "Casts" && (
-          <Cast loading={loading} item={loading ? {} : item} />
-        )}
+        {activeSection === "Casts" && <Cast loading={loading} item={item} />}
         {activeSection === "Reviews" && (
-          <Review loading={loading} item={loading ? {} : item} />
+          <Review loading={loading} item={item} />
         )}
         {activeSection === "Related" && (
-          <Related loading={loading} item={loading ? {} : item} />
+          <Related loading={loading} item={item} />
         )}
       </div>
     </div>
