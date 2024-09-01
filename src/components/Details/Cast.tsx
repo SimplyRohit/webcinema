@@ -44,7 +44,7 @@ function Cast(props: any) {
                   />
                 </div>
                 <div className="w-[60px] pl-1 h-[100px] items-center">
-                  <h1>"name</h1>
+                  <h1>name</h1>
                   <p className="text-[12px]  ">...</p>
                 </div>
               </div>
