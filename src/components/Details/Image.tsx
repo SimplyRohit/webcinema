@@ -9,14 +9,13 @@ const roboto = Roboto_Mono({ subsets: ["latin"] });
 function ImageHeader(props: any) {
   const { item, loading } = props;
 
-  console.log(item);
   return (
     <div className="flex w-full h-full md:w-[81vw] md:ml-[5rem]">
       <div className="md:w-full h-[35rem] pb-[0.5rem] pt-[0.5rem] px-[0.5rem] md:pt-[1rem] md:pr-[1rem] md:h-full md:pb-[2rem]">
         <Image
           className={cn(
             loading ? "shimmer" : "",
-            "md:rounded-[1.875rem] rounded-lg  object-cover w-full h-full"
+            "md:rounded-[1.875rem] rounded-lg  animate-slideInLeft object-cover w-full h-full"
           )}
           src={`https://image.tmdb.org/t/p/original${
             item.backdrop_path ? item.backdrop_path : item.poster_path
@@ -39,25 +38,19 @@ function ImageHeader(props: any) {
             />
           </div>
         ) : ( */}
-        <div
-          className={cn(
-            loading ? "shimmer" : "",
-            "md:w-[150px] md:h-[225px] w-[110px] h-[165px]  "
-          )}
-        >
+        <div className={cn("md:w-[150px] md:h-[225px] w-[110px] h-[165px]  ")}>
           <Image
-            className={cn(
-              loading ? "shimmer" : "",
-              "object-cover  rounded-[1.25rem] w-full h-full"
-            )}
+            className={cn("object-cover  rounded-[1.25rem] w-full h-full")}
             src={
               loading
                 ? ""
                 : `https://image.tmdb.org/t/p/w500${item.poster_path}`
             }
-            width={1920}
-            height={1080}
+            width={200}
+            height={200}
             alt={loading ? "" : item.title || item.name}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
           />
         </div>
         {/* )} */}

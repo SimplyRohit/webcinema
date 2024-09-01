@@ -71,8 +71,8 @@ function Episodes(props: any) {
                   <Image
                     className="w-full rounded-[10px] object-cover h-full"
                     src={""}
-                    width={1920}
-                    height={1080}
+                    width={200}
+                    height={200}
                     alt={""}
                   />
                 </div>
@@ -106,8 +106,8 @@ function Episodes(props: any) {
                   <Image
                     className="w-full rounded-[10px] object-cover h-full"
                     src={`https://image.tmdb.org/t/p/original${episode.still_path}`}
-                    width={1920}
-                    height={1080}
+                    width={200}
+                    height={200}
                     alt={episode.name}
                   />
                 </div>

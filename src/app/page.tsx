@@ -171,8 +171,8 @@ export default function Homepage() {
                         className="object-cover md:h-[250px] h-[150px] rounded"
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.name || movie.title}
-                        width={1920}
-                        height={1080}
+                        width={200}
+                        height={200}
                       />
                       <p className={cn(roboto.className, "truncate")}>
                         {movie.name || movie.title}

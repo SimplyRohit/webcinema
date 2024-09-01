@@ -166,9 +166,10 @@ function Page(params: any) {
                     <Image
                       className="object-cover rounded"
                       src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                      width={1920}
-                      height={1080}
+                      width={200}
+                      height={200}
                       alt={item.title || item.name}
+                      loading="lazy"
                     />
                   </div>
                   <p className={cn(roboto.className, "truncate")}>

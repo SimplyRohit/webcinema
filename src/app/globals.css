@@ -26,8 +26,8 @@ p {
   background: linear-gradient(
     to right,
     #1b1919 4%,
-    rgb(97, 94, 94) 18%,
-    #1b1919 80%
+    rgb(17, 16, 16) 18%,
+    #1b1919 50%
   );
   background-size: 1000px 100%;
 }
@@ -39,4 +39,48 @@ p {
   100% {
     background-position: 1000px 100%;
   }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 1s ease-out forwards;
+}
+
+@keyframes slideInLeftFast {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.animate-slideInLeftFast {
+  animation: slideInLeftFast 0.35s ease-out forwards;
 }

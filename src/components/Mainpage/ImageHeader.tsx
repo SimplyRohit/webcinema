@@ -7,6 +7,7 @@ import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function ImageHeader() {
@@ -24,6 +25,7 @@ export default function ImageHeader() {
 
         setItems(response.data.results.slice(0, 6));
       } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -48,11 +50,17 @@ export default function ImageHeader() {
         ) : (
           currentItem.backdrop_path && (
             <Image
-              className="md:rounded-[30px] rounded-lg object-cover md:h-[750px] h-[400px]"
+              className={cn(
+                "md:rounded-[30px] rounded-lg object-cover w-full md:h-[750px] h-[400px]",
+                currentIndex % 2 === 0
+                  ? "animate-slideInLeft"
+                  : "animate-slideInRight"
+              )}
               src={`https://image.tmdb.org/t/p/original${currentItem.backdrop_path}`}
               alt={currentItem.title || currentItem.name}
-              width={1920}
+              width={1080}
               height={1080}
+              loading="lazy"
             />
           )
         )}
