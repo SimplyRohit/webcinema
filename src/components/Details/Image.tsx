@@ -7,9 +7,9 @@ import { Roboto_Mono } from "next/font/google";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 function ImageHeader(props: any) {
-  const item = props.item;
-  const loading = props.loading;
+  const { item, loading } = props;
 
+  console.log(item);
   return (
     <div className="flex w-full h-full md:w-[81vw] md:ml-[5rem]">
       {loading ? (
@@ -25,7 +25,7 @@ function ImageHeader(props: any) {
       ) : (
         <div className="md:w-full h-[35rem] pb-[0.5rem] pt-[0.5rem] px-[0.5rem] md:pt-[1rem] md:pr-[1rem] md:h-full md:pb-[2rem]">
           <Image
-            className="md:rounded-[1.875rem] rounded-lg object-cover w-full h-full"
+            className="md:rounded-[1.875rem] rounded-lg  object-cover w-full h-full"
             src={`https://image.tmdb.org/t/p/original${
               item.backdrop_path === null
                 ? item.poster_path
