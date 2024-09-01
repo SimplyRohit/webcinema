@@ -12,34 +12,23 @@ function ImageHeader(props: any) {
   console.log(item);
   return (
     <div className="flex w-full h-full md:w-[81vw] md:ml-[5rem]">
-      {loading ? (
-        <div className="md:w-full h-[35rem] shimmer pb-[0.5rem] pt-[0.5rem] px-[0.5rem] md:pt-[1rem] md:pr-[1rem] md:h-full md:pb-[2rem]">
-          <Image
-            className="md:rounded-[1.875rem] rounded-lg object-cover w-full h-full"
-            src={""}
-            alt={""}
-            width={1920}
-            height={1080}
-          />
-        </div>
-      ) : (
-        <div className="md:w-full h-[35rem] pb-[0.5rem] pt-[0.5rem] px-[0.5rem] md:pt-[1rem] md:pr-[1rem] md:h-full md:pb-[2rem]">
-          <Image
-            className="md:rounded-[1.875rem] rounded-lg  object-cover w-full h-full"
-            src={`https://image.tmdb.org/t/p/original${
-              item.backdrop_path === null
-                ? item.poster_path
-                : item.backdrop_path
-            }`}
-            alt={item.title || item.name}
-            width={1920}
-            height={1080}
-          />
-        </div>
-      )}
+      <div className="md:w-full h-[35rem] pb-[0.5rem] pt-[0.5rem] px-[0.5rem] md:pt-[1rem] md:pr-[1rem] md:h-full md:pb-[2rem]">
+        <Image
+          className={cn(
+            loading ? "shimmer" : "",
+            "md:rounded-[1.875rem] rounded-lg  object-cover w-full h-full"
+          )}
+          src={`https://image.tmdb.org/t/p/original${
+            item.backdrop_path ? item.backdrop_path : item.poster_path
+          }`}
+          alt={loading ? "" : item.title || item.name}
+          width={1080}
+          height={1080}
+        />
+      </div>
 
       <div className="absolute md:top-[45.3rem] top-[24rem]  bg-[#000000] border-[5px] md:border-[10px] border-[#1B1919] md:left-[5rem] md:max-h-[16.875rem] max-w-[7.5rem] max-h-[15.625rem] md:max-w-[10.625rem] rounded-[1.25rem]">
-        {loading ? (
+        {/* {loading ? (
           <div className="md:w-[150px] md:h-[225px] w-[110px] h-[165px] shimmer rounded-[1.25rem]">
             <Image
               className="object-cover rounded-[1.25rem] w-full h-full"
@@ -49,15 +38,29 @@ function ImageHeader(props: any) {
               alt={""}
             />
           </div>
-        ) : (
+        ) : ( */}
+        <div
+          className={cn(
+            loading ? "shimmer" : "",
+            "md:w-[150px] md:h-[225px] w-[110px] h-[165px]  "
+          )}
+        >
           <Image
-            className="object-cover rounded-[1.25rem] w-full h-full"
-            src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+            className={cn(
+              loading ? "shimmer" : "",
+              "object-cover  rounded-[1.25rem] w-full h-full"
+            )}
+            src={
+              loading
+                ? ""
+                : `https://image.tmdb.org/t/p/w500${item.poster_path}`
+            }
             width={1920}
             height={1080}
-            alt={item.title || item.name}
+            alt={loading ? "" : item.title || item.name}
           />
-        )}
+        </div>
+        {/* )} */}
 
         {!loading && (
           <div className="absolute top-[-20px] right-[-20px] bg-[#000000] border-[2px] md:border-[5px] border-[#1B1919] rounded-[50%]">
