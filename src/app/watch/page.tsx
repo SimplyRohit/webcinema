@@ -14,25 +14,17 @@ function EmbedContent() {
     type === "tv" ? `/${season}/${episode}` : ""
   }`;
 
- 
-
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <iframe
-        src={embedURL}
-        title="Embedded TV Show Episode"
-        width="100%"
-        height="100%"
-        style={{ border: "none" }}
-        allowFullScreen
-      />
+    <div className="bg-black w-screen h-screen ">
+      <div className="  py-1 h-[calc(100vh-7rem)] md:h-[100vh] ">
+        <iframe
+          src={embedURL}
+          title="Embedded Content"
+          className="w-full h-full "
+          style={{ border: "none" }}
+          allowFullScreen
+        />
+      </div>
     </div>
   );
 }

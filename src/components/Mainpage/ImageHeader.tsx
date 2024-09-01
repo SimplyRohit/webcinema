@@ -33,7 +33,7 @@ export default function ImageHeader() {
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [items.length]);

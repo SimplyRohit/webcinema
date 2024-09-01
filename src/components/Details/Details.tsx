@@ -11,9 +11,9 @@ function Details(props: any) {
   const isMovie = !!item.title;
 
   return (
-    <div className=" md:w-[23vw]  h-[96%] md:mb-8 rounded-[15px] transition-all  overflow-hidden duration-300 md:mr-3 ease-in-out md:hover:w-[37vw] flex flex-col items-center  rounded-t-[15px] w-screen  md:mt-4 bg-black">
+    <div className=" md:w-[23vw] mb-[4rem]   md:h-[59rem] md:mb-[1rem] rounded-[15px] transition-all  overflow-hidden duration-300 md:mr-3 ease-in-out md:hover:w-[37vw] flex flex-col items-center  rounded-t-[15px] w-screen   bg-black">
       <div className="flex w-full pt-2  justify-evenly md:px-4 flex-row">
-        {!isMovie && (
+        {!loading && !isMovie && (
           <h1
             className={`text-[16px] cursor-pointer ${
               activeSection === "Episodes" ? "text-[#FFD700]" : ""
@@ -56,13 +56,23 @@ function Details(props: any) {
           Related
         </h1>
       </div>
-      <hr className="w-[93%]   border-1 border-[#A4B3C9]" />
+      <hr className="w-[93%]    border-1 border-[#A4B3C9]" />
       <div className="flex flex-col md:pr-0.5  w-full">
-        {activeSection === "Overview" && <Overview item={item} />}
-        {!isMovie && activeSection === "Episodes" && <Episodes item={item} />}
-        {activeSection === "Casts" && <Cast item={item} />}
-        {activeSection === "Reviews" && <Review item={item} />}
-        {activeSection === "Related" && <Related item={item} />}
+        {activeSection === "Overview" && (
+          <Overview loading={loading} item={loading ? {} : item} />
+        )}
+        {!isMovie && activeSection === "Episodes" && (
+          <Episodes loading={loading} item={loading ? {} : item} />
+        )}
+        {activeSection === "Casts" && (
+          <Cast loading={loading} item={loading ? {} : item} />
+        )}
+        {activeSection === "Reviews" && (
+          <Review loading={loading} item={loading ? {} : item} />
+        )}
+        {activeSection === "Related" && (
+          <Related loading={loading} item={loading ? {} : item} />
+        )}
       </div>
     </div>
   );

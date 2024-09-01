@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=New+Amsterdam:wght@400&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,8 +7,8 @@ body {
   @apply bg-[#1B1919];
 }
 h1 {
-  color: #A4B3C9;
-  font-family: 'New Amsterdam', sans-serif;
+  color: #a4b3c9;
+  font-family: "New Amsterdam", sans-serif;
 }
 Link {
   @apply text-[#576B87];
@@ -18,7 +18,7 @@ p {
   @apply text-[#4C5E77];
 }
 .shimmer {
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-name: shimmer;
