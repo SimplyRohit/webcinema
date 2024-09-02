@@ -114,6 +114,7 @@ export default function Page() {
                     width={200}
                     height={200}
                     alt={item.title || item.name}
+                    loading="lazy"
                   />
                 </div>
                 <p className={cn(roboto.className, "truncate mt-1")}>

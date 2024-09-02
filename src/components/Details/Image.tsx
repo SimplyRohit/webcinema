@@ -40,7 +40,7 @@ function ImageHeader(props: any) {
 
   useEffect(() => {
     if (!loading) {
-      setTimeout(() => setDIV(true), 800);
+      setTimeout(() => setDIV(true), 1000);
     }
   }, [loading]);
 
@@ -62,6 +62,7 @@ function ImageHeader(props: any) {
           alt={loading ? "" : item.title || item.name}
           width={1080}
           height={1080}
+          loading="lazy"
         />
       </div>
 
@@ -86,6 +87,7 @@ function ImageHeader(props: any) {
           width={200}
           height={200}
           alt={loading ? "" : item.title || item.name}
+          loading="lazy"
         />
 
         {!loading && (

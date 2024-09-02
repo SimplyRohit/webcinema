@@ -109,6 +109,7 @@ function Episodes(props: any) {
                     width={200}
                     height={200}
                     alt={episode.name}
+                    loading="lazy"
                   />
                 </div>
 
