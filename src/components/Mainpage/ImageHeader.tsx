@@ -59,7 +59,7 @@ export default function ImageHeader() {
               alt={currentItem.title || currentItem.name}
               width={1080}
               height={1080}
-              loading="lazy"
+              unoptimized
             />
           )
         )}

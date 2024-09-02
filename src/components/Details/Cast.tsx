@@ -41,7 +41,7 @@ function Cast(props: any) {
                     alt=""
                     width={60}
                     height={100}
-                    loading="lazy"
+                     unoptimized
                   />
                 </div>
                 <div className="w-[60px] pl-1 h-[100px] items-center">
@@ -62,7 +62,7 @@ function Cast(props: any) {
                     alt="Movie poster"
                     width={60}
                     height={100}
-                    loading="lazy"
+                     unoptimized
                   />
                 </div>
                 <div className="w-[60px] pl-1 h-[100px] items-center">

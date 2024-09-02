@@ -172,7 +172,7 @@ export default function Homepage() {
                         alt={movie.name || movie.title}
                         width={200}
                         height={200}
-                        loading="lazy"
+                        unoptimized
                       />
                       <p className={cn(roboto.className, "truncate")}>
                         {movie.name || movie.title}

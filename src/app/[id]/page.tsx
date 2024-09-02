@@ -169,7 +169,7 @@ function Page(params: any) {
                       width={200}
                       height={200}
                       alt={item.title || item.name}
-                      loading="lazy"
+                      unoptimized
                     />
                   </div>
                   <p className={cn(roboto.className, "truncate")}>

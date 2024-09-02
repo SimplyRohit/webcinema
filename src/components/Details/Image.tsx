@@ -62,7 +62,7 @@ function ImageHeader(props: any) {
           alt={loading ? "" : item.title || item.name}
           width={1080}
           height={1080}
-          loading="lazy"
+          unoptimized
         />
       </div>
 
@@ -87,7 +87,7 @@ function ImageHeader(props: any) {
           width={200}
           height={200}
           alt={loading ? "" : item.title || item.name}
-          loading="lazy"
+          unoptimized
         />
 
         {!loading && (
