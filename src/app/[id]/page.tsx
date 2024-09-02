@@ -8,7 +8,7 @@ import Arrow from "@/components/Arrow";
 import { FilterX } from "lucide-react";
 import { notFound } from "next/navigation";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 function Page(params: any) {
@@ -64,7 +64,7 @@ function Page(params: any) {
             className={cn(
               type === "popular" ? "" : "text-[#FFB800]",
               roboto.className,
-              ""
+              "cursor-pointer pr-1"
             )}
           >
             Movie
@@ -74,7 +74,7 @@ function Page(params: any) {
             className={cn(
               type === "popular" ? "text-[#FFB800]" : "",
               roboto.className,
-              ""
+              "cursor-pointer pr-1"
             )}
           >
             Show
@@ -89,17 +89,18 @@ function Page(params: any) {
             className={cn(
               type === "now_playing" ? "text-[#FFB800]" : "",
               roboto.className,
-              ""
+              "cursor-pointer pr-1"
             )}
           >
             Latest
           </h1>
+
           <h1
             onClick={() => setType("popular")}
             className={cn(
               type === "popular" ? "text-[#FFB800]" : "",
               roboto.className,
-              ""
+              "cursor-pointer pr-1"
             )}
           >
             Trending
@@ -110,7 +111,7 @@ function Page(params: any) {
             className={cn(
               type === "top_rated" ? "text-[#FFB800]" : "",
               roboto.className,
-              ""
+              "cursor-pointer pr-1"
             )}
           >
             Top-Rated
@@ -137,7 +138,7 @@ function Page(params: any) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center md:mt-10 w-full h-full">
+        <div className="flex flex-wrap  items-center md:mt-10 w-full h-full">
           {loading
             ? Array.from({ length: 18 }).map((_, index) => (
                 <div
@@ -151,7 +152,7 @@ function Page(params: any) {
             : movies.slice(0, 18).map((item: any) => (
                 <div
                   key={item.id}
-                  className="flex flex-col md:mr-10 mx-3 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px]  md:max-h-[278px]"
+                  className="flex flex-col md:mr-8 md:mx-0 mx-2 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px]  md:max-h-[278px]"
                 >
                   <div
                     onClick={() =>

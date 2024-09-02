@@ -45,31 +45,29 @@ function ImageHeader(props: any) {
   }, [loading]);
 
   return (
-    <div className="flex w-full h-full md:w-[81vw] md:ml-[5rem]">
-      <div className="md:w-full h-[34rem] mb-[1rem] pt-[0.5rem] px-[0.5rem] md:pt-[1rem] z-[-2] md:pr-[1rem] md:h-full md:pb-[2rem]">
-        <Image
-          className={cn(
-            loading ? "shimmer" : "",
-            "md:rounded-[1.875rem] rounded-lg animate-slideInLeft object-cover w-full h-full"
-          )}
-          src={
-            loading
-              ? ""
-              : `https://image.tmdb.org/t/p/original${
-                  item.backdrop_path ? item.backdrop_path : item.poster_path
-                }`
-          }
-          alt={loading ? "" : item.title || item.name}
-          width={1080}
-          height={1080}
-          unoptimized
-        />
-      </div>
+    <div className="flex   w-full h-full   md:w-[81vw] md:ml-[5rem]">
+      <Image
+        className={cn(
+          loading ? "shimmer" : "",
+          "md:rounded-[1.875rem] rounded-lg   animate-slideInLeft object-cover w-full  md:w-full h-[34rem] md:h-[60rem]   mb-[1rem] pt-[1rem] px-[0.5rem] md:px-[0.5rem]  z-[-2] md:pr-[1rem]  md:pb-[0rem]"
+        )}
+        src={
+          loading
+            ? ""
+            : `https://image.tmdb.org/t/p/original${
+                item.backdrop_path ? item.backdrop_path : item.poster_path
+              }`
+        }
+        alt={loading ? "" : item.title || item.name}
+        width={1080}
+        height={1080}
+        unoptimized
+      />
 
-      <div className="absolute md:top-[46rem] top-[24.2rem] md:left-[5rem] ">
+      <div className="absolute  md:top-[46rem]  top-[24.2rem] md:left-[5rem] ">
         {DIV && (
           <>
-            <div className="w-[20px] md:w-[25px] md:h-[25px]   h-[20px] md:bottom-[7.9rem] absolute md:left-[9.45rem] left-[.5rem] bottom-[10.4rem] rounded-bl-[50px] shadow-[-20px_20px_0px_20px_#1B1919] z-[-1]"></div>
+            <div className="w-[20px] md:w-[25px] md:h-[25px] h-[20px] md:bottom-[7.9rem] absolute md:left-[9.45rem] left-[.5rem] bottom-[10.4rem] rounded-bl-[50px] shadow-[-20px_20px_0px_20px_#1B1919] z-[-1]"></div>
             <div className="w-[20px] h-[20px] md:bottom-[0.2rem] absolute md:left-[30rem] left-[21.5rem] bottom-[.5rem] rotate-[2deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] z-[-1]"></div>
             <div className="w-[20px] h-[20px] md:bottom-[0.2rem] absolute md:left-[10rem]  rotate-[2deg] rounded-bl-[50px] sm:shadow-[-10px_10px_0px_10px_#1B1919] z-[-1]"></div>
             <div className="w-[15px] h-[15px] md:bottom-[12.5rem]  absolute md:left-[6.2rem] left-[5rem] bottom-[8.8rem] rotate-[180deg] rounded-bl-[50px] shadow-[-5px_5px_0px_5px_#1B1919] "></div>

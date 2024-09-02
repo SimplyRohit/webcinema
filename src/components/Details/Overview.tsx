@@ -3,7 +3,7 @@ import React from "react";
 function Overview(props: any) {
   const { item, loading } = props;
   return (
-    <div className="p-2 pt-1  ">
+    <div className="p-2 pt-1  overflow-y-auto">
       <h1 className="p-1 pt-5">
         Title: {loading ? "" : item.title || item.name}
       </h1>
