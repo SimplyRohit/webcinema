@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# WebCinema
 
-## Getting Started
+Welcome to **WebCinema**, a comprehensive Next.js application where you can find all types of watching content including movies, TV shows, anime, and K-dramas. The application leverages the power of the TMDB API to provide users with a seamless experience in discovering and exploring various forms of entertainment.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Dynamic Content:** Easily explore different categories like movies, TV shows, anime, and K-dramas.
+- **Responsive Design:** Fully responsive layout ensuring a smooth user experience across devices.
+- **Minimalistic & Aesthetic UI:** A clean and minimal design focused on content delivery.
+- **Detailed Information:** View detailed information about each movie, show, or anime, including cast, reviews, and related content.
+- **Search Functionality:** Search for specific titles with results sorted by popularity.
+- **Shimmer Effect:** Enhanced user experience with loading shimmer animations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Below are the screenshots of the WebCinema application:
+![WebCinema Homepage](public/home.png)  
+![WebCinema Details Page](public/details.png)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Movie details section of WebCinema
+Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Framework: Next.js
+    Styling: Tailwind CSS
+    API: TMDB API
+    State Management: React Hook Form with Zod for form validation
+    Animations: Keen Slider
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Contact
 
-## Deploy on Vercel
+Rohit - rohitjaatjaat073@gmail.com
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Project Link: https://github.com/WasATrueWarrior/webcinema

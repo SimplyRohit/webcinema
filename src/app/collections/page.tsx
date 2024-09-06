@@ -79,9 +79,10 @@ function Page() {
                     src={`https://image.tmdb.org/t/p/w500${
                       item.poster_path ? item.poster_path : item.backdrop_path
                     }`}
-                    width={1920}
-                    height={1080}
+                    width={200}
+                    height={200}
                     alt={item.title || item.name}
+                    unoptimized
                   />
                 </div>
                 <p className={cn(roboto.className, "truncate mt-1")}>
