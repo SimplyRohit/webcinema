@@ -1,44 +1,109 @@
+"use client";
 import React from "react";
-
+import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
+import { useRouter } from "next/navigation";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
-export default function page() {
+export default function Page() {
+  const router = useRouter();
+
   return (
-    <div className="w-full  flex items-center  justify-center  h-full">
-      <h1 className="text-3xl pt-10 ">Coming Soon ........</h1>
-    </div>
-    <div className="w-full pl-[100px] p-5 flex flex-col  h-full">
+    <div className="w-full md:pl-[100px] p-5 flex flex-col  h-full">
       <div className="flex flex-col pb-5 ">
-        <h1 className={cn("font-bold text-[25px] pb-3")}> Account</h1>
+        <h1 className={cn("font-bold text-[50px] ")}> Account</h1>
         <div className="flex  flex-col ">
-          <h1 className={cn(roboto.className, "")}>Login</h1>
-          <h1 className={cn(roboto.className, "")}>signup</h1>
+          <h1
+            onClick={() => router.push("/auth/login")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Login
+          </h1>
+          <h1
+            onClick={() => router.push("/auth/signup")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            signup
+          </h1>
         </div>
       </div>
       <div className="flex flex-col pb-5 ">
-        <h1 className={cn("font-bold text-[25px] pb-3")}>Appearance</h1>
+        <h1 className={cn("font-bold text-[50px] ")}>Appearance</h1>
         <div className="flex  flex-col ">
-          <h1 className={cn(roboto.className, "")}>Mode</h1>
-          <h1 className={cn(roboto.className, "")}>Ascent Color</h1>
+          <h1 className={cn(roboto.className, "text-2xl cursor-pointer ")}>
+            Mode
+          </h1>
+          <h1 className={cn(roboto.className, "text-2xl cursor-pointer ")}>
+            Ascent Color
+          </h1>
         </div>
       </div>
       <div className="flex flex-col pb-5 ">
-        <h1 className={cn("font-bold text-[25px] pb-3")}> App Center</h1>
+        <h1 className={cn("font-bold text-[50px] ")}> App Center</h1>
         <div className="flex  flex-col ">
-          <h1 className={cn(roboto.className, "")}>Anime</h1>
-          <h1 className={cn(roboto.className, "")}>K-drama</h1>
-          <h1 className={cn(roboto.className, "")}>Random</h1>
-          <h1 className={cn(roboto.className, "")}>Download</h1>
-          <h1 className={cn(roboto.className, "")}>Disclaimer</h1>
-          <h1 className={cn(roboto.className, "")}>Contact US</h1>
+          <h1
+            onClick={() => router.push("/")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Home
+          </h1>
+          <h1
+            onClick={() => router.push("/search")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Search
+          </h1>
+          <h1
+            onClick={() => router.push("/movie")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Movies
+          </h1>
+          <h1
+            onClick={() => router.push("/tv")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            TV-Shows
+          </h1>
+          <h1
+            onClick={() => router.push("/anime")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Anime
+          </h1>
+          <h1
+            onClick={() => router.push("/kdrama")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            K-Drama
+          </h1>
+          <h1
+            onClick={() => router.push("/collections")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Collections
+          </h1>
+          <h1
+            onClick={() => router.push("/library")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Library
+          </h1>
+          <h1
+            onClick={() => router.push("/settings")}
+            className={cn(roboto.className, "text-2xl cursor-pointer ")}
+          >
+            Settings
+          </h1>
         </div>
       </div>
       <div className="flex flex-col pb-5 ">
-        <h1 className={cn("font-bold text-[25px] pb-3")}> Links</h1>
+        <h1 className={cn("font-bold text-[50px] pb-3")}> Links</h1>
         <div className="flex  flex-col ">
-          <h1 className={cn(roboto.className, "")}>Website</h1>
+          <h1 className={cn(roboto.className, "text-2xl cursor-pointer ")}>
+            Website
+          </h1>
         </div>
       </div>
     </div>
