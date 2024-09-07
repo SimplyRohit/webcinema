@@ -12,11 +12,42 @@ datasource db {
 
 model User  {
   id Int @id @default(autoincrement())
-  usernmae String @unique
+  username String @unique
   email String @unique
   password String @unique
-  movieCW Int
-  tvCW Int
-  movieWL Int
-  tvWL Int
+  watchlist Watchlist[]
+  continueWatching ContinueWatching[]
+}
+
+enum ContentType {
+  MOVIE
+  TV
+}
+
+model Content {
+  id           Int       @id @default(autoincrement())
+  contentId    Int       
+  title        String
+  type         ContentType 
+  watchlist    Watchlist[]
+  continueWatching ContinueWatching[]
+}
+
+model Watchlist {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  content   Content  @relation(fields: [contentId], references: [id])
+  contentId Int
+  addedAt   DateTime @default(now())
+}
+
+model ContinueWatching {
+  id               Int      @id @default(autoincrement())
+  user             User     @relation(fields: [userId], references: [id])
+  userId           Int
+  content          Content  @relation(fields: [contentId], references: [id])
+  contentId        Int
+  progress         Float    
+  lastWatchedAt    DateTime @default(now())
 }
