@@ -5,7 +5,7 @@ import { Bookmark, Share, Play } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
-
+import nookies from "nookies";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 function ImageHeader(props: any) {
@@ -13,6 +13,8 @@ function ImageHeader(props: any) {
   const [DIV, setDIV] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("" as any);
   const [trailer, setTrailer] = useState(false);
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
+
   useEffect(() => {
     if (!loading && item) {
       const fetchVideos = async () => {
@@ -43,6 +45,28 @@ function ImageHeader(props: any) {
       setTimeout(() => setDIV(true), 1000);
     }
   }, [loading]);
+
+  useEffect(() => {
+    const cookies = nookies.get();
+    console.log(cookies.watchlist);
+    const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
+    setIsInWatchlist(watchlist.some((content: any) => content.id === item.id));
+  }, [item]);
+
+  const toggleWatchlist = () => {
+    const cookies = nookies.get();
+
+    const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
+    const updatedWatchlist = isInWatchlist
+      ? watchlist.filter((content: any) => content.id !== item.id)
+      : [...watchlist, { id: item.id, type: item.name ? "tv" : "movie" }];
+    console.log(updatedWatchlist);
+    nookies.set(null, "watchlist", JSON.stringify(updatedWatchlist), {
+      path: "/",
+    });
+
+    setIsInWatchlist(!isInWatchlist);
+  };
 
   return (
     <div className="flex   w-full h-full   md:w-[81vw] md:ml-[5rem]">
@@ -132,7 +156,13 @@ function ImageHeader(props: any) {
               <Play className="md:w-5 md:h-4 w-3 h-3 fill-[#000000]" />
             </Link>
 
-            <Bookmark className="md:w-5 w-4 h-4 md:h-5 text-[#4C5E77]" />
+            <Bookmark
+              onClick={toggleWatchlist}
+              className={cn(
+                isInWatchlist ? "fill-[#FFD700]" : "",
+                "md:w-5 w-4 h-4 md:h-5 text-[#4C5E77]"
+              )}
+            />
             <Share className="md:w-5 md:h-5 w-4 h-4 text-[#4C5E77]" />
           </div>
         </div>

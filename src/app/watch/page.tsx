@@ -1,6 +1,6 @@
 "use client";
-
-import React, { Suspense } from "react";
+import nookies from "nookies";
+import React, { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 function EmbedContent() {
@@ -13,7 +13,18 @@ function EmbedContent() {
   const embedURL = `https://vidsrc.cc/v2/embed/${type}/${id}${
     type === "tv" ? `/${season}/${episode}` : ""
   }`;
-
+  useEffect(() => {
+    const cookies = nookies.get();
+    const ContinueWatching = cookies.ContinueWatching
+      ? JSON.parse(cookies.ContinueWatching)
+      : [];
+    if (!ContinueWatching.some((content: any) => content.id === id)) {
+      ContinueWatching.push({ id, type });
+      nookies.set(null, "ContinueWatching", JSON.stringify(ContinueWatching), {
+        path: "/",
+      });
+    }
+  });
   return (
     <div className="bg-black w-screen h-screen ">
       <div className="  py-1 h-[calc(100vh-7rem)] md:h-[100vh] ">

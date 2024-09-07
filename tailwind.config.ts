@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+import { Roboto_Mono } from "next/font/google";
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -7,9 +7,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: { fontFamily: {
-      'new-amsterdam': ['"New Amsterdam"', 'sans-serif'],
-    },
+    extend: {
+      fontFamily: {
+        "new-amsterdam": ['"New Amsterdam"', "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        mono: ["Roboto Mono", "monospace"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

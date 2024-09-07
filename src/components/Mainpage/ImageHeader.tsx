@@ -7,6 +7,7 @@ import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import nookies from "nookies";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
@@ -14,6 +15,7 @@ export default function ImageHeader() {
   const [items, setItems] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -40,6 +42,33 @@ export default function ImageHeader() {
   }, [items.length]);
 
   const currentItem = items[currentIndex] || {};
+
+  useEffect(() => {
+    const cookies = nookies.get();
+    console.log(cookies.watchlist);
+    const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
+    setIsInWatchlist(
+      watchlist.some((content: any) => content.id === currentItem.id)
+    );
+  }, [currentItem]);
+
+  const toggleWatchlist = () => {
+    const cookies = nookies.get();
+
+    const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
+    const updatedWatchlist = isInWatchlist
+      ? watchlist.filter((content: any) => content.id !== currentItem.id)
+      : [
+          ...watchlist,
+          { id: currentItem.id, type: currentItem.name ? "tv" : "movie" },
+        ];
+    console.log(updatedWatchlist);
+    nookies.set(null, "watchlist", JSON.stringify(updatedWatchlist), {
+      path: "/",
+    });
+
+    setIsInWatchlist(!isInWatchlist);
+  };
 
   return (
     <div className="relative flex flex-1 flex-col items-center">
@@ -106,7 +135,26 @@ export default function ImageHeader() {
           >
             Details
           </Link>
-          <Bookmark className="md:w-5 w-4 h-4  md:h-5 text-[#4C5E77]" />
+          <div className="relative inline-block group">
+            <Bookmark
+              onClick={toggleWatchlist}
+              className={cn(
+                isInWatchlist ? "fill-[#FFD700]" : "",
+                "md:w-5 w-4 h-4 md:h-5 text-[#4C5E77] group-hover:text-[#FFD700]"
+              )}
+            />
+
+            <span
+              className={cn(
+                isInWatchlist ? "w-[12rem]" : "w-[10rem]",
+                roboto.className,
+                " absolute  bg-[#4d4747] px-4 py-1 bg-opacity-40 rounded   text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+              )}
+            >
+              {isInWatchlist ? "Remove from Watchlist " : "Add to Watchlist "}
+            </span>
+          </div>
+
           <Share className="md:w-5 md:h-5 w-4 h-4  text-[#4C5E77]" />
         </div>
       </div>

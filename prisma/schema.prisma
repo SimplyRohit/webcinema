@@ -1,0 +1,53 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User  {
+  id Int @id @default(autoincrement())
+  username String @unique
+  email String @unique
+  password String @unique
+  watchlist Watchlist[]
+  continueWatching ContinueWatching[]
+}
+
+enum ContentType {
+  MOVIE
+  TV
+}
+
+model Content {
+  id           Int       @id @default(autoincrement())
+  contentId    Int       
+  title        String
+  type         ContentType 
+  watchlist    Watchlist[]
+  continueWatching ContinueWatching[]
+}
+
+model Watchlist {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  content   Content  @relation(fields: [contentId], references: [id])
+  contentId Int
+  addedAt   DateTime @default(now())
+}
+
+model ContinueWatching {
+  id               Int      @id @default(autoincrement())
+  user             User     @relation(fields: [userId], references: [id])
+  userId           Int
+  content          Content  @relation(fields: [contentId], references: [id])
+  contentId        Int
+  progress         Float    
+  lastWatchedAt    DateTime @default(now())
+}
