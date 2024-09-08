@@ -1,15 +1,21 @@
 "use client";
-import { cn } from "@/libs/utils";
+// src/app/auth/[auth]/page.tsx
 import { z } from "zod";
+import { createAccountAction, loginAccountAction } from "@/actions/users";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, signupSchema } from "@/schema/zod";
 import React from "react";
+import toast from "react-hot-toast";
+import { getUser } from "../../../auth/server";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 type LoginFormData = z.infer<typeof loginSchema>;
 type SignupFormData = z.infer<typeof signupSchema>;
 export default function Page(params: any) {
   const router = useRouter();
+  const [isPending, startTransition] = React.useTransition();
+  // const user = await getUser();
   const {
     register: registerLogin,
     handleSubmit: handleSubmitLogin,
@@ -25,11 +31,26 @@ export default function Page(params: any) {
     resolver: zodResolver(signupSchema),
   });
   const onLoginSubmit = (data: LoginFormData) => {
-    console.log("Login Data:", data);
+    startTransition(async () => {
+      const { errorMessage } = await loginAccountAction(data);
+      if (errorMessage) {
+        toast.error(errorMessage);
+      } else {
+        toast.success("login successful");
+        router.push("/settings");
+      }
+    });
   };
-
   const onSignupSubmit = (data: SignupFormData) => {
-    console.log("Signup Data:", data);
+    startTransition(async () => {
+      const { errorMessage } = await createAccountAction(data);
+      if (errorMessage) {
+        toast.error(errorMessage);
+      } else {
+        toast.success("Account created successfully");
+        router.push("/auth/login");
+      }
+    });
   };
 
   if (params.params.auth === "login") {
@@ -45,6 +66,7 @@ export default function Page(params: any) {
             className="w-[15rem] rounded outline-none p-2 bg-black text-[#FFD700]"
             type="text"
             {...registerLogin("email")}
+            disabled={isPending}
           />
           {errorsLogin.email && (
             <p className="text-red-500">{errorsLogin.email.message}</p>
@@ -55,6 +77,7 @@ export default function Page(params: any) {
             className="w-[15rem] rounded outline-none p-2 bg-black text-[#FFD700]"
             type="password"
             {...registerLogin("password")}
+            disabled={isPending}
           />
           {errorsLogin.password && (
             <p className="text-red-500">{errorsLogin.password.message}</p>
@@ -63,8 +86,9 @@ export default function Page(params: any) {
           <button
             className="w-[10rem] ml-10 rounded mt-5 p-2 bg-black text-[#A4B3C9] transition duration-150 ease-in-out transform hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-none"
             type="submit"
+            disabled={isPending}
           >
-            Submit
+            {isPending ? "Loggingginn..." : "Login"}
           </button>
           <span className="text-[1rem] font-bold pt-4 flex text-[#435165] items-center">
             Don&#39;t have an account?
@@ -91,6 +115,7 @@ export default function Page(params: any) {
             className="w-[15rem] rounded  outline-none p-2 bg-black text-[#FFD700] "
             type="text"
             {...registerSignup("username")}
+            disabled={isPending}
           />
           {errorsSignup.username && (
             <p className="text-red-500">{errorsSignup.username.message}</p>
@@ -100,6 +125,7 @@ export default function Page(params: any) {
             className="w-[15rem] rounded 1 outline-none p-2 bg-black text-[#FFD700] "
             type="text"
             {...registerSignup("email")}
+            disabled={isPending}
           />
           {errorsSignup.email && (
             <p className="text-red-500">{errorsSignup.email.message}</p>
@@ -107,8 +133,9 @@ export default function Page(params: any) {
           <label className="text-2xl   py-2 pb-4 ">password</label>
           <input
             className="w-[15rem] rounded  outline-none p-2 bg-black text-[#FFD700] "
-            type="text"
+            type="password"
             {...registerSignup("password")}
+            disabled={isPending}
           />
           {errorsSignup.password && (
             <p className="text-red-500">{errorsSignup.password.message}</p>
@@ -116,8 +143,9 @@ export default function Page(params: any) {
           <button
             className="w-[10rem] ml-10 rounded mt-5 p-2 bg-black text-[#ffffff] transition duration-150 ease-in-out transform hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-none"
             type="submit"
+            disabled={isPending}
           >
-            Submit
+            {isPending ? "submitingg..." : "Submit"}
           </button>
         </form>
         <span className="text-[1rem] font-bold  pt-4 flex text-[#435165] items-center ">
