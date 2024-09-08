@@ -27,48 +27,43 @@ export default function Page(params: any) {
     resolver: zodResolver(signupSchema),
   });
   const onLoginSubmit = async (data: LoginFormData) => {
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      console.log("login Response:", result);
-
-      router.push("/settings");
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
+    // try {
+    //   const response = await fetch("/api/auth/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   });
+    //   if (!response.ok) {
+    //     throw new Error(`HTTP error! Status: ${response.status}`);
+    //   }
+    //   const result = await response.json();
+    //   console.log("login Response:", result);
+    //   router.push("/settings");
+    // } catch (error) {
+    //   console.error("Login failed:", error);
+    // }
   };
 
   const onSignupSubmit = async (data: SignupFormData) => {
-    try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      router.push("/auth/login");
-      console.log("signup Response:", result);
-    } catch (error) {
-      console.error("signup Error:", error);
-    }
+    // try {
+    //   const response = await fetch("/api/auth/signup", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   });
+    //   if (!response.ok) {
+    //     throw new Error(`HTTP error! Status: ${response.status}`);
+    //   }
+    //   const result = await response.json();
+    //   router.push("/auth/login");
+    //   console.log("signup Response:", result);
+    // } catch (error) {
+    //   console.error("signup Error:", error);
+    // }
   };
 
   if (params.params.auth === "login") {
