@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
           username,
           email,
           password,
-          supabaseId: supabaseUser.id,
+          supabaseId: supabaseUser?.id ?? null,
         },
       });
 
