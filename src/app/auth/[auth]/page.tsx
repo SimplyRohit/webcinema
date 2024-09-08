@@ -1,11 +1,13 @@
 "use client";
-import { cn } from "@/libs/utils";
+// src/app/auth/[auth]/page.tsx
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, signupSchema } from "@/schema/zod";
 import React from "react";
+import { supabase } from "../../../utils/supabase";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 type LoginFormData = z.infer<typeof loginSchema>;
 type SignupFormData = z.infer<typeof signupSchema>;
 export default function Page(params: any) {
@@ -24,12 +26,49 @@ export default function Page(params: any) {
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
   });
-  const onLoginSubmit = (data: LoginFormData) => {
-    console.log("Login Data:", data);
+  const onLoginSubmit = async (data: LoginFormData) => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("login Response:", result);
+
+      router.push("/settings");
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
-  const onSignupSubmit = (data: SignupFormData) => {
-    console.log("Signup Data:", data);
+  const onSignupSubmit = async (data: SignupFormData) => {
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      router.push("/auth/login");
+      console.log("signup Response:", result);
+    } catch (error) {
+      console.error("signup Error:", error);
+    }
   };
 
   if (params.params.auth === "login") {
@@ -107,7 +146,7 @@ export default function Page(params: any) {
           <label className="text-2xl   py-2 pb-4 ">password</label>
           <input
             className="w-[15rem] rounded  outline-none p-2 bg-black text-[#FFD700] "
-            type="text"
+            type="password"
             {...registerSignup("password")}
           />
           {errorsSignup.password && (
