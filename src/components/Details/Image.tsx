@@ -7,13 +7,19 @@ import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
 import nookies from "nookies";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
-
+import { createSupabaseClient } from "@/auth/client";
+import prisma from "@/libs/prisma";
 function ImageHeader(props: any) {
+  const { auth } = createSupabaseClient();
   const { item, loading } = props;
   const [DIV, setDIV] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("" as any);
   const [trailer, setTrailer] = useState(false);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
+  // const [user, setUser] = useState<any>(null);
+  // auth.onAuthStateChange((event, session) => {
+  //   setUser(session?.user ?? null);
+  // });
 
   useEffect(() => {
     if (!loading && item) {
