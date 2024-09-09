@@ -8,24 +8,13 @@ export async function createAccountAction(data: any) {
     const password = data.password;
     const username = data.username;
     const { auth } = createSupabaseClient();
-    const { data: signUpData, error } = await auth.signUp({
+    const { error } = await auth.signUp({
       email,
       password,
     });
 
     if (error) throw error;
-    const { user } = signUpData;
-    if (user) {
-      const savedUser = await prisma.user.create({
-        data: {
-          username,
-          email,
-          password,
-          supabaseId: user.id,
-        },
-      });
-      return { errorMessage: null, user: savedUser };
-    }
+    return { errorMessage: null };
   } catch (error) {
     return { errorMessage: getErrorMessage(error) };
   }
