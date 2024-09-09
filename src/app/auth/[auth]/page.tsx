@@ -5,9 +5,8 @@ import { createAccountAction, loginAccountAction } from "@/actions/users";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, signupSchema } from "@/schema/zod";
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
-import { getUser } from "../../../auth/server";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -15,7 +14,7 @@ type SignupFormData = z.infer<typeof signupSchema>;
 export default function Page(params: any) {
   const router = useRouter();
   const [isPending, startTransition] = React.useTransition();
-  // const user = await getUser();
+
   const {
     register: registerLogin,
     handleSubmit: handleSubmitLogin,
@@ -37,15 +36,15 @@ export default function Page(params: any) {
         toast.error(errorMessage);
       } else {
         toast.success("login successful");
-        router.push("/settings");
+        router.push("/");
       }
     });
   };
   const onSignupSubmit = (data: SignupFormData) => {
     startTransition(async () => {
-      const { errorMessage } = await createAccountAction(data);
-      if (errorMessage) {
-        toast.error(errorMessage);
+      const result: any = await createAccountAction(data);
+      if (result.errorMessage) {
+        toast.error(result.errorMessage);
       } else {
         toast.success("Account created successfully");
         router.push("/auth/login");
