@@ -4,28 +4,21 @@ import { getErrorMessage } from "../libs/utils";
 import prisma from "@/libs/prisma";
 export async function createAccountAction(data: any) {
   try {
-    const email = data.email;
-    const password = data.password;
-    const username = data.username;
-    const { auth } = createSupabaseClient();
-    const { data: signUpData, error } = await auth.signUp({
+    const {email , password , username} = data
+   const { auth } = createSupabaseClient();
+    const { error } = await auth.signUp({
+     
       email,
       password,
-    });
-    if (error) throw error;
-    if (error) throw error;
-    const { user } = signUpData;
-    if (user) {
-      const savedUser = await prisma.user.create({
+      options: {
         data: {
-          username,
-          email,
-          password,
-          supabaseId: user.id,
+          username
         },
-      });
-      return { errorMessage: null, user: savedUser };
-    }
+      }
+    });
+    
+    if (error) throw error;
+    return { errorMessage: null };
   } catch (error) {
     return { errorMessage: getErrorMessage(error) };
   }
