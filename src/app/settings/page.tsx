@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { createSupabaseClient } from "@/auth/client";
 import toast from "react-hot-toast";
 import { getUser, signOutAction } from "@/actions/users";
-
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function Page() {

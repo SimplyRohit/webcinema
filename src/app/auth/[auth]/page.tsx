@@ -9,6 +9,8 @@ import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import prisma from "@/libs/prisma";
+
 type LoginFormData = z.infer<typeof loginSchema>;
 type SignupFormData = z.infer<typeof signupSchema>;
 export default function Page(params: any) {
@@ -35,6 +37,7 @@ export default function Page(params: any) {
       if (errorMessage) {
         toast.error(errorMessage);
       } else {
+        
         toast.success("login successful");
         router.push("/");
       }
