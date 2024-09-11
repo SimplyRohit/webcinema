@@ -49,7 +49,7 @@ export default function Page(params: any) {
       if (result.errorMessage) {
         toast.error(result.errorMessage);
       } else {
-        toast.success("Account created successfully");
+        toast.success("verify your email");
         router.push("/auth/login");
       }
     });
