@@ -16,23 +16,29 @@ function Page() {
   const [Continue, setContinue] = useState([]);
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+  setTimeout(() => setLoading(false), 1000); 
 
   useEffect(() => {
     const cookies = nookies.get();
     const parsedWatchlist = cookies.watchlist
       ? JSON.parse(cookies.watchlist)
       : [];
+      if (parsedWatchlist.length > 0) {
     setWatchlist(parsedWatchlist);
-
+      }
     const parsedContinue = cookies.ContinueWatching
       ? JSON.parse(cookies.ContinueWatching)
       : [];
-    setContinue(parsedContinue);
+      if (parsedContinue.length > 0) {
+        setContinue(parsedContinue);
+
+      }
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+
       try {
         const listToUse = List === "wl" ? watchlist : Continue;
         const responses = await Promise.all(
@@ -46,7 +52,6 @@ function Page() {
         );
         setData(responses.map((response) => response.data));
       } finally {
-        setLoading(false);
       }
     };
 
