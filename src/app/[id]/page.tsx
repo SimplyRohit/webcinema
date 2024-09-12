@@ -123,7 +123,7 @@ function Page(params: any) {
 
   if (["movie", "tv", "anime", "kdrama"].includes(params.params.id)) {
     return (
-      <div className="w-full md:pl-[100px] p-2   md:p-5 flex flex-col h-full">
+      <div className="w-full md:pl-[100px] p-2 md:p-5 flex md:items-start items-center  flex-col h-full">
         <div className="flex pb-5">
           <h1 className={cn("font-bold text-[25px] pt-2 ")}>
             {params.params.id.charAt(0).toUpperCase() +
@@ -132,13 +132,9 @@ function Page(params: any) {
         </div>
         <div className="flex flex-row pb-5 justify-between">
           <div className="flex space-x-2">{renderSortOptions()}</div>
-          <div className="flex items-center">
-            <h1 className={cn(roboto.className, "")}>Filter</h1>
-            <FilterX className="text-[#A4B3C9] w-4 h-4" />
-          </div>
         </div>
 
-        <div className="flex flex-wrap  items-center md:mt-10 w-full h-full">
+        <div className="flex flex-wrap  md:justify-start justify-center   items-center md:mt-10 w-full h-full">
           {loading
             ? Array.from({ length: 18 }).map((_, index) => (
                 <div

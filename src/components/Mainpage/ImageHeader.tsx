@@ -16,6 +16,7 @@ export default function ImageHeader() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const [copyMessage, setCopyMessage] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -45,7 +46,6 @@ export default function ImageHeader() {
 
   useEffect(() => {
     const cookies = nookies.get();
-    console.log(cookies.watchlist);
     const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
     setIsInWatchlist(
       watchlist.some((content: any) => content.id === currentItem.id)
@@ -54,7 +54,6 @@ export default function ImageHeader() {
 
   const toggleWatchlist = () => {
     const cookies = nookies.get();
-
     const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
     const updatedWatchlist = isInWatchlist
       ? watchlist.filter((content: any) => content.id !== currentItem.id)
@@ -62,12 +61,27 @@ export default function ImageHeader() {
           ...watchlist,
           { id: currentItem.id, type: currentItem.name ? "tv" : "movie" },
         ];
-    console.log(updatedWatchlist);
     nookies.set(null, "watchlist", JSON.stringify(updatedWatchlist), {
       path: "/",
     });
 
     setIsInWatchlist(!isInWatchlist);
+  };
+
+  const handleShareClick = () => {
+    const path = `webcinema.vercel.app/details?id=${currentItem.id}&type=${
+      currentItem.name ? "tv" : "movie"
+    }`;
+
+    navigator.clipboard
+      .writeText(path)
+      .then(() => {
+        setCopyMessage("Copied!"); // Show feedback message
+        setTimeout(() => setCopyMessage(""), 2000); // Reset after 2 seconds
+      })
+      .catch(() => {
+        setCopyMessage("Failed to copy");
+      });
   };
 
   return (
@@ -79,7 +93,7 @@ export default function ImageHeader() {
           currentItem.backdrop_path && (
             <Image
               className={cn(
-                "rounded-[30px]  object-cover w-full md:h-[750px] h-[400px]",
+                "rounded-[30px] object-cover w-full md:h-[750px] h-[400px]",
                 currentIndex % 2 === 0
                   ? "animate-slideInLeft"
                   : "animate-slideInRight"
@@ -95,9 +109,6 @@ export default function ImageHeader() {
       </div>
 
       <div className="absolute md:bottom-[-20px] bottom-[-1rem] left-[0px] md:left-[36%] flex flex-col items-center bg-[#000000] border-[15px] border-[#1B1919] w-[270px] md:min-w-[350px] pt-2 pb-3 p-1 rounded-[40px]">
-        <div className="w-[50px]  h-[50px] absolute md:bottom-[13px] md:left-[-63px]  rounded-br-[50px] md:shadow-[70px_70px_0px_70px_#1B1919] z-[-1]"></div>
-        <div className="w-[50px] h-[50px] md:bottom-[13px] absolute md:left-[315px] left-[15.6rem] bottom-[0.55rem] rounded-bl-[50px] shadow-[-70px_70px_0px_70px_#1B1919] z-[-1]"></div>
-
         <h1 className="font-bold pl-1 ml-2 relative translate-y-2 truncate text-[20px] md:text-[25px] max-w-[150px] md:max-w-[250px]">
           {loading ? (
             <>Loading...</>
@@ -118,7 +129,7 @@ export default function ImageHeader() {
           <Link
             className={cn(
               roboto.className,
-              "p-1 px-1  bg-[#FFD700] items-center text-[12px] md:text-[15px] rounded-[5px] flex"
+              "p-1 px-1 bg-[#FFD700] items-center text-[12px] md:text-[15px] rounded-[5px] flex"
             )}
             href={`/watch?id=${currentItem.id}&type=${
               currentItem.name ? "tv&season=1&episode=1" : "movie"
@@ -127,14 +138,16 @@ export default function ImageHeader() {
             Watch
             <Play className="md:w-5 md:h-4 w-3 h-3 fill-[#000000]" />
           </Link>
+
           <Link
-            className="p-1  bg-[#FFD700] text-[12px] md:text-[14px] rounded-[5px]"
+            className="p-1 bg-[#FFD700] text-[12px] md:text-[14px] rounded-[5px]"
             href={`/details?id=${currentItem.id}&type=${
               currentItem.name ? "tv" : "movie"
             }`}
           >
             Details
           </Link>
+
           <div className="relative inline-block group">
             <Bookmark
               onClick={toggleWatchlist}
@@ -143,20 +156,38 @@ export default function ImageHeader() {
                 "md:w-5 w-4 h-4 md:h-5 text-[#4C5E77] group-hover:text-[#FFD700]"
               )}
             />
-
             <span
               className={cn(
                 isInWatchlist ? "w-[12rem]" : "w-[10rem]",
                 roboto.className,
-                " absolute  bg-[#4d4747] px-4 py-1 bg-opacity-40 rounded   text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+                " absolute bg-[#4d4747] px-4 py-1 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
               )}
             >
-              {isInWatchlist ? "Remove from Watchlist " : "Add to Watchlist "}
+              {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
             </span>
           </div>
 
-          <Share className="md:w-5 md:h-5 w-4 h-4  text-[#4C5E77]" />
+          <div className="relative inline-block group">
+            <Share
+              onClick={handleShareClick}
+              className="md:w-5 md:h-5 w-4 h-4 text-[#4C5E77] group-hover:text-[#FFD700]"
+            />
+            <span
+              className={cn(
+                roboto.className,
+                "absolute bg-[#4d4747] px-4 py-2 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+              )}
+            >
+              Share
+            </span>
+          </div>
         </div>
+
+        {copyMessage && (
+          <div className="absolute bottom-[-40px] text-white text-sm">
+            {copyMessage}
+          </div>
+        )}
       </div>
     </div>
   );

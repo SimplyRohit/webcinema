@@ -63,15 +63,17 @@ export default function Page() {
         <input
           className={cn(
             roboto.className,
-            "rounded-lg w-[350px] h-[48px] bg-black text-[13px] px-3 placeholder:text-[12px] placeholder:text-[#5c6065] outline-none text-[#ffc31e]"
+            "rounded-lg md:w-[350px] w-[250px] h-[48px] bg-black text-[13px] px-3 placeholder:text-[12px] placeholder:text-[#5c6065] outline-none text-[#ffc31e]"
           )}
           placeholder="please enter at least 3 characters to search ....."
           type="text"
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) =>
+            setTimeout(() => setSearchQuery(e.target.value), 800)
+          }
         />
       </div>
       <div className="pt-5 flex items-center space-x-2 pl-5 md:pl-0 w-full h-full">
-        <h1 className={cn(sans, "md:pl-10 p-2 text-[20px] md:text-[25px]")}>
+        <h1 className={cn(sans, "md:pl-2 p-2 text-[20px] md:text-[25px]")}>
           Top Searches
         </h1>
         <h1

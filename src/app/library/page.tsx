@@ -16,23 +16,22 @@ function Page() {
   const [Continue, setContinue] = useState([]);
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  setTimeout(() => setLoading(false), 1000); 
+  setTimeout(() => setLoading(false), 1000);
 
   useEffect(() => {
     const cookies = nookies.get();
     const parsedWatchlist = cookies.watchlist
       ? JSON.parse(cookies.watchlist)
       : [];
-      if (parsedWatchlist.length > 0) {
-    setWatchlist(parsedWatchlist);
-      }
+    if (parsedWatchlist.length > 0) {
+      setWatchlist(parsedWatchlist);
+    }
     const parsedContinue = cookies.ContinueWatching
       ? JSON.parse(cookies.ContinueWatching)
       : [];
-      if (parsedContinue.length > 0) {
-        setContinue(parsedContinue);
-
-      }
+    if (parsedContinue.length > 0) {
+      setContinue(parsedContinue);
+    }
   }, []);
 
   useEffect(() => {
@@ -64,7 +63,7 @@ function Page() {
   }, [watchlist, Continue, Type, List]);
 
   return (
-    <div className="w-full md:pl-[100px] ml-1 md:p-5 flex flex-col h-full">
+    <div className="w-full md:pl-[100px] md:items-start items-center ml-1 md:p-5 flex flex-col h-full">
       <div className="flex pb-5">
         <h1 className={cn("font-bold text-[25px]")}>Library</h1>
       </div>
@@ -114,7 +113,7 @@ function Page() {
           </h1>
         </div>
       </div>
-      <div className="flex flex-wrap items-center md:mt-10 w-full h-full">
+      <div className="flex flex-wrap md:justify-start justify-center items-center md:mt-10 w-full h-full">
         {loading
           ? Array.from({ length: 18 }).map((_, index) => (
               <div

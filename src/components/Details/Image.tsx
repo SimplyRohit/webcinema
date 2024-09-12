@@ -7,23 +7,14 @@ import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
 import nookies from "nookies";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
-// import { createSupabaseClient } from "@/auth/client";
-// import prisma from "@/libs/prisma";
 function ImageHeader(props: any) {
-  // const { auth } = createSupabaseClient();
   const { item, loading } = props;
   const [DIV, setDIV] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("" as any);
   const [trailer, setTrailer] = useState(false);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
-  // const [user, setUser] = useState<any>(null);
-  
-  // useEffect(() => {
-  //   auth.onAuthStateChange((event, session) => {
-  //     setUser(session?.user ?? null);
-  //   });  
-  // } ,[auth]);
- 
+  const [copyMessage, setCopyMessage] = useState("");
+
   useEffect(() => {
     if (!loading && item) {
       const fetchVideos = async () => {
@@ -57,7 +48,6 @@ function ImageHeader(props: any) {
 
   useEffect(() => {
     const cookies = nookies.get();
-    console.log(cookies.watchlist);
     const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
     setIsInWatchlist(watchlist.some((content: any) => content.id === item.id));
   }, [item]);
@@ -69,7 +59,6 @@ function ImageHeader(props: any) {
     const updatedWatchlist = isInWatchlist
       ? watchlist.filter((content: any) => content.id !== item.id)
       : [...watchlist, { id: item.id, type: item.name ? "tv" : "movie" }];
-    console.log(updatedWatchlist);
     nookies.set(null, "watchlist", JSON.stringify(updatedWatchlist), {
       path: "/",
     });
@@ -77,6 +66,20 @@ function ImageHeader(props: any) {
     setIsInWatchlist(!isInWatchlist);
   };
 
+  const handleShareClick = () => {
+    const link = `https://webcinema.vercel.app/details?id=${item.id}&type=${
+      item.name ? "tv" : "movie"
+    }`;
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        setCopyMessage("Copied!");
+        setTimeout(() => setCopyMessage(""), 2000);
+      })
+      .catch(() => {
+        setCopyMessage("Failed to copy");
+      });
+  };
   return (
     <div className="flex   w-full h-full   md:w-[81vw] md:ml-[5rem]">
       <Image
@@ -165,14 +168,38 @@ function ImageHeader(props: any) {
               <Play className="md:w-5 md:h-4 w-3 h-3 fill-[#000000]" />
             </Link>
 
-            <Bookmark
-              onClick={toggleWatchlist}
-              className={cn(
-                isInWatchlist ? "fill-[#FFD700]" : "",
-                "md:w-5 w-4 h-4 md:h-5 text-[#4C5E77]"
-              )}
-            />
-            <Share className="md:w-5 md:h-5 w-4 h-4 text-[#4C5E77]" />
+            <div className="relative inline-block group">
+              <Bookmark
+                onClick={toggleWatchlist}
+                className={cn(
+                  isInWatchlist ? "fill-[#FFD700]" : "",
+                  "md:w-5 w-4 h-4 md:h-5 text-[#4C5E77] group-hover:text-[#FFD700]"
+                )}
+              />
+              <span
+                className={cn(
+                  isInWatchlist ? "w-[12rem]" : "w-[10rem]",
+                  roboto.className,
+                  " absolute bg-[#4d4747] px-4 py-1 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+                )}
+              >
+                {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+              </span>
+            </div>
+            <div className="relative inline-block group">
+              <Share
+                onClick={handleShareClick}
+                className="md:w-5 md:h-5 w-4 h-4 text-[#4C5E77] group-hover:text-[#FFD700]"
+              />
+              <span
+                className={cn(
+                  roboto.className,
+                  "absolute bg-[#4d4747] px-4 py-2 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+                )}
+              >
+                {copyMessage ? "Copied" : "Share"}
+              </span>
+            </div>
           </div>
         </div>
       </div>

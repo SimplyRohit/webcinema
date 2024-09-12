@@ -37,7 +37,6 @@ export default function Page(params: any) {
       if (errorMessage) {
         toast.error(errorMessage);
       } else {
-        
         toast.success("login successful");
         router.push("/");
       }
@@ -63,9 +62,9 @@ export default function Page(params: any) {
           onSubmit={handleSubmitLogin(onLoginSubmit)}
           className="flex flex-col"
         >
-          <label className="text-2xl py-2 pb-4">Email</label>
+          <p className="text-2xl pb-2 pt-4">Email</p>
           <input
-            className="w-[15rem] rounded outline-none p-2 bg-black text-[#FFD700]"
+            className="w-[15rem] rounded outline-none p-2  text-[#FFD700]"
             type="text"
             {...registerLogin("email")}
             disabled={isPending}
@@ -74,7 +73,7 @@ export default function Page(params: any) {
             <p className="text-red-500">{errorsLogin.email.message}</p>
           )}
 
-          <label className="text-2xl py-2 pb-4">Password</label>
+          <p className="text-2xl  pt-4 pb-2">Password</p>
           <input
             className="w-[15rem] rounded outline-none p-2 bg-black text-[#FFD700]"
             type="password"
@@ -112,7 +111,7 @@ export default function Page(params: any) {
           className="flex flex-col"
           onSubmit={handleSubmitSignup(onSignupSubmit)}
         >
-          <label className="text-2xl   py-2 pb-4 ">username</label>
+          <p className="text-2xl   pb-2 pt-4 ">username</p>
           <input
             className="w-[15rem] rounded  outline-none p-2 bg-black text-[#FFD700] "
             type="text"
@@ -122,7 +121,7 @@ export default function Page(params: any) {
           {errorsSignup.username && (
             <p className="text-red-500">{errorsSignup.username.message}</p>
           )}
-          <label className="text-2xl py-2 pb-4">Email</label>
+          <p className="text-2xl pb-2 pt-4">Email</p>
           <input
             className="w-[15rem] rounded 1 outline-none p-2 bg-black text-[#FFD700] "
             type="text"
@@ -132,7 +131,7 @@ export default function Page(params: any) {
           {errorsSignup.email && (
             <p className="text-red-500">{errorsSignup.email.message}</p>
           )}
-          <label className="text-2xl   py-2 pb-4 ">password</label>
+          <p className="text-2xl pb-2 pt-4 ">password</p>
           <input
             className="w-[15rem] rounded  outline-none p-2 bg-black text-[#FFD700] "
             type="password"
