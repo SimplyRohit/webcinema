@@ -64,7 +64,7 @@ export default function Page(params: any) {
         >
           <p className="text-2xl pb-2 pt-4">Email</p>
           <input
-            className="w-[15rem] rounded outline-none p-2  text-[#FFD700]"
+            className="w-[15rem] rounded outline-none p-2 bg-black text-[#FFD700]"
             type="text"
             {...registerLogin("email")}
             disabled={isPending}

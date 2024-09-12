@@ -127,7 +127,7 @@ function Page() {
           : data.map((item: any) => (
               <div
                 key={item.id}
-                className="flex flex-col md:mr-8 md:mx-0 mx-2 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px] md:max-h-[278px]"
+                className="flex flex-col md:mr-8 md:mx-0 mx-5 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px] md:max-h-[278px]"
               >
                 <div
                   onClick={() =>
