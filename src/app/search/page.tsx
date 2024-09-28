@@ -4,9 +4,8 @@ import { Roboto_Mono } from "next/font/google";
 import { Roboto_Serif } from "next/font/google";
 import { cn } from "@/libs/utils";
 import Image from "next/image";
-import Arrow from "@/components/Arrow";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const sans = Roboto_Serif({ subsets: ["latin"] });
 const roboto = Roboto_Mono({ subsets: ["latin"] });
@@ -17,27 +16,20 @@ export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const router = useRouter();
+
   const fetchItems = async (query: string) => {
     setLoading(true);
     try {
-      const movieEndpoint = query
-        ? `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}&sort_by=popularity.desc`
-        : `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc`;
+      const endpoint = query
+        ? `https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}`
+        : `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
 
-      const tvEndpoint = query
-        ? `https://api.themoviedb.org/3/search/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}&sort_by=popularity.desc`
-        : `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc`;
-
-      const [moviesResponse, tvResponse] = await Promise.all([
-        axios.get(movieEndpoint),
-        axios.get(tvEndpoint),
-      ]);
-      const combinedResults: any = [
-        ...moviesResponse.data.results,
-        ...tvResponse.data.results,
-      ].sort(() => Math.random() - 0.5);
-
-      setItems(combinedResults);
+      const response = await axios.get(endpoint);
+      const sortedItems = response.data.results.sort((a: any, b: any) => {
+        return b.popularity - a.popularity;
+      });
+      console.log(sortedItems);
+      setItems(sortedItems);
     } finally {
       setLoading(false);
     }
@@ -82,7 +74,7 @@ export default function Page() {
           today
         </h1>
       </div>
-      <div className="flex flex-wrap items-start justify-start pl-5 md:pl-0  mt-5 w-full h-full">
+      <div className="flex flex-wrap items-start justify-start pl-5 md:pl-0 mt-5 w-full h-full">
         {loading
           ? Array.from({ length: 18 }).map((_, index) => (
               <div
@@ -101,9 +93,7 @@ export default function Page() {
                 <div
                   onClick={() =>
                     router.push(
-                      `/details?id=${item.id}&type=${
-                        item.title ? "movie" : "tv"
-                      }`
+                      `/details?id=${item.id}&type=${item.media_type}`
                     )
                   }
                   className="flex md:min-h-[250px] md:min-w-[150px]"
