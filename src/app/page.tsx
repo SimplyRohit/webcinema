@@ -74,7 +74,7 @@ export default function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const allData = await axios.get("api/page");
+        const allData = await axios.get("api/mainpage/page");
         setMoviesData(allData.data);
       } catch (err) {
         console.error(err);
