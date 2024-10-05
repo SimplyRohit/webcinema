@@ -22,7 +22,7 @@ export default function ImageHeader() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`api/mainpage`);
+        const response = await axios.get(`api/mainpage/image`);
         setItems(response.data.results.slice(0, 6));
       } catch (err) {
       } finally {
@@ -73,8 +73,8 @@ export default function ImageHeader() {
     navigator.clipboard
       .writeText(path)
       .then(() => {
-        setCopyMessage("Copied!"); // Show feedback message
-        setTimeout(() => setCopyMessage(""), 2000); // Reset after 2 seconds
+        setCopyMessage("Copied!");
+        setTimeout(() => setCopyMessage(""), 2000);
       })
       .catch(() => {
         setCopyMessage("Failed to copy");
