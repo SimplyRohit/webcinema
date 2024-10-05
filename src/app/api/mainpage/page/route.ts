@@ -43,7 +43,7 @@ const maindata = [
 
 export async function GET() {
   try {
-    const allData = await Promise.all(
+    const allData = await Promise.all<any>(
       maindata.map(async (item) => {
         const response = await fetch(item.url);
         if (!response.ok) {

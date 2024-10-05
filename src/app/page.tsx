@@ -11,7 +11,43 @@ import { useRouter } from "next/navigation";
 import ImageHeader from "@/components/Mainpage/ImageHeader";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
-
+const maindata = [
+  {
+    id: 0,
+    name: "Recommendation",
+    url: `https://api.themoviedb.org/3/movie/157336/recommendations?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+  },
+  {
+    id: 1,
+    name: "Latest Movies",
+    url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=1`,
+  },
+  {
+    id: 2,
+    name: "Latest TV-Shows",
+    url: `https://api.themoviedb.org/3/tv/on_the_air?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=1`,
+  },
+  {
+    id: 3,
+    name: "K-Drama Movies",
+    url: `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&with_origin_country=KR&sort_by=popularity.escpage=1`,
+  },
+  {
+    id: 4,
+    name: "K-Drama Shows",
+    url: `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&with_origin_country=KR&sort_by=popularity.despage=1`,
+  },
+  {
+    id: 5,
+    name: "Anime Movies",
+    url: `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&with_genres=16&sort_by=popularity.desc&pag=1`,
+  },
+  {
+    id: 6,
+    name: "Anime Shows",
+    url: `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&with_genres=16&sort_by=popularity.desc&page=1`,
+  },
+];
 export default function Homepage() {
   const router = useRouter();
 
@@ -45,10 +81,10 @@ export default function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("api/mainpage/page");
-        setMoviesData(response.data);
+        const allData = await axios.get("api/mainpage/page");
+        setMoviesData(allData);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -60,7 +96,7 @@ export default function Homepage() {
     <div className="w-full h-full md:pb-2  overflow-hidden md:pl-[70px]">
       <ImageHeader />
       {loading
-        ? maindata.map((item: any, idx: any) => (
+        ? maindata.map((item, idx) => (
             <div key={idx} className="pl-1 w-full h-full">
               <div className="md:pb-[40px] md:pt-[40px]">
                 <div className="flex flex-row items-center justify-between">
