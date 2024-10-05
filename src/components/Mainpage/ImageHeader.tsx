@@ -22,10 +22,7 @@ export default function ImageHeader() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
-        );
-
+        const response = await axios.get(`api/mainpage`);
         setItems(response.data.results.slice(0, 6));
       } catch (err) {
       } finally {
