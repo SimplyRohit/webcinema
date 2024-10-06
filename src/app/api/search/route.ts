@@ -6,8 +6,8 @@ export async function GET(request: Request) {
   const query = searchParams.get("query");
 
   const apiUrl = query
-    ? `https://api.themoviedb.org/3/search/multi?api_key=${process.env.API_KEY}&query=${query}`
-    : `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.API_KEY}`;
+    ? `https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}`
+    : `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
 
   try {
     const response = await axios.get(apiUrl);

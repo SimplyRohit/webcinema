@@ -6,7 +6,7 @@ export async function POST(request: any) {
     const { id } = await request.json();
     const apiUrl = `https://api.themoviedb.org/3/${
       id ? "tv" : "movie"
-    }/${id}/videos?api_key=${process.env.API_KEY}a`;
+    }/${id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
     const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error("Failed to fetch data from TMDb API");

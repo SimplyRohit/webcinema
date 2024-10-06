@@ -4,10 +4,9 @@ import nookies from "nookies";
 import { Roboto_Mono } from "next/font/google";
 import { cn } from "@/libs/utils";
 import axios from "axios";
+const roboto = Roboto_Mono({ subsets: ["latin"] });
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
-const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 function Page() {
   const router = useRouter();
@@ -15,20 +14,24 @@ function Page() {
   const [List, setList] = useState("wl");
   const [watchlist, setWatchlist] = useState([]);
   const [Continue, setContinue] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+  setTimeout(() => setLoading(false), 1000);
 
   useEffect(() => {
     const cookies = nookies.get();
     const parsedWatchlist = cookies.watchlist
       ? JSON.parse(cookies.watchlist)
       : [];
+    if (parsedWatchlist.length > 0) {
+      setWatchlist(parsedWatchlist);
+    }
     const parsedContinue = cookies.ContinueWatching
       ? JSON.parse(cookies.ContinueWatching)
       : [];
-
-    setWatchlist(parsedWatchlist);
-    setContinue(parsedContinue);
+    if (parsedContinue.length > 0) {
+      setContinue(parsedContinue);
+    }
   }, []);
 
   useEffect(() => {
@@ -40,7 +43,7 @@ function Page() {
           list: listToUse,
           type: Type,
         });
-        setData(responses.data); // Assuming responses.data is an array
+        setData(responses.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -103,7 +106,7 @@ function Page() {
               "cursor-pointer"
             )}
           >
-            TV Shows
+            Tv-Show
           </h1>
         </div>
       </div>
@@ -118,7 +121,7 @@ function Page() {
                 <p className={cn(roboto.className, "truncate")}>Loading...</p>
               </div>
             ))
-          : data.map((item) => (
+          : data.map((item: any) => (
               <div
                 key={item.id}
                 className="flex flex-col md:mr-8 md:mx-0 mx-5 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px] md:max-h-[278px]"

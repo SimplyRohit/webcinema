@@ -5,7 +5,7 @@ export async function POST(request: any) {
   try {
     const { data, count } = await request.json();
     const response = await fetch(
-      `https://api.themoviedb.org/3/${data}api_key=${process.env.API_KEY}a&page=${count}`
+      `https://api.themoviedb.org/3/${data}api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${count}`
     );
     if (!response.ok) {
       throw new Error(`API returned status code ${response.status}`);

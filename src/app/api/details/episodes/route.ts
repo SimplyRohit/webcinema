@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: any) {
   try {
     const { selectedSeason, id } = await request.json();
-    const apiUrl = `https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=${process.env.API_KEY}a`;
+    const apiUrl = `https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
     const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error("Failed to fetch data from TMDb API");
