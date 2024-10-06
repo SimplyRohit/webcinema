@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 export async function POST(request: any) {
   try {
     const { count } = await request.json();
-    const movieEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=23b2eec7e3fab51943e211619621ce2a&sort_by=popularity.desc&page=${count}`;
-    const tvEndpoint = `https://api.themoviedb.org/3/tv/popular?api_key=23b2eec7e3fab51943e211619621ce2a&sort_by=popularity.desc&page=${count}`;
+    const movieEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&sort_by=popularity.desc&page=${count}`;
+    const tvEndpoint = `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.API_KEY}&sort_by=popularity.desc&page=${count}`;
     const [moviesResponse, tvResponse] = await Promise.all([
       fetch(movieEndpoint),
       fetch(tvEndpoint),
