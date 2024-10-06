@@ -55,6 +55,7 @@ export async function GET() {
         return { name: item.name, data };
       })
     );
+    console.log(allData);
 
     return NextResponse.json(allData);
   } catch (error) {

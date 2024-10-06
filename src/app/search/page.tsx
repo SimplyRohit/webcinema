@@ -20,10 +20,10 @@ export default function Page() {
   const fetchItems = async (query: string) => {
     setLoading(true);
     try {
-      const response = await axios.post(`/api/search`, { query });
-      const sortedItems = response.data.results.sort((a: any, b: any) => {
-        return b.popularity - a.popularity;
-      });
+      const endpoint = query ? `/api/search?query=${query}` : `/api/search`;
+
+      const response = await axios.get(endpoint);
+      const sortedItems = response.data;
       console.log(sortedItems);
       setItems(sortedItems);
     } finally {

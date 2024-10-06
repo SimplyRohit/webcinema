@@ -75,6 +75,7 @@ export default function Homepage() {
     const fetchData = async () => {
       try {
         const allData = await axios.get("api/mainpage/page");
+        console.log(allData.data);
         setMoviesData(allData.data);
       } catch (err) {
         console.error(err);
@@ -93,7 +94,7 @@ export default function Homepage() {
             <div key={idx} className="pl-1 w-full h-full">
               <div className="md:pb-[40px] md:pt-[40px]">
                 <div className="flex flex-row items-center justify-between">
-                  <h1 className={cn("  text-[25px] pb-3")}>{item.name}</h1>
+                  <h1 className={cn("text-[25px] pb-3")}>{item.name}</h1>
                   <div className="flex flex-row items-center pr-2 justify-center">
                     <ChevronLeft className="text-[#A4B3C9] w-5 h-5" />
                     <p
@@ -121,10 +122,10 @@ export default function Homepage() {
             </div>
           ))
         : moviesData.map((item, idx) => (
-            <div key={idx} className="pl-1  w-full h-full">
+            <div key={idx} className="pl-1 w-full h-full">
               <div className="md:pb-[40px] pt-[20px] md:pt-[40px]">
                 <div className="flex flex-row items-center justify-between">
-                  <h1 className={cn(" text-[20px] md:text-[25px] pb-3")}>
+                  <h1 className={cn("text-[20px] md:text-[25px] pb-3")}>
                     {item.name}
                   </h1>
                   <div className="flex flex-row items-center pr-2 justify-center">
@@ -142,33 +143,37 @@ export default function Homepage() {
                 </div>
                 <div
                   ref={sliderRef}
-                  className="keen-slider overflow-x-auto   md:h-[270px] h-[180px] "
+                  className="keen-slider overflow-x-auto md:h-[270px] h-[180px]"
                 >
-                  {item.data.map((movie: any) => (
-                    <div
-                      onClick={() =>
-                        router.push(
-                          `/details?id=${movie.id}&type=${
-                            movie.name ? "tv" : "movie"
-                          }`
-                        )
-                      }
-                      key={movie.id}
-                      className="keen-slider__slide md:!min-w-[180px] !min-w-[90px]   "
-                    >
-                      <Image
-                        className="object-cover md:h-[250px] h-[150px] rounded"
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie.name || movie.title}
-                        width={200}
-                        height={200}
-                        unoptimized
-                      />
-                      <p className={cn(roboto.className, "truncate")}>
-                        {movie.name || movie.title}
-                      </p>
-                    </div>
-                  ))}
+                  {Array.isArray(item.data.results) ? (
+                    item.data.results.map((movie: any) => (
+                      <div
+                        onClick={() =>
+                          router.push(
+                            `/details?id=${movie.id}&type=${
+                              movie.name ? "tv" : "movie"
+                            }`
+                          )
+                        }
+                        key={movie.id}
+                        className="keen-slider__slide md:!min-w-[180px] !min-w-[90px]"
+                      >
+                        <Image
+                          className="object-cover md:h-[250px] h-[150px] rounded"
+                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          alt={movie.name || movie.title}
+                          width={200}
+                          height={200}
+                          unoptimized
+                        />
+                        <p className={cn(roboto.className, "truncate")}>
+                          {movie.name || movie.title}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No movies available.</p>
+                  )}
                 </div>
               </div>
             </div>

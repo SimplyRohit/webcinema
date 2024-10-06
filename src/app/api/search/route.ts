@@ -6,12 +6,15 @@ export async function GET(request: Request) {
   const query = searchParams.get("query");
 
   const apiUrl = query
-    ? `https://api.themoviedb.org/3/search/multi?api_key=23b2eec7e3fab51943e211619621ce2a&query=${query}`
-    : `https://api.themoviedb.org/3/trending/all/day?api_key=23b2eec7e3fab51943e211619621ce2a`;
+    ? `https://api.themoviedb.org/3/search/multi?api_key=${process.env.API_KEY}&query=${query}`
+    : `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.API_KEY}`;
 
   try {
     const response = await axios.get(apiUrl);
-    return NextResponse.json(response);
+    const sortedItems = response.data.results.sort(
+      (a: any, b: any) => b.popularity - a.popularity
+    );
+    return NextResponse.json(sortedItems);
   } catch (error) {
     return NextResponse.json({ error: "Error fetching data" }, { status: 500 });
   }

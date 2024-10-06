@@ -4,9 +4,10 @@ import nookies from "nookies";
 import { Roboto_Mono } from "next/font/google";
 import { cn } from "@/libs/utils";
 import axios from "axios";
-const roboto = Roboto_Mono({ subsets: ["latin"] });
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+
+const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 function Page() {
   const router = useRouter();
@@ -14,40 +15,36 @@ function Page() {
   const [List, setList] = useState("wl");
   const [watchlist, setWatchlist] = useState([]);
   const [Continue, setContinue] = useState([]);
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  setTimeout(() => setLoading(false), 1000);
 
   useEffect(() => {
     const cookies = nookies.get();
     const parsedWatchlist = cookies.watchlist
       ? JSON.parse(cookies.watchlist)
       : [];
-    if (parsedWatchlist.length > 0) {
-      setWatchlist(parsedWatchlist);
-    }
     const parsedContinue = cookies.ContinueWatching
       ? JSON.parse(cookies.ContinueWatching)
       : [];
-    if (parsedContinue.length > 0) {
-      setContinue(parsedContinue);
-    }
+
+    setWatchlist(parsedWatchlist);
+    setContinue(parsedContinue);
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-
       try {
         const listToUse = List === "wl" ? watchlist : Continue;
-
-        const responses = await Promise.all(
-          listToUse
-            .filter((item: any) => item.type === Type)
-            .map((item: any) => axios.post(`/api/library`, item))
-        );
-        setData(responses.map((response) => response.data));
+        const responses = await axios.post(`/api/library`, {
+          list: listToUse,
+          type: Type,
+        });
+        setData(responses.data); // Assuming responses.data is an array
+      } catch (error) {
+        console.error("Error fetching data:", error);
       } finally {
+        setLoading(false);
       }
     };
 
@@ -106,7 +103,7 @@ function Page() {
               "cursor-pointer"
             )}
           >
-            Tv-Show
+            TV Shows
           </h1>
         </div>
       </div>
@@ -121,7 +118,7 @@ function Page() {
                 <p className={cn(roboto.className, "truncate")}>Loading...</p>
               </div>
             ))
-          : data.map((item: any) => (
+          : data.map((item) => (
               <div
                 key={item.id}
                 className="flex flex-col md:mr-8 md:mx-0 mx-5 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px] md:max-h-[278px]"
