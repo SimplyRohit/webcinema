@@ -24,7 +24,6 @@ export default function Page() {
 
       const response = await axios.get(endpoint);
       const sortedItems = response.data;
-      console.log(sortedItems);
       setItems(sortedItems);
     } finally {
       setLoading(false);

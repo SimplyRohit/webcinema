@@ -75,7 +75,7 @@ export default function Homepage() {
     const fetchData = async () => {
       try {
         const allData = await axios.get("api/mainpage/page");
-        console.log(allData.data);
+
         setMoviesData(allData.data);
       } catch (err) {
         console.error(err);

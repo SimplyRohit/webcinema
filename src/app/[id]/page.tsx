@@ -46,7 +46,7 @@ function Page(params: any) {
           data,
           count,
         });
-        console.log("id", response.data.results);
+
         setMovies(response.data.results);
       } finally {
         setLoading(false);
