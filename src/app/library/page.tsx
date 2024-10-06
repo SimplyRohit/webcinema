@@ -40,14 +40,11 @@ function Page() {
 
       try {
         const listToUse = List === "wl" ? watchlist : Continue;
+
         const responses = await Promise.all(
           listToUse
             .filter((item: any) => item.type === Type)
-            .map((item: any) =>
-              axios.get(
-                `https://api.themoviedb.org/3/${item.type}/${item.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-              )
-            )
+            .map((item: any) => axios.post(`/api/library`, item))
         );
         setData(responses.map((response) => response.data));
       } finally {

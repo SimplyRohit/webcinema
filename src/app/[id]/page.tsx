@@ -42,10 +42,11 @@ function Page(params: any) {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/${data}api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${count}`
-        );
-
+        const response = await axios.post(`api/id`, {
+          data,
+          count,
+        });
+        console.log("id", response.data.results);
         setMovies(response.data.results);
       } finally {
         setLoading(false);

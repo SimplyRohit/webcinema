@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/libs/utils";
 import { Roboto_Mono } from "next/font/google";
 import nookies from "nookies";
+import axios from "axios";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 function ImageHeader(props: any) {
   const { item, loading } = props;
@@ -18,14 +19,11 @@ function ImageHeader(props: any) {
   useEffect(() => {
     if (!loading && item) {
       const fetchVideos = async () => {
+        const id = item.id;
         try {
           setTrailer(true);
-          const response = await fetch(
-            `https://api.themoviedb.org/3/${item.name ? "tv" : "movie"}/${
-              item.id
-            }/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-          );
-          const trial = await response.json();
+          const response = await axios.post(`api/details/image`, { id });
+          const trial = response.data;
 
           if (trial.results.length > 0) {
             const lastVideo = trial.results[trial.results.length - 1];

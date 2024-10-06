@@ -16,14 +16,14 @@ function Related(props: any) {
   const [count, setCount] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
+      const name = item.name;
+      const id = item.id;
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/${item.name ? "tv" : "movie"}/${
-            item.id
-          }/recommendations?api_key=${
-            process.env.NEXT_PUBLIC_API_KEY
-          }&language=en-US&page=${count}`
-        );
+        const response = await axios.post(`api/details/related`, {
+          id,
+          name,
+          count,
+        });
         setRelated(response.data.results);
       } finally {
         setLoading(false);
@@ -74,7 +74,7 @@ function Related(props: any) {
                   width={200}
                   height={200}
                   alt={item.title || item.name}
-                   unoptimized
+                  unoptimized
                 />
               </div>
               <p className={cn(roboto.className, "truncate")}>
