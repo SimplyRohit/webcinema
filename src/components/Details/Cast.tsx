@@ -10,14 +10,10 @@ function Cast(props: any) {
 
   useEffect(() => {
     const fetchData = async () => {
+      const name = item.name;
+      const id = item.id;
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/${item.name ? "tv" : "movie"}/${
-            item.id
-          }/credits?api_key=${
-            process.env.NEXT_PUBLIC_API_KEY
-          }&language=en-US&page=1`
-        );
+        const response = await axios.post(`api/details/cast`, { name, id });
         setCast(response.data.cast);
       } finally {
         setLoading(false);

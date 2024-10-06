@@ -12,6 +12,7 @@ function Episodes(props: any) {
   const [selectedSeason, setSelectedSeason] = useState(1 as any);
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (item && item.id) {
       setSeasons(item.seasons || []);
@@ -24,10 +25,9 @@ function Episodes(props: any) {
   useEffect(() => {
     if (selectedSeason && item && item.id) {
       setLoading(true);
+      const id = item.id;
       axios
-        .get(
-          `https://api.themoviedb.org/3/tv/${item.id}/season/${selectedSeason}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-        )
+        .post(`api/details/episodes`, { id, selectedSeason })
         .then((response) => {
           setEpisodes(response.data.episodes || []);
           setLoading(false);

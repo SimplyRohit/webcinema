@@ -20,15 +20,10 @@ export default function Page() {
   const fetchItems = async (query: string) => {
     setLoading(true);
     try {
-      const endpoint = query
-        ? `https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}`
-        : `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+      const endpoint = query ? `/api/search?query=${query}` : `/api/search`;
 
       const response = await axios.get(endpoint);
-      const sortedItems = response.data.results.sort((a: any, b: any) => {
-        return b.popularity - a.popularity;
-      });
-      console.log(sortedItems);
+      const sortedItems = response.data;
       setItems(sortedItems);
     } finally {
       setLoading(false);

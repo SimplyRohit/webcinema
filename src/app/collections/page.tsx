@@ -21,24 +21,15 @@ function Page() {
     const fetchItems = async () => {
       setLoading(true);
       try {
-        const movieEndpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&page=${count}`;
-
-        const tvEndpoint = `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=popularity.desc&page=${count}`;
-
-        const [moviesResponse, tvResponse] = await Promise.all([
-          axios.get(movieEndpoint),
-          axios.get(tvEndpoint),
-        ]);
-        const combinedResults: any = [
-          ...moviesResponse.data.results,
-          ...tvResponse.data.results,
-        ].sort(() => Math.random() - 0.5);
-
-        setItems(combinedResults);
+        const response = await axios.post("/api/collections", { count });
+        setItems(response.data);
+      } catch (error) {
+        console.error("Error fetching items:", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchItems();
   }, [count]);
 

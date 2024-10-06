@@ -37,20 +37,17 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-
       try {
         const listToUse = List === "wl" ? watchlist : Continue;
-        const responses = await Promise.all(
-          listToUse
-            .filter((item: any) => item.type === Type)
-            .map((item: any) =>
-              axios.get(
-                `https://api.themoviedb.org/3/${item.type}/${item.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-              )
-            )
-        );
-        setData(responses.map((response) => response.data));
+        const responses = await axios.post(`/api/library`, {
+          list: listToUse,
+          type: Type,
+        });
+        setData(responses.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       } finally {
+        setLoading(false);
       }
     };
 

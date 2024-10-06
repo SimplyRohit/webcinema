@@ -17,11 +17,10 @@ function PageContent() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-        );
+        const response = await axios.post("api/details/page", { type, id });
         setItem(response.data);
       } catch (err) {
+        console.error("Error fetching item:", err);
       } finally {
         setLoading(false);
       }
