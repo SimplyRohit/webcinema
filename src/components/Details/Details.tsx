@@ -57,7 +57,7 @@ function Details(props: any) {
         </h1>
       </div>
       <hr className="w-full  border-1 border-[#A4B3C9]" />
-      <div className="flex md:h-[57rem] rounded-lg bg-black w-full h-[60rem]">
+      <div className="flex md:h-[calc(98%-32px)] rounded-lg bg-black w-full h-[60rem]">
         {activeSection === "Overview" && (
           <Overview loading={loading} item={item} />
         )}

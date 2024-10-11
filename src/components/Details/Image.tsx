@@ -79,11 +79,11 @@ function ImageHeader(props: any) {
       });
   };
   return (
-    <div className="flex   w-full h-full   md:w-[81vw] md:ml-[5rem]">
+    <div className="flex h-full w-full md:ml-[5rem]">
       <Image
         className={cn(
           loading ? "shimmer" : "",
-          "md:rounded-[1.875rem] rounded-lg   animate-slideInLeft object-cover w-full  md:w-full h-[34rem] md:h-[60rem]   mb-[1rem] pt-[1rem] px-[0.5rem] md:px-[0.5rem]  z-[-2] md:pr-[1rem]  md:pb-[0rem]"
+          "animate-slideInLeft relative z-[-2] mb-[1rem] h-[34rem] w-full rounded-lg object-cover px-[0.5rem] pt-[1rem] md:h-[98%] md:w-full md:rounded-[1.875rem] md:px-[0.5rem] md:pb-[0rem] md:pr-[1rem]",
         )}
         src={
           loading
@@ -98,106 +98,105 @@ function ImageHeader(props: any) {
         unoptimized
       />
 
-      <div className="absolute  md:top-[46rem]  top-[24.2rem] md:left-[5rem] ">
-        {DIV && (
-          <>
-            <div className="w-[20px] md:w-[25px] md:h-[25px] h-[20px] md:bottom-[7.9rem] absolute md:left-[9.45rem] left-[.5rem] bottom-[10.4rem] rounded-bl-[50px] shadow-[-20px_20px_0px_20px_#1B1919] z-[-1]"></div>
-            <div className="w-[20px] h-[20px] md:bottom-[0.2rem] absolute md:left-[30rem] left-[21.5rem] bottom-[.5rem] rotate-[2deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] z-[-1]"></div>
-            <div className="w-[20px] h-[20px] md:bottom-[0.2rem] absolute md:left-[10rem]  rotate-[2deg] rounded-bl-[50px] sm:shadow-[-10px_10px_0px_10px_#1B1919] z-[-1]"></div>
-            <div className="w-[15px] h-[15px] md:bottom-[12.5rem]  absolute md:left-[6.2rem] left-[5rem] bottom-[8.8rem] rotate-[180deg] rounded-bl-[50px] shadow-[-5px_5px_0px_5px_#1B1919] "></div>
-            <div className="w-[15px] h-[15px] md:bottom-[10.2rem] absolute md:left-[7.9rem] left-[6.6rem] bottom-[6.5rem] rotate-[190deg] rounded-bl-[50px] shadow-[-5px_5px_0px_5px_#1B1919] "></div>
-            <div className="w-[30px] h-[30px] md:bottom-[14rem] absolute md:left-[.5rem] left-[9.2rem] bottom-[7.2rem] md:rotate-[0deg] rotate-[0deg] rounded-bl-[50px] md:shadow-[-10px_10px_0px_10px_#1B1919] md:z-[-1] shadow-[-10px_10px_0px_10px_#1B1919] "></div>
-          </>
+      {DIV && (
+        <>
+          <div className="absolute bottom-[25rem] left-[.5rem] z-[-1] h-[20px] w-[20px] rounded-bl-[50px] shadow-[-20px_20px_0px_20px_#1B1919] md:bottom-[8.24rem] md:left-[14.4rem] md:h-[25px] md:w-[25px]"></div>
+          <div className="absolute bottom-[15.5rem] left-[21.5rem] z-[-1] h-[20px] w-[20px] rotate-[2deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[1.23rem] md:left-[35rem]"></div>
+          <div className="absolute z-[-1] h-[20px] w-[20px] rotate-[2deg] rounded-bl-[50px] sm:shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[0.2rem] md:left-[15rem]"></div>
+          {/* <div className="w-[15px] h-[15px] md:bottom-[12.5rem]  absolute md:left-[6rem] left-[5rem] bottom-[8.8rem] rotate-[180deg] rounded-bl-[50px] shadow-[-5px_5px_0px_5px_#1B1919] "></div>
+            <div className="w-[15px] h-[15px] md:bottom-[10.2rem] absolute md:left-[7.9rem] left-[6.6rem] bottom-[6.5rem] rotate-[190deg] rounded-bl-[50px] shadow-[-5px_5px_0px_5px_#1B1919]md:z-[-1] "></div> */}
+          <div className="absolute bottom-[21rem] left-[9rem] h-[30px] w-[30px] rotate-[0deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[14.5rem] md:left-[5.5rem] md:z-[-1] md:rotate-[0deg] md:shadow-[-10px_10px_0px_10px_#1B1919]"></div>
+        </>
+      )}
+
+      <Image
+        className={cn(
+          "absolute bottom-[15rem] left-[0rem] h-[165px] w-[130px] rounded-[1.25rem] border-[10px] border-[#1B1919] object-cover md:bottom-[0rem] md:left-[5rem] md:h-[225px] md:w-[150px]",
         )}
-        <Image
-          className={cn(
-            "object-cover border-[10px] md:w-[150px] md:h-[225px] rounded-[1.25rem] w-[130px] h-[165px] border-[#1B1919]"
-          )}
-          src={
+        src={
             loading ? "" : `https://image.tmdb.org/t/p/w500${item.poster_path}`
-          }
-          width={200}
-          height={200}
-          alt={loading ? "" : item.title || item.name}
-          unoptimized
-        />
+        }
+        width={200}
+        height={200}
+        alt={loading ? "" : item.title || item.name}
+        unoptimized
+      />
 
-        {!loading && (
-          <div className="absolute top-[-10px] right-[-20px] bg-[#000000] border-[8px] border-[#1B1919] rounded-[50%]">
-            <h1 className="text-[#FFD700] font-bold text-[1.125rem] p-[0.5rem] px-[.7rem]">
-              {item.vote_average.toFixed(1)}
-            </h1>
-          </div>
-        )}
-
-        <div className="absolute md:bottom-[-0.3rem] bottom-[-0.1rem] left-[7.5rem] md:left-[9rem] flex flex-col items-center bg-[#000000] border-[10px] border-[#1B1919] w-[14rem] md:min-w-[21rem] p-[.5rem] rounded-[1.25rem] md:rounded-[2.5rem]">
-          <h1 className="font-bold pl-1 ml-2 relative translate-y-2 truncate text-[20px] md:text-[25px] max-w-[150px] md:max-w-[250px]">
-            {loading ? <>Loading...</> : <>{item.title || item.name}</>}
+      {!loading && (
+        <div className="absolute bottom-[22.5rem] left-[6.8rem] rounded-[50%] border-[8px] border-[#1B1919] bg-[#000000] md:bottom-[11.5rem] md:left-[13rem]">
+          <h1 className="p-[0.5rem] px-[.7rem] text-[1.125rem] font-bold text-[#FFD700]">
+          {item.vote_average.toFixed(1)}
           </h1>
+        </div>
+      )}
 
-          <p
+      <div className="absolute bottom-[15rem] left-[7.5rem] flex w-[14rem] flex-col items-center rounded-[1.25rem] border-[10px] border-[#1B1919] bg-[#000000] p-[.5rem] md:bottom-[0rem] md:left-[14rem] md:min-w-[21rem] md:rounded-[2.5rem]">
+        <h1 className="relative ml-2 max-w-[150px] translate-y-2 truncate pl-1 text-[20px] font-bold md:max-w-[250px] md:text-[25px]">
+          {loading ? <>Loading...</> : <>{item.title || item.name}</>}
+        </h1>
+
+        <p
+          className={cn(
+            roboto.className,
+            "translate-x-[-90px] -rotate-[-90deg] transform text-[15px] md:translate-x-[-140px] md:text-[18px]",
+          )}
+        >
+          {loading ? <>Movie</> : <>{item.name ? "Show" : "Movie"}</>}
+        </p>
+        <div className="ml-7 flex flex-row items-center space-x-2">
+          <Link
             className={cn(
               roboto.className,
-              "transform -rotate-[-90deg] md:text-[18px] text-[15px] translate-x-[-90px] md:translate-x-[-140px]"
+              "flex items-center rounded-[5px] bg-[#FFD700] p-1 px-1 text-[14px] md:text-[15px]",
             )}
+            href={`/watch?id=${item.id}&type=${
+              item.name ? "tv&season=1&episode=1" : "movie"
+            }`}
           >
-            {loading ? <>Movie</> : <>{item.name ? "Show" : "Movie"}</>}
-          </p>
-          <div className="flex ml-7 flex-row space-x-2 items-center">
-            <Link
+            Watch
+            <Play className="h-3 w-3 fill-[#000000] md:h-4 md:w-5" />
+          </Link>
+
+          <Link
+            className="flex items-center rounded-[5px] bg-[#FFD700] p-1 px-1 text-[14px] md:text-[15px]"
+            href={trailer ? "" : trailerUrl}
+            target="_blank"
+          >
+            Trailer
+            <Play className="h-3 w-3 fill-[#000000] md:h-4 md:w-5" />
+          </Link>
+
+          <div className="group relative inline-block">
+            <Bookmark
+              onClick={toggleWatchlist}
+              className={cn(
+                isInWatchlist ? "fill-[#FFD700]" : "",
+                "h-4 w-4 text-[#4C5E77] group-hover:text-[#FFD700] md:h-5 md:w-5",
+              )}
+            />
+            <span
+              className={cn(
+                isInWatchlist ? "w-[12rem]" : "w-[10rem]",
+                roboto.className,
+                "absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform rounded bg-[#4d4747] bg-opacity-40 px-4 py-1 text-[.9rem] tracking-[-.075em] text-[#b8c2cf] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100",
+              )}
+            >
+              {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+            </span>
+          </div>
+          <div className="group relative inline-block">
+            <Share
+              onClick={handleShareClick}
+              className="h-4 w-4 text-[#4C5E77] group-hover:text-[#FFD700] md:h-5 md:w-5"
+            />
+            <span
               className={cn(
                 roboto.className,
-                "p-1 px-1 bg-[#FFD700] items-center text-[14px] md:text-[15px] rounded-[5px] flex"
+                "absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform rounded bg-[#4d4747] bg-opacity-40 px-4 py-2 text-[.9rem] tracking-[-.075em] text-[#b8c2cf] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100",
               )}
-              href={`/watch?id=${item.id}&type=${
-                item.name ? "tv&season=1&episode=1" : "movie"
-              }`}
             >
-              Watch
-              <Play className="md:w-5 md:h-4 w-3 h-3 fill-[#000000]" />
-            </Link>
-
-            <Link
-              className="p-1 px-1 bg-[#FFD700] items-center text-[14px] md:text-[15px] rounded-[5px] flex"
-              href={trailer ? "" : trailerUrl}
-              target="_blank"
-            >
-              Trailer
-              <Play className="md:w-5 md:h-4 w-3 h-3 fill-[#000000]" />
-            </Link>
-
-            <div className="relative inline-block group">
-              <Bookmark
-                onClick={toggleWatchlist}
-                className={cn(
-                  isInWatchlist ? "fill-[#FFD700]" : "",
-                  "md:w-5 w-4 h-4 md:h-5 text-[#4C5E77] group-hover:text-[#FFD700]"
-                )}
-              />
-              <span
-                className={cn(
-                  isInWatchlist ? "w-[12rem]" : "w-[10rem]",
-                  roboto.className,
-                  " absolute bg-[#4d4747] px-4 py-1 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
-                )}
-              >
-                {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
-              </span>
-            </div>
-            <div className="relative inline-block group">
-              <Share
-                onClick={handleShareClick}
-                className="md:w-5 md:h-5 w-4 h-4 text-[#4C5E77] group-hover:text-[#FFD700]"
-              />
-              <span
-                className={cn(
-                  roboto.className,
-                  "absolute bg-[#4d4747] px-4 py-2 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
-                )}
-              >
-                {copyMessage ? "Copied" : "Share"}
-              </span>
-            </div>
+              {copyMessage ? "Copied" : "Share"}
+            </span>
           </div>
         </div>
       </div>
