@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Roboto_Mono } from "next/font/google";
 import Arrow from "../Arrow";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
@@ -33,19 +33,19 @@ function Related(props: any) {
   }, [item, count]);
 
   return (
-    <div className="w-full h-[800px] overflow-y-auto overflow-x-hidden flex flex-col ">
+    <div className="flex h-[800px] w-full flex-col overflow-y-auto overflow-x-hidden">
       {loading ? (
-        <div className="flex flex-wrap justify-center items-center w-full h-full">
+        <div className="flex h-full w-full flex-wrap items-center justify-center">
           {Array.from({ length: 18 }).map((_, index) => (
             <div
               key={index}
-              className="flex flex-col mx-3 mb-6 max-w-[150px] max-h-[278px] rounded shimmer"
+              className="shimmer mx-3 mb-6 flex max-h-[278px] max-w-[150px] flex-col rounded"
             >
-              <div className="flex min-h-[250px] min-w-[150px] bg-gray-700 animate-pulse"></div>
+              <div className="flex min-h-[250px] min-w-[150px] animate-pulse bg-gray-700"></div>
               <p
                 className={cn(
                   roboto.className,
-                  "truncate bg-gray-700 animate-pulse"
+                  "animate-pulse truncate bg-gray-700",
                 )}
               >
                 Loading...
@@ -54,11 +54,11 @@ function Related(props: any) {
           ))}
         </div>
       ) : (
-        <div className="flex flex-wrap items-center pt-5 justify-center ">
+        <div className="flex flex-wrap items-center justify-center pt-5">
           {related.slice(0, 18).map((item: any) => (
             <div
               key={item.id}
-              className="flex flex-col mx-3 mb-6  max-w-[100px] "
+              className="mx-3 mb-6 flex max-w-[100px] flex-col"
             >
               <div
                 onClick={() =>
@@ -69,7 +69,7 @@ function Related(props: any) {
                 className="flex min-h-[100px] min-w-[50px] cursor-pointer"
               >
                 <Image
-                  className="object-cover rounded"
+                  className="rounded object-cover"
                   src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                   width={200}
                   height={200}

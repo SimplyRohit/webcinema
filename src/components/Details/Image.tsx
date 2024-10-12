@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Bookmark, Share, Play } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 import { Roboto_Mono } from "next/font/google";
 import nookies from "nookies";
 import axios from "axios";

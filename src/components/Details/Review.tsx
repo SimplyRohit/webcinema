@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { Roboto_Mono } from "next/font/google";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 import { Star } from "lucide-react";
 function Review(props: any) {
@@ -29,14 +29,14 @@ function Review(props: any) {
     fetchData();
   }, [item]);
   return (
-    <div className="w-full h-[880px]  flex overflow-y-auto overflow-x-hidden flex-col">
+    <div className="flex h-[880px] w-full flex-col overflow-y-auto overflow-x-hidden">
       {Review.map((review: any) => (
         <div
           key={review.id}
-          className="flex w-full h-[250px] rounded-lg  m-2 bg-[#1B1919] flex-col"
+          className="m-2 flex h-[250px] w-full flex-col rounded-lg bg-[#1B1919]"
         >
-          <h1 className="text-[#FFD700] pb-2 pt-2 pl-2">{review.author}</h1>
-          <p className={cn(roboto.className, "pl-2  items-center flex")}>
+          <h1 className="pb-2 pl-2 pt-2 text-[#FFD700]">{review.author}</h1>
+          <p className={cn(roboto.className, "flex items-center pl-2")}>
             <Star size={15} color="#FFD700" /> -{review.author_details.rating}
           </p>
           <p className={cn(roboto.className, "pl-2")}>
@@ -46,7 +46,7 @@ function Review(props: any) {
           <p
             className={cn(
               roboto.className,
-              "pt-2 pl-2 break-words overflow-y-auto "
+              "overflow-y-auto break-words pl-2 pt-2",
             )}
           >
             {review.content}

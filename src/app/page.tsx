@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Roboto_Mono } from "next/font/google";
 import Image from "next/image";
 import axios from "axios";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import ImageHeader from "@/components/Mainpage/ImageHeader";
 import {
@@ -14,41 +13,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
+import { maindata } from "@/utils/constant";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
-const maindata = [
-  {
-    id: 0,
-    name: "Recommendation",
-  },
-  {
-    id: 1,
-    name: "Latest Movies",
-  },
-  {
-    id: 2,
-    name: "Latest TV-Shows",
-  },
-  {
-    id: 3,
-    name: "K-Drama Movies",
-  },
-  {
-    id: 4,
-    name: "K-Drama Shows",
-  },
-  {
-    id: 5,
-    name: "Anime Movies",
-  },
-  {
-    id: 6,
-    name: "Anime Shows",
-  },
-];
+
 export default function Homepage() {
   const router = useRouter();
-
   const [moviesData, setMoviesData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -99,12 +68,9 @@ export default function Homepage() {
                     />
                   </div>
                 </div>
-                <div className="keen-slider h-[100px] overflow-x-auto md:h-[270px]">
+                <div className="shimmer h-[100px] md:h-[270px]">
                   {Array.from({ length: 18 }).map((_, index) => (
-                    <div
-                      key={index}
-                      className="keen-slider__slide shimmer !min-w-[200px]"
-                    >
+                    <div key={index} className="!min-w-[200px]">
                       <p className={cn(roboto.className, "truncate")}></p>
                     </div>
                   ))}

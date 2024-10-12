@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Bookmark, Share, Play } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 import { Roboto_Mono } from "next/font/google";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import nookies from "nookies";
-
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function ImageHeader() {
@@ -85,7 +84,7 @@ export default function ImageHeader() {
     <div className="relative flex flex-1 flex-col items-center">
       <div className="z-[-2] h-full w-full p-2">
         {loading ? (
-          <div className="shimmer h-[750px] md:rounded-[30px]"></div>
+          <div className="shimmer h-[400px] w-full rounded-[30px] md:h-[calc(100vh-150px)]"></div>
         ) : (
           currentItem.backdrop_path && (
             <Image

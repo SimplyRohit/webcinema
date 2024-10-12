@@ -3,7 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 
 function Episodes(props: any) {
   const { item } = props;
@@ -41,7 +41,7 @@ function Episodes(props: any) {
 
   return (
     <div className="">
-      <div className="flex items-center pb-5 pt-2 w-full justify-center">
+      <div className="flex w-full items-center justify-center pb-5 pt-2">
         {loading
           ? ""
           : seasons.length > 0 && (
@@ -49,7 +49,7 @@ function Episodes(props: any) {
                 id="season"
                 onChange={handleSeasonChange}
                 value={selectedSeason}
-                className="min-w-[250px] max-w-[250px] px-5 py-2 m-2 rounded-[10px] bg-[#1B1919] font-mono text-[#A4B3C9]"
+                className="m-2 min-w-[250px] max-w-[250px] rounded-[10px] bg-[#1B1919] px-5 py-2 font-mono text-[#A4B3C9]"
               >
                 {seasons.map((season: any, index) => (
                   <option key={index} value={season.season_number}>
@@ -60,16 +60,16 @@ function Episodes(props: any) {
             )}
       </div>
 
-      <div className="w-full h-[800px] overflow-y-auto flex flex-col p-2">
+      <div className="flex h-[800px] w-full flex-col overflow-y-auto p-2">
         {loading
           ? Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={index}
-                className="w-full flex flex-row mb-5 min-h-[200px] bg-[#1B1919]"
+                className="mb-5 flex min-h-[200px] w-full flex-row bg-[#1B1919]"
               >
-                <div className=" shimmer max-w-[40%] p-2">
+                <div className="shimmer max-w-[40%] p-2">
                   <Image
-                    className="w-full rounded-[10px] object-cover h-full"
+                    className="h-full w-full rounded-[10px] object-cover"
                     src={""}
                     width={200}
                     height={200}
@@ -77,12 +77,12 @@ function Episodes(props: any) {
                   />
                 </div>
 
-                <div className="flex flex-col min-w-[50%] py-2 ml-3">
-                  <h1 className="font-bold pt-2 pb-1">Ep No ....</h1>
+                <div className="ml-3 flex min-w-[50%] flex-col py-2">
+                  <h1 className="pb-1 pt-2 font-bold">Ep No ....</h1>
                   <p className="pb-2">12.. min</p>
                   <Link
                     className={cn(
-                      "bg-[#FFD700] pl-10 mb-2 rounded-[5px] flex w-[150px]"
+                      "mb-2 flex w-[150px] rounded-[5px] bg-[#FFD700] pl-10",
                     )}
                     href={""}
                   >
@@ -100,11 +100,11 @@ function Episodes(props: any) {
           : episodes.map((episode: any) => (
               <div
                 key={episode.id}
-                className="w-full flex flex-row mb-5 min-h-[200px] bg-[#1B1919]"
+                className="mb-5 flex min-h-[200px] w-full flex-row bg-[#1B1919]"
               >
                 <div className="max-w-[40%] p-2">
                   <Image
-                    className="w-full rounded-[10px] object-cover h-full"
+                    className="h-full w-full rounded-[10px] object-cover"
                     src={`https://image.tmdb.org/t/p/original${episode.still_path}`}
                     width={200}
                     height={200}
@@ -113,8 +113,8 @@ function Episodes(props: any) {
                   />
                 </div>
 
-                <div className="flex flex-col min-w-[50%] py-2 ml-3">
-                  <h1 className="font-bold pt-2 pb-1">
+                <div className="ml-3 flex min-w-[50%] flex-col py-2">
+                  <h1 className="pb-1 pt-2 font-bold">
                     Ep {episode.episode_number} - {episode.name}
                   </h1>
                   <p className="pb-2">
@@ -122,7 +122,7 @@ function Episodes(props: any) {
                   </p>
                   <Link
                     className={cn(
-                      "bg-[#FFD700] pl-10 mb-2 rounded-[5px] flex w-[150px]"
+                      "mb-2 flex w-[150px] rounded-[5px] bg-[#FFD700] pl-10",
                     )}
                     href={`/watch?id=${item.id}&type=tv&season=${episode.season_number}&episode=${episode.episode_number}`}
                   >

@@ -9,7 +9,7 @@ import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import prisma from "@/libs/prisma";
+import prisma from "@/lib/prisma";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 type SignupFormData = z.infer<typeof signupSchema>;
@@ -56,15 +56,15 @@ export default function Page(params: any) {
 
   if (params.params.auth === "login") {
     return (
-      <div className="w-full md:pl-[100px] p-5 flex flex-col h-full">
+      <div className="flex h-full w-full flex-col p-5 md:pl-[100px]">
         <h1 className="text-[50px]">Login</h1>
         <form
           onSubmit={handleSubmitLogin(onLoginSubmit)}
           className="flex flex-col"
         >
-          <p className="text-2xl pb-2 pt-4">Email</p>
+          <p className="pb-2 pt-4 text-2xl">Email</p>
           <input
-            className="w-[15rem] rounded outline-none p-2 bg-black text-[#FFD700]"
+            className="w-[15rem] rounded bg-black p-2 text-[#FFD700] outline-none"
             type="text"
             {...registerLogin("email")}
             disabled={isPending}
@@ -73,9 +73,9 @@ export default function Page(params: any) {
             <p className="text-red-500">{errorsLogin.email.message}</p>
           )}
 
-          <p className="text-2xl  pt-4 pb-2">Password</p>
+          <p className="pb-2 pt-4 text-2xl">Password</p>
           <input
-            className="w-[15rem] rounded outline-none p-2 bg-black text-[#FFD700]"
+            className="w-[15rem] rounded bg-black p-2 text-[#FFD700] outline-none"
             type="password"
             {...registerLogin("password")}
             disabled={isPending}
@@ -85,17 +85,17 @@ export default function Page(params: any) {
           )}
 
           <button
-            className="w-[10rem] ml-10 rounded mt-5 p-2 bg-black text-[#A4B3C9] transition duration-150 ease-in-out transform hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-none"
+            className="ml-10 mt-5 w-[10rem] transform rounded bg-black p-2 text-[#A4B3C9] transition duration-150 ease-in-out hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-none"
             type="submit"
             disabled={isPending}
           >
             {isPending ? "Loggingginn..." : "Login"}
           </button>
-          <span className="text-[1rem] font-bold pt-4 flex text-[#435165] items-center">
+          <span className="flex items-center pt-4 text-[1rem] font-bold text-[#435165]">
             Don&#39;t have an account?
             <h1
               onClick={() => router.push("/auth/signup")}
-              className="text-2xl pl-2 tracking-wider cursor-pointer"
+              className="cursor-pointer pl-2 text-2xl tracking-wider"
             >
               SignUP
             </h1>
@@ -105,15 +105,15 @@ export default function Page(params: any) {
     );
   } else if (params.params.auth === "signup") {
     return (
-      <div className="w-full md:pl-[100px] p-5 flex flex-col  h-full">
+      <div className="flex h-full w-full flex-col p-5 md:pl-[100px]">
         <h1 className="text-[50px]">SignUp</h1>
         <form
           className="flex flex-col"
           onSubmit={handleSubmitSignup(onSignupSubmit)}
         >
-          <p className="text-2xl   pb-2 pt-4 ">username</p>
+          <p className="pb-2 pt-4 text-2xl">username</p>
           <input
-            className="w-[15rem] rounded  outline-none p-2 bg-black text-[#FFD700] "
+            className="w-[15rem] rounded bg-black p-2 text-[#FFD700] outline-none"
             type="text"
             {...registerSignup("username")}
             disabled={isPending}
@@ -121,9 +121,9 @@ export default function Page(params: any) {
           {errorsSignup.username && (
             <p className="text-red-500">{errorsSignup.username.message}</p>
           )}
-          <p className="text-2xl pb-2 pt-4">Email</p>
+          <p className="pb-2 pt-4 text-2xl">Email</p>
           <input
-            className="w-[15rem] rounded 1 outline-none p-2 bg-black text-[#FFD700] "
+            className="1 w-[15rem] rounded bg-black p-2 text-[#FFD700] outline-none"
             type="text"
             {...registerSignup("email")}
             disabled={isPending}
@@ -131,9 +131,9 @@ export default function Page(params: any) {
           {errorsSignup.email && (
             <p className="text-red-500">{errorsSignup.email.message}</p>
           )}
-          <p className="text-2xl pb-2 pt-4 ">password</p>
+          <p className="pb-2 pt-4 text-2xl">password</p>
           <input
-            className="w-[15rem] rounded  outline-none p-2 bg-black text-[#FFD700] "
+            className="w-[15rem] rounded bg-black p-2 text-[#FFD700] outline-none"
             type="password"
             {...registerSignup("password")}
             disabled={isPending}
@@ -142,18 +142,18 @@ export default function Page(params: any) {
             <p className="text-red-500">{errorsSignup.password.message}</p>
           )}
           <button
-            className="w-[10rem] ml-10 rounded mt-5 p-2 bg-black text-[#ffffff] transition duration-150 ease-in-out transform hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-none"
+            className="ml-10 mt-5 w-[10rem] transform rounded bg-black p-2 text-[#ffffff] transition duration-150 ease-in-out hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-none"
             type="submit"
             disabled={isPending}
           >
             {isPending ? "submitingg..." : "Submit"}
           </button>
         </form>
-        <span className="text-[1rem] font-bold  pt-4 flex text-[#435165] items-center ">
+        <span className="flex items-center pt-4 text-[1rem] font-bold text-[#435165]">
           Already have an account?
           <h1
             onClick={() => router.push("/auth/login")}
-            className="text-2xl pl-2 tracking-wider cursor-pointer "
+            className="cursor-pointer pl-2 text-2xl tracking-wider"
           >
             LogIN
           </h1>

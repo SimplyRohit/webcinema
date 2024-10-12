@@ -1,12 +1,12 @@
 "use server";
 import { createSupabaseClient } from "../auth/server";
-import { getErrorMessage } from "../libs/utils";
+import { getErrorMessage } from "../lib/utils";
 
 export async function createAccountAction(data: any) {
   try {
     const { email, password, username } = data;
     const { auth } = createSupabaseClient();
-    
+
     const { data: signUpData, error: signUpError } = await auth.signUp({
       email,
       password,
@@ -21,7 +21,6 @@ export async function createAccountAction(data: any) {
     return { errorMessage: getErrorMessage(error) };
   }
 }
-
 
 export async function loginAccountAction(data: any) {
   try {

@@ -10,7 +10,7 @@ import {
   LibraryBig,
   Settings,
 } from "lucide-react";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { Roboto_Mono } from "next/font/google";
 const roboto = Roboto_Mono({ subsets: ["latin"] });

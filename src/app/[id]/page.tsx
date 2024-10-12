@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
-import { cn } from "@/libs/utils";
+import { cn } from "@/lib/utils";
 import { Roboto_Mono } from "next/font/google";
 import Arrow from "@/components/Arrow";
 import { FilterX } from "lucide-react";
@@ -65,7 +65,7 @@ function Page(params: any) {
             className={cn(
               type === "popular" ? "" : "text-[#FFB800]",
               roboto.className,
-              "cursor-pointer pr-1"
+              "cursor-pointer pr-1",
             )}
           >
             Movie
@@ -75,7 +75,7 @@ function Page(params: any) {
             className={cn(
               type === "popular" ? "text-[#FFB800]" : "",
               roboto.className,
-              "cursor-pointer pr-1"
+              "cursor-pointer pr-1",
             )}
           >
             Show
@@ -90,7 +90,7 @@ function Page(params: any) {
             className={cn(
               type === "now_playing" ? "text-[#FFB800]" : "",
               roboto.className,
-              "cursor-pointer pr-1"
+              "cursor-pointer pr-1",
             )}
           >
             Latest
@@ -101,7 +101,7 @@ function Page(params: any) {
             className={cn(
               type === "popular" ? "text-[#FFB800]" : "",
               roboto.className,
-              "cursor-pointer pr-1"
+              "cursor-pointer pr-1",
             )}
           >
             Trending
@@ -112,7 +112,7 @@ function Page(params: any) {
             className={cn(
               type === "top_rated" ? "text-[#FFB800]" : "",
               roboto.className,
-              "cursor-pointer pr-1"
+              "cursor-pointer pr-1",
             )}
           >
             Top-Rated
@@ -124,45 +124,45 @@ function Page(params: any) {
 
   if (["movie", "tv", "anime", "kdrama"].includes(params.params.id)) {
     return (
-      <div className="w-full md:pl-[100px] p-2 md:p-5 flex md:items-start items-center  flex-col h-full">
+      <div className="flex h-full w-full flex-col items-center p-2 md:items-start md:p-5 md:pl-[100px]">
         <div className="flex pb-5">
-          <h1 className={cn("font-bold text-[25px] pt-2 ")}>
+          <h1 className={cn("pt-2 text-[25px] font-bold")}>
             {params.params.id.charAt(0).toUpperCase() +
               params.params.id.slice(1)}
           </h1>
         </div>
-        <div className="flex flex-row pb-5 justify-between">
+        <div className="flex flex-row justify-between pb-5">
           <div className="flex space-x-2">{renderSortOptions()}</div>
         </div>
 
-        <div className="flex flex-wrap  md:justify-start justify-center   items-center md:mt-10 w-full h-full">
+        <div className="flex h-full w-full flex-wrap items-center justify-center md:mt-10 md:justify-start">
           {loading
             ? Array.from({ length: 18 }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex flex-col md:mr-10 md:mb-12 max-w-[150px] max-h-[278px]"
+                  className="flex max-h-[278px] max-w-[150px] flex-col md:mb-12 md:mr-10"
                 >
-                  <div className="flex min-h-[250px] min-w-[150px] rounded shimmer"></div>
+                  <div className="shimmer flex min-h-[250px] min-w-[150px] rounded"></div>
                   <p className={cn(roboto.className, "truncate")}>Loading...</p>
                 </div>
               ))
             : movies.slice(0, 18).map((item: any) => (
                 <div
                   key={item.id}
-                  className="flex flex-col md:mr-8 md:mx-0 mx-5 md:mb-12 mb-6 md:max-w-[150px] max-w-[100px]  md:max-h-[278px]"
+                  className="mx-5 mb-6 flex max-w-[100px] flex-col md:mx-0 md:mb-12 md:mr-8 md:max-h-[278px] md:max-w-[150px]"
                 >
                   <div
                     onClick={() =>
                       router.push(
                         `/details?id=${item.id}&type=${
                           item.title ? "movie" : "tv"
-                        }`
+                        }`,
                       )
                     }
-                    className="flex  md:min-h-[250px] min-h-[100px] min-w-[50px] md:min-w-[150px]"
+                    className="flex min-h-[100px] min-w-[50px] md:min-h-[250px] md:min-w-[150px]"
                   >
                     <Image
-                      className="object-cover rounded"
+                      className="rounded object-cover"
                       src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                       width={200}
                       height={200}
