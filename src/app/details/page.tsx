@@ -30,7 +30,7 @@ function PageContent() {
   }, [type, id]);
 
   return (
-    <div className="flex w-screen h-screen overflow-hidden animate-slideInLeftFast  items-center  flex-col md:flex-row md:justify-center">
+    <div className="animate-slideInLeftFast flex h-screen w-screen flex-col items-center md:flex-row md:justify-center">
       <ImageHeader item={item} loading={loading} />
 
       <Details item={item} loading={loading} />

@@ -124,7 +124,7 @@ function Page(params: any) {
 
   if (["movie", "tv", "anime", "kdrama"].includes(params.params.id)) {
     return (
-      <div className="flex h-full w-full flex-col items-center p-2 md:items-start md:p-5 md:pl-[100px]">
+      <div className="mb-[calc(100vh-90vh)] flex h-full w-full flex-col items-center p-2 md:mb-0 md:items-start md:p-5 md:pl-[100px]">
         <div className="flex pb-5">
           <h1 className={cn("pt-2 text-[25px] font-bold")}>
             {params.params.id.charAt(0).toUpperCase() +
@@ -140,7 +140,7 @@ function Page(params: any) {
             ? Array.from({ length: 18 }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex max-h-[278px] max-w-[150px] flex-col md:mb-12 md:mr-10"
+                  className="mb-8 flex max-h-[278px] max-w-[150px] flex-col md:mb-12 md:mr-10"
                 >
                   <div className="shimmer flex min-h-[250px] min-w-[150px] rounded"></div>
                   <p className={cn(roboto.className, "truncate")}>Loading...</p>
@@ -149,7 +149,7 @@ function Page(params: any) {
             : movies.slice(0, 18).map((item: any) => (
                 <div
                   key={item.id}
-                  className="mx-5 mb-6 flex max-w-[100px] flex-col md:mx-0 md:mb-12 md:mr-8 md:max-h-[278px] md:max-w-[150px]"
+                  className="mx-5 mb-8 flex max-w-[100px] flex-col md:mx-0 md:mb-12 md:mr-8 md:max-h-[278px] md:max-w-[150px]"
                 >
                   <div
                     onClick={() =>
