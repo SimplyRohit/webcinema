@@ -45,7 +45,7 @@ export default function ImageHeader() {
     const cookies = nookies.get();
     const watchlist = cookies.watchlist ? JSON.parse(cookies.watchlist) : [];
     setIsInWatchlist(
-      watchlist.some((content: any) => content.id === currentItem.id)
+      watchlist.some((content: any) => content.id === currentItem.id),
     );
   }, [currentItem]);
 
@@ -83,17 +83,17 @@ export default function ImageHeader() {
 
   return (
     <div className="relative flex flex-1 flex-col items-center">
-      <div className="w-full z-[-2] h-full p-2">
+      <div className="z-[-2] h-full w-full p-2">
         {loading ? (
-          <div className="md:rounded-[30px] shimmer h-[750px]"></div>
+          <div className="shimmer h-[750px] md:rounded-[30px]"></div>
         ) : (
           currentItem.backdrop_path && (
             <Image
               className={cn(
-                "rounded-[30px] object-cover w-full md:h-[750px] h-[400px]",
+                "h-[400px] w-full rounded-[30px] object-cover md:h-[calc(100vh-150px)]",
                 currentIndex % 2 === 0
                   ? "animate-slideInLeft"
-                  : "animate-slideInRight"
+                  : "animate-slideInRight",
               )}
               src={`https://image.tmdb.org/t/p/original${currentItem.backdrop_path}`}
               alt={currentItem.title || currentItem.name}
@@ -105,8 +105,8 @@ export default function ImageHeader() {
         )}
       </div>
 
-      <div className="absolute md:bottom-[-20px] bottom-[-1rem] left-[0px] md:left-[36%] flex flex-col items-center bg-[#000000] border-[15px] border-[#1B1919] w-[270px] md:min-w-[350px] pt-2 pb-3 p-1 rounded-[40px]">
-        <h1 className="font-bold pl-1 ml-2 relative translate-y-2 truncate text-[20px] md:text-[25px] max-w-[150px] md:max-w-[250px]">
+      <div className="absolute bottom-[-1rem] left-[0px] flex w-[270px] flex-col items-center rounded-[40px] border-[15px] border-[#1B1919] bg-[#000000] p-1 pb-3 pt-2 md:bottom-[-20px] md:left-[36%] md:min-w-[350px]">
+        <h1 className="relative ml-2 max-w-[150px] translate-y-2 truncate pl-1 text-[20px] font-bold md:max-w-[250px] md:text-[25px]">
           {loading ? (
             <>Loading...</>
           ) : (
@@ -117,27 +117,27 @@ export default function ImageHeader() {
         <p
           className={cn(
             roboto.className,
-            "transform -rotate-[-90deg] md:text-[18px] text-[15px] translate-x-[-90px] md:translate-x-[-140px]"
+            "translate-x-[-90px] -rotate-[-90deg] transform text-[15px] md:translate-x-[-140px] md:text-[18px]",
           )}
         >
           {loading ? <>Movie</> : <>{currentItem.name ? "Show" : "Movie"}</>}
         </p>
-        <div className="flex ml-7 flex-row space-x-2 items-center">
+        <div className="ml-7 flex flex-row items-center space-x-2">
           <Link
             className={cn(
               roboto.className,
-              "p-1 px-1 bg-[#FFD700] items-center text-[12px] md:text-[15px] rounded-[5px] flex"
+              "flex items-center rounded-[5px] bg-[#FFD700] p-1 px-1 text-[12px] md:text-[15px]",
             )}
             href={`/watch?id=${currentItem.id}&type=${
               currentItem.name ? "tv&season=1&episode=1" : "movie"
             }`}
           >
             Watch
-            <Play className="md:w-5 md:h-4 w-3 h-3 fill-[#000000]" />
+            <Play className="h-3 w-3 fill-[#000000] md:h-4 md:w-5" />
           </Link>
 
           <Link
-            className="p-1 bg-[#FFD700] text-[12px] md:text-[14px] rounded-[5px]"
+            className="rounded-[5px] bg-[#FFD700] p-1 text-[12px] md:text-[14px]"
             href={`/details?id=${currentItem.id}&type=${
               currentItem.name ? "tv" : "movie"
             }`}
@@ -145,34 +145,34 @@ export default function ImageHeader() {
             Details
           </Link>
 
-          <div className="relative inline-block group">
+          <div className="group relative inline-block">
             <Bookmark
               onClick={toggleWatchlist}
               className={cn(
                 isInWatchlist ? "fill-[#FFD700]" : "",
-                "md:w-5 w-4 h-4 md:h-5 text-[#4C5E77] group-hover:text-[#FFD700]"
+                "h-4 w-4 text-[#4C5E77] group-hover:text-[#FFD700] md:h-5 md:w-5",
               )}
             />
             <span
               className={cn(
                 isInWatchlist ? "w-[12rem]" : "w-[10rem]",
                 roboto.className,
-                " absolute bg-[#4d4747] px-4 py-1 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+                "absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform rounded bg-[#4d4747] bg-opacity-40 px-4 py-1 text-[.9rem] tracking-[-.075em] text-[#b8c2cf] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100",
               )}
             >
               {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
             </span>
           </div>
 
-          <div className="relative inline-block group">
+          <div className="group relative inline-block">
             <Share
               onClick={handleShareClick}
-              className="md:w-5 md:h-5 w-4 h-4 text-[#4C5E77] group-hover:text-[#FFD700]"
+              className="h-4 w-4 text-[#4C5E77] group-hover:text-[#FFD700] md:h-5 md:w-5"
             />
             <span
               className={cn(
                 roboto.className,
-                "absolute bg-[#4d4747] px-4 py-2 bg-opacity-40 rounded text-[#b8c2cf] text-[.9rem] tracking-[-.075em] bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+                "absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform rounded bg-[#4d4747] bg-opacity-40 px-4 py-2 text-[.9rem] tracking-[-.075em] text-[#b8c2cf] opacity-0 transition-opacity duration-300 md:group-hover:opacity-100",
               )}
             >
               Share
@@ -181,7 +181,7 @@ export default function ImageHeader() {
         </div>
 
         {copyMessage && (
-          <div className="absolute bottom-[-40px] text-white text-sm">
+          <div className="absolute bottom-[-40px] text-sm text-white">
             {copyMessage}
           </div>
         )}

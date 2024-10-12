@@ -65,25 +65,27 @@ export default function Navbar() {
 
   return (
     <div
-      className={cn("fixed md:left-0 bottom-[0rem] md:top-[30%] md:pl-2 z-50")}
+      className={cn(
+        "fixed bottom-[0rem] z-50 md:top-[0rem] md:flex md:items-center md:justify-center md:pl-2",
+      )}
     >
-      <nav className="flex md:flex-col flex-row items-center md:rounded-[10px]  justify-evenly md:w-[54px] w-screen h-[3.8rem] md:h-[420px] md:backdrop-blur-sm md:bg-opacity-50 bg-[#000000]">
+      <nav className="flex h-[3.8rem] w-screen flex-row items-center justify-evenly bg-[#000000] md:h-[420px] md:w-[54px] md:flex-col md:rounded-[10px] md:bg-opacity-50 md:backdrop-blur-sm">
         {navItems.map((item, index) => (
           <div
             key={index}
             className={cn(
-              "relative group",
-              item.hiddenOnSmall ? "hidden md:block" : "block"
+              "group relative",
+              item.hiddenOnSmall ? "hidden md:block" : "block",
             )}
           >
             <p
               className={cn(
                 roboto.className,
-                "absolute inline-block whitespace-nowrap p-2 bg-opacity-60 backdrop-blur-[0px] rounded-[6px] bg-[#4d4747] text-[#b8c2cf] text-[.9rem] tracking-[-.075em]",
+                "absolute inline-block whitespace-nowrap rounded-[6px] bg-[#4d4747] bg-opacity-60 p-2 text-[.9rem] tracking-[-.075em] text-[#b8c2cf] backdrop-blur-[0px]",
                 item.tooltipPosition === "top"
-                  ? "left-1/2 transform -translate-x-1/2 -translate-y-1/3 bottom-full"
-                  : "left-full top-1/2 transform -translate-y-1/2 ml-2",
-                "opacity-0 md:group-hover:opacity-100"
+                  ? "bottom-full left-1/2 -translate-x-1/2 -translate-y-1/3 transform"
+                  : "left-full top-1/2 ml-2 -translate-y-1/2 transform",
+                "opacity-0 md:group-hover:opacity-100",
               )}
             >
               {item.label}
@@ -92,7 +94,7 @@ export default function Navbar() {
               onClick={() => router.push(item.path)}
               className={cn(
                 path === item.path ? "text-[#ffde24]" : "text-[#576B87]",
-                "w-5 h-5 cursor-pointer"
+                "h-5 w-5 cursor-pointer",
               )}
             />
           </div>

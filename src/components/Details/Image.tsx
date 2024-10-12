@@ -83,7 +83,7 @@ function ImageHeader(props: any) {
       <Image
         className={cn(
           loading ? "shimmer" : "",
-          "animate-slideInLeft relative z-[-2] mb-[1rem] h-[34rem] w-full rounded-lg object-cover px-[0.5rem] pt-[1rem] md:h-[98%] md:w-full md:rounded-[1.875rem] md:px-[0.5rem] md:pb-[0rem] md:pr-[1rem]",
+          "animate-slideInLeft relative z-[-2] mb-[1rem] h-[34rem] w-full rounded-lg object-cover px-[0.5rem] pt-[1rem] md:h-[99%] md:w-full md:rounded-[1.875rem] md:px-[0.5rem] md:pb-[0rem] md:pr-[1rem]",
         )}
         src={
           loading
@@ -100,12 +100,12 @@ function ImageHeader(props: any) {
 
       {DIV && (
         <>
-          <div className="absolute bottom-[25rem] left-[.5rem] z-[-1] h-[20px] w-[20px] rounded-bl-[50px] shadow-[-20px_20px_0px_20px_#1B1919] md:bottom-[8.24rem] md:left-[14.4rem] md:h-[25px] md:w-[25px]"></div>
-          <div className="absolute bottom-[15.5rem] left-[21.5rem] z-[-1] h-[20px] w-[20px] rotate-[2deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[1.23rem] md:left-[35rem]"></div>
+          <div className="absolute bottom-[25rem] left-[.5rem] z-[-1] h-[20px] w-[20px] rounded-bl-[50px] shadow-[-20px_20px_0px_20px_#1B1919] md:bottom-[8rem] md:left-[14.3rem] md:h-[25px] md:w-[25px]"></div>
+          <div className="absolute bottom-[15.5rem] left-[21.5rem] z-[-1] h-[20px] w-[20px] rotate-[2deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[.3rem] md:left-[34.8rem]"></div>
           <div className="absolute z-[-1] h-[20px] w-[20px] rotate-[2deg] rounded-bl-[50px] sm:shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[0.2rem] md:left-[15rem]"></div>
           {/* <div className="w-[15px] h-[15px] md:bottom-[12.5rem]  absolute md:left-[6rem] left-[5rem] bottom-[8.8rem] rotate-[180deg] rounded-bl-[50px] shadow-[-5px_5px_0px_5px_#1B1919] "></div>
             <div className="w-[15px] h-[15px] md:bottom-[10.2rem] absolute md:left-[7.9rem] left-[6.6rem] bottom-[6.5rem] rotate-[190deg] rounded-bl-[50px] shadow-[-5px_5px_0px_5px_#1B1919]md:z-[-1] "></div> */}
-          <div className="absolute bottom-[21rem] left-[9rem] h-[30px] w-[30px] rotate-[0deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[14.5rem] md:left-[5.5rem] md:z-[-1] md:rotate-[0deg] md:shadow-[-10px_10px_0px_10px_#1B1919]"></div>
+          <div className="absolute bottom-[21rem] left-[9rem] h-[30px] w-[30px] rotate-[0deg] rounded-bl-[50px] shadow-[-10px_10px_0px_10px_#1B1919] md:bottom-[14rem] md:left-[5.5rem] md:z-[-1] md:rotate-[0deg] md:shadow-[-10px_10px_0px_10px_#1B1919]"></div>
         </>
       )}
 
@@ -114,7 +114,7 @@ function ImageHeader(props: any) {
           "absolute bottom-[15rem] left-[0rem] h-[165px] w-[130px] rounded-[1.25rem] border-[10px] border-[#1B1919] object-cover md:bottom-[0rem] md:left-[5rem] md:h-[225px] md:w-[150px]",
         )}
         src={
-            loading ? "" : `https://image.tmdb.org/t/p/w500${item.poster_path}`
+          loading ? "" : `https://image.tmdb.org/t/p/w500${item.poster_path}`
         }
         width={200}
         height={200}
@@ -125,7 +125,7 @@ function ImageHeader(props: any) {
       {!loading && (
         <div className="absolute bottom-[22.5rem] left-[6.8rem] rounded-[50%] border-[8px] border-[#1B1919] bg-[#000000] md:bottom-[11.5rem] md:left-[13rem]">
           <h1 className="p-[0.5rem] px-[.7rem] text-[1.125rem] font-bold text-[#FFD700]">
-          {item.vote_average.toFixed(1)}
+            {item.vote_average.toFixed(1)}
           </h1>
         </div>
       )}
