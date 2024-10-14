@@ -66,10 +66,10 @@ export default function Navbar() {
   return (
     <div
       className={cn(
-        "fixed bottom-[0rem] z-50 md:top-[0rem] md:flex md:items-center md:justify-center md:pl-2",
+        "fixed bottom-[0rem] z-50 md:top-[0rem] md:flex md:w-0 md:items-center md:justify-center md:pl-2",
       )}
     >
-      <nav className="flex h-[3.8rem] w-screen flex-row items-center justify-evenly bg-[#000000] md:h-[420px] md:w-[54px] md:flex-col md:rounded-[10px] md:bg-opacity-50 md:backdrop-blur-sm">
+      <nav className="flex h-[3.8rem] w-screen flex-row items-center justify-evenly bg-[#000000] md:absolute md:left-2 md:h-[420px] md:w-[54px] md:flex-col md:rounded-[10px] md:bg-opacity-50 md:backdrop-blur-sm">
         {navItems.map((item, index) => (
           <div
             key={index}

@@ -34,7 +34,7 @@ function Page() {
   }, [count]);
 
   return (
-    <div className="mr:p-10 flex h-full w-full flex-col items-center p-2 md:pl-[100px] md:pr-12">
+    <div className="mr:p-10 mb-16 flex h-full w-full flex-col items-center p-2 md:mb-0 md:pl-[100px] md:pr-12">
       <div className="flex h-full w-full items-center space-x-4 pt-5">
         <h1 className={cn(sans, "text-[25px]")}>All Collections</h1>
         <h1 className={cn("text-[25px] font-bold text-[#ffc31e]")}></h1>
