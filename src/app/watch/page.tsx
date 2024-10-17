@@ -10,7 +10,7 @@ function EmbedContent() {
   const season = searchParams.get("season");
   const episode = searchParams.get("episode");
 
-  const embedURL = `https://vidsrc.cc/v2/embed/${type}/${id}${
+  const embedURL = `https://vidsrc.xyz/embed/${type}/${id}${
     type === "tv" ? `/${season}/${episode}` : ""
   }`;
   useEffect(() => {
@@ -26,12 +26,12 @@ function EmbedContent() {
     }
   });
   return (
-    <div className="bg-black w-screen h-screen ">
-      <div className="  py-1 h-[calc(100vh-7rem)] md:h-[100vh] ">
+    <div className="h-screen w-screen bg-black">
+      <div className="h-[calc(100vh-7rem)] py-1 md:h-[100vh]">
         <iframe
           src={embedURL}
           title="Embedded Content"
-          className="w-full h-full "
+          className="h-full w-full"
           style={{ border: "none" }}
           allowFullScreen
         />
