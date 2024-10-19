@@ -32,7 +32,6 @@ function PageContent() {
   return (
     <div className="animate-slideInLeftFast flex h-screen w-screen flex-col items-center md:flex-row md:justify-center">
       <ImageHeader item={item} loading={loading} />
-
       <Details item={item} loading={loading} />
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Bookmark, Share, Play } from "lucide-react";
+import { Bookmark, Share, Play, Divide } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Roboto_Mono } from "next/font/google";
@@ -79,23 +79,22 @@ function ImageHeader(props: any) {
   };
   return (
     <div className="relative flex h-full w-full md:ml-[5rem]">
-      <Image
-        className={cn(
-          loading ? "shimmer" : "",
-          "animate-slideInLeft z-[-2] mb-[1rem] h-[34rem] w-full rounded-lg object-cover px-[0.5rem] pt-[1rem] md:h-[99%] md:w-full md:rounded-[1.875rem] md:px-[0.5rem] md:pb-[0rem] md:pr-[1rem]",
-        )}
-        src={
-          loading
-            ? ""
-            : `https://image.tmdb.org/t/p/original${
-                item.backdrop_path ? item.backdrop_path : item.poster_path
-              }`
-        }
-        alt={loading ? "" : item.title || item.name}
-        width={1080}
-        height={1080}
-        unoptimized
-      />
+      {loading ? (
+        <div className="animate-slideInLeft shimmer z-[-2] mb-[1rem] h-[34rem] w-full rounded-lg px-[0.5rem] pt-[1rem] md:h-[99%] md:w-full md:rounded-[1.875rem] md:px-[0.5rem] md:pb-[0rem] md:pr-[1rem]"></div>
+      ) : (
+        <Image
+          className={cn(
+            "animate-slideInLeft z-[-2] mb-[1rem] h-[34rem] w-full rounded-lg object-cover px-[0.5rem] pt-[1rem] md:h-[99%] md:w-full md:rounded-[1.875rem] md:px-[0.5rem] md:pb-[0rem] md:pr-[1rem]",
+          )}
+          src={`https://image.tmdb.org/t/p/original${
+            item.backdrop_path ? item.backdrop_path : item.poster_path
+          }`}
+          alt={item.title || item.name}
+          width={1080}
+          height={1080}
+          unoptimized
+        />
+      )}
 
       {DIV && (
         <>
@@ -108,18 +107,20 @@ function ImageHeader(props: any) {
         </>
       )}
 
-      <Image
-        className={cn(
-          "absolute bottom-[0rem] left-[0rem] h-[165px] w-[130px] rounded-[1.25rem] border-[10px] border-[#1B1919] object-cover md:bottom-[0rem] md:left-[0rem] md:h-[225px] md:w-[150px]",
-        )}
-        src={
-          loading ? "" : `https://image.tmdb.org/t/p/w500${item.poster_path}`
-        }
-        width={200}
-        height={200}
-        alt={loading ? "" : item.title || item.name}
-        unoptimized
-      />
+      {loading ? (
+        <div className="shimmer absolute bottom-[0rem] left-[0rem] h-[165px] w-[130px] rounded-[1.25rem] border-[10px] border-[#1B1919] object-cover md:bottom-[0rem] md:left-[0rem] md:h-[225px] md:w-[150px]"></div>
+      ) : (
+        <Image
+          className={cn(
+            "absolute bottom-[0rem] left-[0rem] h-[165px] w-[130px] rounded-[1.25rem] border-[10px] border-[#1B1919] object-cover md:bottom-[0rem] md:left-[0rem] md:h-[225px] md:w-[150px]",
+          )}
+          src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+          width={200}
+          height={200}
+          alt={item.title || item.name}
+          unoptimized
+        />
+      )}
 
       <div className="absolute bottom-[8rem] left-[6.8rem] rounded-[50%] border-[8px] border-[#1B1919] bg-[#000000] md:bottom-[11.5rem] md:left-[8rem]">
         <h1 className="p-[0.5rem] px-[.7rem] text-[1.125rem] font-bold text-[#FFD700]">

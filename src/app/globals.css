@@ -17,7 +17,7 @@ Link {
 }
 
 p {
-  @apply text-[#4C5E77] font-mono;
+  @apply font-mono text-[#4C5E77];
 }
 .shimmer {
   animation-duration: 3s;
