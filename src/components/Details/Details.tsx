@@ -11,11 +11,11 @@ function Details(props: any) {
   const isMovie = !!item.title;
 
   return (
-    <div className="flex w-full flex-col h-full md:hover:w-[40vw] md:w-[20vw] duration-300 transition-all ease-in-out   ">
-      <div className="flex flex-row  items-center py-1 mt-3 rounded-lg justify-evenly  bg-black">
+    <div className="flex h-full w-full flex-col transition-all duration-300 ease-in-out md:w-[20vw] md:hover:w-[40vw]">
+      <div className="rounded-x-lg mt-3 flex flex-row items-center justify-evenly rounded-t-lg bg-black py-1">
         {!loading && !isMovie && (
           <h1
-            className={`lg:text-[16px] md:text-[10px] cursor-pointer ${
+            className={`cursor-pointer md:text-[10px] lg:text-[16px] ${
               activeSection === "Episodes" ? "text-[#FFD700]" : ""
             }`}
             onClick={() => setActiveSection("Episodes")}
@@ -24,7 +24,7 @@ function Details(props: any) {
           </h1>
         )}
         <h1
-          className={`lg:text-[16px] md:text-[10px] cursor-pointer ${
+          className={`cursor-pointer md:text-[10px] lg:text-[16px] ${
             activeSection === "Overview" ? "text-[#FFD700]" : ""
           }`}
           onClick={() => setActiveSection("Overview")}
@@ -32,7 +32,7 @@ function Details(props: any) {
           Overview
         </h1>
         <h1
-          className={`lg:text-[16px] md:text-[10px] cursor-pointer ${
+          className={`cursor-pointer md:text-[10px] lg:text-[16px] ${
             activeSection === "Casts" ? "text-[#FFD700]" : ""
           }`}
           onClick={() => setActiveSection("Casts")}
@@ -40,7 +40,7 @@ function Details(props: any) {
           Casts
         </h1>
         <h1
-          className={`lg:text-[16px] md:text-[10px] cursor-pointer ${
+          className={`cursor-pointer md:text-[10px] lg:text-[16px] ${
             activeSection === "Reviews" ? "text-[#FFD700]" : ""
           }`}
           onClick={() => setActiveSection("Reviews")}
@@ -48,7 +48,7 @@ function Details(props: any) {
           Reviews
         </h1>
         <h1
-          className={`lg:text-[16px] md:text-[10px]  cursor-pointer ${
+          className={`cursor-pointer md:text-[10px] lg:text-[16px] ${
             activeSection === "Related" ? "text-[#FFD700]" : ""
           }`}
           onClick={() => setActiveSection("Related")}
@@ -56,8 +56,8 @@ function Details(props: any) {
           Related
         </h1>
       </div>
-      <hr className="w-full  border-1 border-[#A4B3C9]" />
-      <div className="flex md:h-[calc(98%-32px)] rounded-lg bg-black w-full h-[60rem]">
+      <hr className="border-1 w-full border-[#A4B3C9]" />
+      <div className="flex h-[60rem] w-full rounded-b-lg bg-black md:h-[calc(98%-32px)]">
         {activeSection === "Overview" && (
           <Overview loading={loading} item={item} />
         )}

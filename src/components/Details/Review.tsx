@@ -29,7 +29,7 @@ function Review(props: any) {
     fetchData();
   }, [item]);
   return (
-    <div className="flex h-[880px] w-full flex-col overflow-y-auto overflow-x-hidden">
+    <div className="flex h-full w-full flex-col overflow-y-auto overflow-x-hidden">
       {Review.map((review: any) => (
         <div
           key={review.id}

@@ -33,7 +33,7 @@ function Related(props: any) {
   }, [item, count]);
 
   return (
-    <div className="flex h-[800px] w-full flex-col overflow-y-auto overflow-x-hidden">
+    <div className="flex h-full w-full flex-col overflow-y-auto overflow-x-hidden">
       {loading ? (
         <div className="flex h-full w-full flex-wrap items-center justify-center">
           {Array.from({ length: 18 }).map((_, index) => (

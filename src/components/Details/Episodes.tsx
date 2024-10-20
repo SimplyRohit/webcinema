@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 function Episodes(props: any) {
   const { item } = props;
-
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(1 as any);
   const [episodes, setEpisodes] = useState([]);
@@ -40,8 +39,8 @@ function Episodes(props: any) {
   };
 
   return (
-    <div className="">
-      <div className="flex w-full items-center justify-center pb-5 pt-2">
+    <div className="mb-10 flex h-full w-full flex-col md:mb-0">
+      <div className="flex items-center justify-center pb-5 pt-2">
         {loading
           ? ""
           : seasons.length > 0 && (
@@ -49,7 +48,7 @@ function Episodes(props: any) {
                 id="season"
                 onChange={handleSeasonChange}
                 value={selectedSeason}
-                className="m-2 min-w-[250px] max-w-[250px] rounded-[10px] bg-[#1B1919] px-5 py-2 font-mono text-[#A4B3C9]"
+                className="m-2 w-[200px] rounded-[10px] bg-[#1B1919] px-5 py-2 font-mono text-[#A4B3C9] lg:w-[240px]"
               >
                 {seasons.map((season: any, index) => (
                   <option key={index} value={season.season_number}>
@@ -67,15 +66,7 @@ function Episodes(props: any) {
                 key={index}
                 className="mb-5 flex min-h-[200px] w-full flex-row bg-[#1B1919]"
               >
-                <div className="shimmer max-w-[40%] p-2">
-                  <Image
-                    className="h-full w-full rounded-[10px] object-cover"
-                    src={""}
-                    width={200}
-                    height={200}
-                    alt={""}
-                  />
-                </div>
+                <div className="shimmer min-w-[40%] rounded-[10px] p-2"></div>
 
                 <div className="ml-3 flex min-w-[50%] flex-col py-2">
                   <h1 className="pb-1 pt-2 font-bold">Ep No ....</h1>
@@ -91,7 +82,7 @@ function Episodes(props: any) {
                   </Link>
                   <div className="overflow-hidden">
                     <p className="text-ellipsis whitespace-normal">
-                      {"......."}
+                      ........... .................. ......................
                     </p>
                   </div>
                 </div>
@@ -100,9 +91,9 @@ function Episodes(props: any) {
           : episodes.map((episode: any) => (
               <div
                 key={episode.id}
-                className="mb-5 flex min-h-[200px] w-full flex-row bg-[#1B1919]"
+                className="mb-5 flex min-h-[200px] w-full flex-row overflow-hidden bg-[#1B1919]"
               >
-                <div className="max-w-[40%] p-2">
+                <div className="w-[50%] p-2">
                   <Image
                     className="h-full w-full rounded-[10px] object-cover"
                     src={`https://image.tmdb.org/t/p/original${episode.still_path}`}
@@ -113,7 +104,7 @@ function Episodes(props: any) {
                   />
                 </div>
 
-                <div className="ml-3 flex min-w-[50%] flex-col py-2">
+                <div className="ml-3 flex w-[50%] flex-col py-2">
                   <h1 className="pb-1 pt-2 font-bold">
                     Ep {episode.episode_number} - {episode.name}
                   </h1>
@@ -122,14 +113,14 @@ function Episodes(props: any) {
                   </p>
                   <Link
                     className={cn(
-                      "mb-2 flex w-[150px] rounded-[5px] bg-[#FFD700] pl-10",
+                      "mb-2 flex w-[90px] justify-center rounded-[5px] bg-[#FFD700] lg:w-[150px]",
                     )}
                     href={`/watch?id=${item.id}&type=tv&season=${episode.season_number}&episode=${episode.episode_number}`}
                   >
                     Watch
-                    <Play className="w-5 fill-[#000000]" />
+                    <Play className="w-4 fill-[#000000]" />
                   </Link>
-                  <div className="overflow-hidden">
+                  <div className="overflow-y-auto">
                     <p className="text-ellipsis whitespace-normal">
                       {episode.overview.substring(0, 100) + "......."}
                     </p>
