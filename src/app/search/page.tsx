@@ -21,7 +21,6 @@ export default function Page() {
     setLoading(true);
     try {
       const endpoint = query ? `/api/search?query=${query}` : `/api/search`;
-
       const response = await axios.get(endpoint);
       const sortedItems = response.data;
       setItems(sortedItems);
