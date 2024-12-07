@@ -2,7 +2,12 @@
 import nookies from "nookies";
 import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { string } from "zod";
 
+interface Content {
+  id: string;
+  type: string;
+}
 function EmbedContent() {
   const searchParams = useSearchParams();
 
@@ -25,7 +30,7 @@ function EmbedContent() {
     const ContinueWatching = cookies.ContinueWatching
       ? JSON.parse(cookies.ContinueWatching)
       : [];
-    if (!ContinueWatching.some((content) => content.id === id)) {
+    if (!ContinueWatching.some((content: Content) => content.id === id)) {
       ContinueWatching.push({ id, type });
       nookies.set(null, "ContinueWatching", JSON.stringify(ContinueWatching), {
         path: "/",
@@ -33,7 +38,7 @@ function EmbedContent() {
     }
   }, [modernserver, id, type]);
 
-  const handleServerChange = (e) => {
+  const handleServerChange = (e: any) => {
     const selectedServer = e.target.value;
     switch (selectedServer) {
       case "modernserver":

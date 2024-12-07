@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Bookmark, Share, Play } from "lucide-react";
 import Link from "next/link";
@@ -38,7 +38,10 @@ export default function ImageHeader() {
     return () => clearInterval(interval);
   }, [items.length]);
 
-  const currentItem = items[currentIndex] || {};
+  const currentItem = useMemo(
+    () => items[currentIndex] || {},
+    [items, currentIndex],
+  );
 
   useEffect(() => {
     const cookies = nookies.get();
