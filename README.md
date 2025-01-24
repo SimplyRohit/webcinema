@@ -32,4 +32,4 @@ Contact
 
 Rohit - rohitjaatjaat073@gmail.com
 
-Project Link: https://github.com/WasATrueWarrior/webcinema
+Project Link: https://github.com/SimplyRohit/webcinema
