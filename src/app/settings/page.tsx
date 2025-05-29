@@ -1,15 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Roboto_Mono } from "next/font/google";
 import { useRouter } from "next/navigation";
-import { createSupabaseClient } from "@/auth/client";
+// import { createSupabaseClient } from "@/auth/client";
 import toast from "react-hot-toast";
 import { getUser, signOutAction } from "@/actions/users";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function Page() {
-  const { auth } = createSupabaseClient();
+  // const { auth } = createSupabaseClient();
   const router = useRouter();
   const [isPending, startTransition] = React.useTransition();
   const [User, setUser] = React.useState<any>(null);

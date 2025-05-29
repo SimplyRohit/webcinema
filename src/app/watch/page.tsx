@@ -62,6 +62,8 @@ function EmbedContent() {
         <option value="modernserver">Server : 1 (Modern Server)</option>
         <option value="vidsrc">Server : 2 (Multi)</option>
       </select>
+
+      <h1 className="absolute right-2 top-14 z-50">Watchparty</h1>
       <div className="h-[calc(100vh-7rem)] py-1 md:h-[100vh]">
         <iframe
           src={url}
@@ -71,6 +73,7 @@ function EmbedContent() {
           allowFullScreen
         />
       </div>
+    
     </div>
   );
 }
