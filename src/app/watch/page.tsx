@@ -18,6 +18,10 @@ function EmbedContent() {
   const [url, setUrl] = useState("");
   const randomid = Math.random().toString(36).substring(2, 15);
 
+  const vidjoy = `https://vidjoy.pro/embed/${type}/${id}${
+    type === "tv" ? `/${season}/${episode}` : ""
+  }?adFree=true`;
+
   const modernserver = `https://embed.su/embed/${type}/${id}${
     type === "tv" ? `/${season}/${episode}` : ""
   }`;
@@ -26,7 +30,7 @@ function EmbedContent() {
   }`;
 
   useEffect(() => {
-    setUrl(modernserver);
+    setUrl(vidjoy);
     const cookies = nookies.get();
     const ContinueWatching = cookies.ContinueWatching
       ? JSON.parse(cookies.ContinueWatching)
@@ -37,11 +41,14 @@ function EmbedContent() {
         path: "/",
       });
     }
-  }, [modernserver, id, type]);
+  }, [vidjoy, id, type]);
 
   const handleServerChange = (e: any) => {
     const selectedServer = e.target.value;
     switch (selectedServer) {
+      case "vidjoy":
+        setUrl(vidjoy);
+        break;
       case "modernserver":
         setUrl(modernserver);
         break;
@@ -49,7 +56,7 @@ function EmbedContent() {
         setUrl(Vidsrc);
         break;
       default:
-        setUrl(modernserver);
+        setUrl(vidjoy);
         break;
     }
   };
@@ -61,20 +68,21 @@ function EmbedContent() {
           className="rounded-md bg-[#1B1B1B] p-3 pr-12 text-white text-sm md:text-base hover:bg-[#2B2B2B] transition-colors"
           onChange={handleServerChange}
         >
+          <option value="vidjoy">Vidjoy</option>
           <option value="modernserver">Modern Server</option>
           <option value="vidsrc">Multi</option>
         </select>
 
         <Link
-          href={`/watchparty/${randomid}?id=${id}&type=${type}${type === "tv" ? `&season=${season}&episode=${episode}` : ""}`}
+          href={`/watchparty/${randomid}?wpurl=${url}`}
           className="rounded-md bg-[#1B1B1B] p-3 px-6 truncate
-           text-white text-sm md:text-base hover:bg-[#2B2B2B]  transition-colors"
+           text-white text-sm md:text-base hover:bg-[#2B2B2B] transition-colors"
         >
           Start Watch Party
         </Link>
       </div>
 
-      <div className="h-screen w-screen">
+      <div className="flex md:h-screen h-[calc(100vh-4rem)] w-screen">
         <iframe
           src={url}
           title="Embedded Content"
