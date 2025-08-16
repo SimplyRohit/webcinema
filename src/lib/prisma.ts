@@ -1,4 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+// @ts-expect-error PrismaClient is not a type
+// This file is used to create a singleton instance of PrismaClient
+
+import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
   return new PrismaClient();

@@ -18,10 +18,15 @@ function EmbedContent() {
   const [url, setUrl] = useState("");
   const randomid = Math.random().toString(36).substring(2, 15);
 
+  const videasy = `https://vidrock.net/${
+    type === "tv" ? `tv/${id}/${season}/${episode}` : `movie/${id}`
+  }`;
+  const vidrock = `https://player.videasy.net/${
+    type === "tv" ? `tv/${id}/${season}/${episode}` : `movie/${id}`
+  }`;
   const vidjoy = `https://vidjoy.pro/embed/${type}/${id}${
     type === "tv" ? `/${season}/${episode}` : ""
   }?adFree=true`;
-
   const modernserver = `https://embed.su/embed/${type}/${id}${
     type === "tv" ? `/${season}/${episode}` : ""
   }`;
@@ -30,7 +35,7 @@ function EmbedContent() {
   }`;
 
   useEffect(() => {
-    setUrl(vidjoy);
+    setUrl(vidrock);
     const cookies = nookies.get();
     const ContinueWatching = cookies.ContinueWatching
       ? JSON.parse(cookies.ContinueWatching)
@@ -41,11 +46,14 @@ function EmbedContent() {
         path: "/",
       });
     }
-  }, [vidjoy, id, type]);
+  }, [vidrock, id, type]);
 
   const handleServerChange = (e: any) => {
     const selectedServer = e.target.value;
     switch (selectedServer) {
+      case "vidrock":
+        setUrl(vidrock);
+        break;
       case "vidjoy":
         setUrl(vidjoy);
         break;
@@ -55,8 +63,11 @@ function EmbedContent() {
       case "vidsrc":
         setUrl(Vidsrc);
         break;
+      case "videasy":
+        setUrl(videasy);
+        break;
       default:
-        setUrl(vidjoy);
+        setUrl(vidrock);
         break;
     }
   };
@@ -68,9 +79,11 @@ function EmbedContent() {
           className="rounded-md bg-[#1B1B1B] p-3 pr-12 text-white text-sm md:text-base hover:bg-[#2B2B2B] transition-colors"
           onChange={handleServerChange}
         >
+          <option value="vidrock">Vidrock</option>
           <option value="vidjoy">Vidjoy</option>
           <option value="modernserver">Modern Server</option>
           <option value="vidsrc">Multi</option>
+          <option value="videasy">Videasy</option>
         </select>
 
         <Link
