@@ -1,4 +1,3 @@
-// src/app/watchparty/[id]/page.tsx
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
@@ -36,92 +35,86 @@ export default function WatchParty() {
   const [participants, setParticipants] = useState<string[]>([]);
   const [showParticipants, setShowParticipants] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
+
   const socketRef = useRef<Socket | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
-  const playerRef = useRef<typeof videojs.players | null>(null);
+  const playerRef = useRef<any>(null);
 
-  // Initialize Video.js only for player method
+  // Track last emitted to prevent loop
+  const lastEmitted = useRef<{ playing: boolean; currentTime: number } | null>(
+    null
+  );
+
+  // ---------------- Video.js Initialization ----------------
   useEffect(() => {
-    if (
-      method === "player" &&
-      videoRef.current &&
-      !playerRef.current &&
-      wpurl
-    ) {
-      const videoElement = document.createElement("video-js");
-      videoElement.style.width = "100%";
-      videoElement.style.height = "100%";
-      videoElement.classList.add("vjs-big-play-centered");
-      videoRef.current.appendChild(videoElement);
+    if (method !== "player" || !videoRef.current || !wpurl) return;
 
-      const player = (playerRef.current = videojs(videoElement, {
-        autoplay: false,
-        controls: true,
-        responsive: true,
-        fluid: true,
-        playbackRates: [0.5, 1, 1.5, 2],
-        tracks: [{}],
-        sources: [
-          {
-            src: wpurl,
-            type: "application/x-mpegURL",
-          },
-        ],
-      }));
+    const videoElement = document.createElement("video-js");
+    videoElement.style.width = "100%";
+    videoElement.style.height = "100%";
+    videoElement.classList.add("vjs-big-play-centered");
+    videoRef.current.appendChild(videoElement);
 
-      // @ts-ignore videojs-hls-quality-selector
-      if (player.hlsQualitySelector) {
-        // @ts-ignore videojs-hls-quality-selector
-        player.hlsQualitySelector({ displayCurrentQuality: true });
-      }
+    const player = (playerRef.current = videojs(videoElement, {
+      autoplay: false,
+      controls: true,
+      responsive: true,
+      fluid: true,
+      preload: "auto",
+      playbackRates: [0.5, 1, 1.5, 2],
+      sources: [{ src: wpurl, type: "application/x-mpegURL" }],
+    }));
 
-      // Emit play/pause events
-      player.on("play", () => {
-        socketRef.current?.emit("video-control", {
-          playing: true,
-          currentTime: player.currentTime(),
-        });
-        setIsPlaying(true);
-      });
+    // HLS quality selector
+    // @ts-ignore
+    if (player.hlsQualitySelector)
+      // @ts-ignore
+      player.hlsQualitySelector({ displayCurrentQuality: true });
 
-      player.on("pause", () => {
-        socketRef.current?.emit("video-control", {
-          playing: false,
-          currentTime: player.currentTime(),
-        });
-        setIsPlaying(false);
-      });
+    // Wait for metadata before allowing play/pause/seek
+    player.on("loadedmetadata", () => setIsPlayerReady(true));
 
-      // Emit seek events
-      player.on("seeked", () => {
-        socketRef.current?.emit("video-control", {
-          playing: !player.paused(),
-          currentTime: player.currentTime(),
-        });
-      });
+    // Emit play/pause/seek
+    const emitVideoControl = (playing: boolean) => {
+      if (!isPlayerReady) return;
+      const data = { playing, currentTime: player.currentTime() };
+      // @ts-ignore
+      lastEmitted.current = data; // save to prevent loop
+      socketRef.current?.emit("video-control", data);
+      setIsPlaying(playing);
+    };
 
-      player.on("dispose", () => {
-        playerRef.current = null;
-      });
-    }
+    player.on("play", () => emitVideoControl(true));
+    player.on("pause", () => emitVideoControl(false));
+    player.on("seeked", () => {
+      if (!isPlayerReady) return;
+      const data = {
+        playing: !player.paused(),
+        currentTime: player.currentTime(),
+      };
+      // @ts-ignore
+      lastEmitted.current = data;
+      socketRef.current?.emit("video-control", data);
+    });
+
+    player.on("dispose", () => (playerRef.current = null));
 
     return () => {
-      if (playerRef.current && !playerRef.current.isDisposed()) {
+      if (playerRef.current && !playerRef.current.isDisposed())
         playerRef.current.dispose();
-      }
     };
-  }, [wpurl, method]);
+  }, [wpurl, method, isPlayerReady]);
 
-  // Auto scroll chat
+  // ---------------- Auto-scroll chat ----------------
   useEffect(() => {
-    if (chatContainerRef.current) {
+    if (chatContainerRef.current)
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
-    }
   }, [messages]);
 
-  // Username handling
+  // ---------------- Username handling ----------------
   useEffect(() => {
     const cookies = nookies.get();
     const storedUsername =
@@ -142,8 +135,8 @@ export default function WatchParty() {
     });
   };
 
-  // Socket setup
-  // @ts-ignore videojs-hls-quality-selector
+  // ---------------- Socket Setup ----------------
+  // @ts-ignore
   useEffect(() => {
     if (!username) return;
 
@@ -152,69 +145,72 @@ export default function WatchParty() {
     });
     socketRef.current = socket;
 
-    socket.on("message", (msg: Message) => {
-      if (["chat", "system"].includes(msg.type))
-        setMessages((prev) => [...prev, msg]);
-    });
-
+    socket.on("message", (msg: Message) =>
+      setMessages((prev) => [...prev, msg])
+    );
     socket.on("participants", (data: any) => setParticipants(data.list));
+
+    // ---------------- Sync on Join ----------------
     socket.on(
       "sync-on-join",
       (data: { playing: boolean; currentTime: number }) => {
-        if (!playerRef.current) return;
-        const player = playerRef.current;
+        const waitForReady = setInterval(() => {
+          if (playerRef.current && isPlayerReady) {
+            clearInterval(waitForReady);
+            const player = playerRef.current;
+            player.currentTime(data.currentTime);
+            if (data.playing) player.play().catch(() => {});
+            else player.pause();
+            setIsPlaying(data.playing);
+          }
+        }, 50);
+      }
+    );
 
-        player.currentTime(data.currentTime); // jump to current time
-        if (data.playing) player.play().catch(() => {});
-        else player.pause();
+    // ---------------- Video-Control Updates ----------------
+    socket.on(
+      "video-control",
+      (data: { playing: boolean; currentTime: number }) => {
+        if (!playerRef.current || !isPlayerReady) return;
+
+        // Prevent applying own event
+        if (
+          lastEmitted.current &&
+          Math.abs(lastEmitted.current.currentTime - data.currentTime) < 0.5 &&
+          lastEmitted.current.playing === data.playing
+        )
+          return;
+
+        const player = playerRef.current;
+        if (Math.abs(player.currentTime() - data.currentTime) > 0.5)
+          player.currentTime(data.currentTime);
+
+        if (data.playing && player.paused()) player.play().catch(() => {});
+        else if (!data.playing && !player.paused()) player.pause();
 
         setIsPlaying(data.playing);
       }
     );
 
-    // Sync video controls only for player method
-    if (method === "player") {
-      socket.on(
-        "video-control",
-        (data: { playing: boolean; currentTime: number }) => {
-          if (!playerRef.current) return;
-          const player = playerRef.current;
-
-          // Sync seek
-          if (Math.abs(player.currentTime() - data.currentTime) > 0.5)
-            player.currentTime(data.currentTime);
-
-          // Sync play/pause
-          if (data.playing && player.paused()) {
-            player.play().catch(() => {});
-            setIsPlaying(true);
-          } else if (!data.playing && !player.paused()) {
-            player.pause();
-            setIsPlaying(false);
-          }
-        }
-      );
-    }
-
     return () => socket.disconnect();
-  }, [roomId, username, method]);
+  }, [username, roomId, method, isPlayerReady]);
 
+  // ---------------- Send chat ----------------
   const sendMessage = () => {
-    if (socketRef.current && newMessage.trim() !== "") {
-      socketRef.current.emit("message", {
-        type: "chat",
-        username,
-        message: newMessage,
-      });
-      setNewMessage("");
-    }
+    if (!newMessage.trim()) return;
+    socketRef.current?.emit("message", {
+      type: "chat",
+      username,
+      message: newMessage,
+    });
+    setNewMessage("");
   };
 
+  // ---------------- Render ----------------
   return (
     <div className="flex h-screen w-screen flex-col bg-black md:flex-row md:overflow-hidden">
       {/* Video Section */}
       <div className="relative h-[40vh] w-full md:h-full md:w-[calc(100%-350px)]">
-        {/* Method Indicator */}
         <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-black/80 backdrop-blur-md rounded-lg px-3 py-2 border border-gray-600/30">
           {method === "chat" ? (
             <>
@@ -230,8 +226,6 @@ export default function WatchParty() {
             </>
           )}
         </div>
-
-        {/* Video Player - Choose method */}
         {method === "chat" ? (
           <iframe
             src={wpurl as string}
@@ -248,7 +242,7 @@ export default function WatchParty() {
         )}
       </div>
 
-      {/* Sidebar */}
+      {/* Sidebar and Chat */}
       <div className="flex h-[60vh] w-full flex-col overflow-hidden bg-[#1B1B1B] p-2 md:h-full md:w-[350px] md:p-4">
         {/* Username input and toggle */}
         <div className="mb-2 flex w-full items-center justify-between text-white md:mb-4">
